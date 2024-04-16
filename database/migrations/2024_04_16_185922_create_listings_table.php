@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('number_of_bathrooms');
             $table->json('amenities')->nullable();
             $table->decimal('price_per_night', 8, 2);
-            $table->foreignId('host_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUlid('host_id')->constrained('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

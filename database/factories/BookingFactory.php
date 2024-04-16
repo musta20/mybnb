@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\BookingStatus;
+use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +19,17 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
+        $checkInDate = fake()->dateTimeBetween('-1 month', '+1 month');
+        $checkOutDate = fake()->dateTimeBetween($checkInDate, $checkInDate->format('Y-m-d H:i:s').' + 5 days');
+
         return [
-            //
+            'listing_id' => Listing::factory(),
+            'guest_id' => User::factory()->guest(),
+            'check_in_date' => $checkInDate,
+            'check_out_date' => $checkOutDate,
+            'total_price' => fake()->randomFloat(2, 50, 500),
+            'status' => fake()->randomElement(BookingStatus::cases()),
+            'special_requests' => fake()->paragraph(), 
         ];
     }
 }

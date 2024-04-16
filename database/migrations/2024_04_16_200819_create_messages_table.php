@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUlid('sender_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUlid('recipient_id')->constrained('users')->onDelete('cascade');
             $table->text('content');
             $table->boolean('is_read')->default(false);
             $table->softDeletes();

@@ -13,8 +13,6 @@ class Booking extends Model
 {
     use HasFactory,SoftDeletes,HasUlids;
 
-
-
     protected $fillable = [
         'listing_id',
         'guest_id',

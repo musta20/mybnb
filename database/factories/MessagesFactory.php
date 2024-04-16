@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,19 @@ class MessagesFactory extends Factory
      */
     public function definition(): array
     {
+
+        $users = User::all()->pluck('id')->toArray(); // Get all user IDs
+
+        do {
+            $senderId = fake()->randomElement($users);
+            $recipientId = fake()->randomElement($users);
+        } while ($senderId === $recipientId); // Ensure sender and recipient are different
+
         return [
-            //
+            'sender_id' => $senderId,
+            'recipient_id' => $recipientId,
+            'content' => fake()->sentence(),
+            'is_read' => fake()->boolean(),
         ];
     }
 }

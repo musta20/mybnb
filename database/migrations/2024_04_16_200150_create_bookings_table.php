@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('listing_id')->constrained('listings')->onDelete('cascade');
-            $table->foreignId('guest_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUlid('guest_id')->constrained('users')->onDelete('cascade');
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->decimal('total_price', 8, 2);

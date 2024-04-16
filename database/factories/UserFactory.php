@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\HostType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,6 +30,17 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+
+            'type' => fake()->randomElement(HostType::cases()),
+            'date_of_birth' => fake()->date(),
+            'phone_number' => fake()->phoneNumber(),
+            'profile_picture' => fake()->imageUrl(),
+            'about_me' => fake()->paragraph(), // For hosts
+            'languages' => fake()->randomElement(['English, arabic', 'French, Italian']), // For hosts
+            'response_time' => fake()->randomElement(['within an hour', 'within a day']), // For hosts
+            'response_rate' => fake()->numberBetween(80, 100), // For hosts
+            'remember_token' => Str::random(10),
+
         ];
     }
 
