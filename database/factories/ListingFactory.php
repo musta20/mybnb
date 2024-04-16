@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\Amenities;
+use App\Enums\HostType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,7 +32,9 @@ class ListingFactory extends Factory
             'number_of_bathrooms' => fake()->numberBetween(1, 4),
             'amenities' => json_encode(fake()->randomElements(Amenities::cases(), 3, false)),
             'price_per_night' => fake()->randomFloat(2, 50, 500),
-            'host_id' => User::factory()->host(),
+            'host_id' => User::factory()->create([
+                'type' => HostType::HOST->value,
+            ]),
         ];
     }
 }

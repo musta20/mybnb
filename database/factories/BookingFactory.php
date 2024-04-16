@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\BookingStatus;
+use App\Enums\HostType;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,11 +25,13 @@ class BookingFactory extends Factory
 
         return [
             'listing_id' => Listing::factory(),
-            'guest_id' => User::factory()->guest(),
+            'guest_id' => User::factory()->create([
+                'type' => HostType::HOST->value,
+            ]),
             'check_in_date' => $checkInDate,
             'check_out_date' => $checkOutDate,
             'total_price' => fake()->randomFloat(2, 50, 500),
-            'status' => fake()->randomElement(BookingStatus::cases()),
+            'status' => fake()->randomElement(BookingStatus::cases())->value,
             'special_requests' => fake()->paragraph(), 
         ];
     }

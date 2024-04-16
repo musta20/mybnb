@@ -2,14 +2,14 @@
 
 namespace App\Enums;
 
-enum Amenities
+enum Amenities :string
 {
-    const WIFI = 'Wifi';
-    const KITCHEN = 'Kitchen';
-    const PARKING = 'Parking';
-    const POOL = 'Pool';
-    const HEATING = 'Heating';
-    const AIR_CONDITIONING = 'Air conditioning';
+    case WIFI = 'Wifi';
+    case KITCHEN = 'Kitchen';
+    case PARKING = 'Parking';
+    case POOL = 'Pool';
+    case HEATING = 'Heating';
+    case AIR_CONDITIONING = 'Air conditioning';
 }
 
 

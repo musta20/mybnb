@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\HostType;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,7 +21,9 @@ class ReviewsFactory extends Factory
     {
         return [
             'listing_id' => Listing::factory(), 
-            'guest_id' => User::factory()->guest(), 
+            'guest_id' => User::factory()->create([
+                'type' => HostType::GUEST->value,
+            ]), 
             'rating' => fake()->numberBetween(1, 5),
             'comment' => fake()->paragraph(),
         ];

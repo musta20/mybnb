@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum HostType
+enum HostType :string
 {
-    const GUEST = 'guest';
-    const HOST = 'host';
+    case GUEST = 'guest';
+    case HOST = 'host';
 }
 
 

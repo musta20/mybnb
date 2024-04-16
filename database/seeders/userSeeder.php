@@ -17,10 +17,9 @@ class userSeeder extends Seeder
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
-            'type' => HostType::HOST,
+            'type' => HostType::HOST->value,
             'password' => Hash::make('password'),
         ]);
         User::factory()->count(10)->create(); 
-        User::factory()->host()->create();      
     }
 }
