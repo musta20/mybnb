@@ -24,7 +24,6 @@ class ListingFactory extends Factory
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
             'city' => fake()->city(),
-            'country' => fake()->country(),
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'number_of_guests' => fake()->numberBetween(1, 10),

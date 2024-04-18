@@ -1,0 +1,1 @@
+delete * from listing_images where listing_id = 01hvre9he8ftr7njr5wtzkhehr;

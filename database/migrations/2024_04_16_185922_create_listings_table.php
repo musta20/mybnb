@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('address');
             $table->string('city');
-            $table->string('country');
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->integer('number_of_guests');

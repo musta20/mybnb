@@ -20,7 +20,6 @@ class Listing extends Model
         'description',
         'address',
         'city',
-        'country',
         'latitude',
         'longitude',
         'number_of_guests',
@@ -32,7 +31,10 @@ class Listing extends Model
     ];
 
 
-
+    protected $casts = [
+        'amenities' => 'array',
+        'images' => 'array'
+]  ;
 
     /**
      * Get the host (user) who owns the listing.
@@ -56,6 +58,11 @@ class Listing extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Reviews::class);
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ListingImage::class);
     }
 
 }
