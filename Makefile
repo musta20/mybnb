@@ -16,3 +16,6 @@ CleanTest:
 
 fresh: 
 	rm -rf storage/app/listings/* && php artisan migrate:fresh --seed 
+
+clearFiles: 
+	rm -rf storage/app/listings/*
