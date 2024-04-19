@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Listing;
-use App\Models\ListingImage;
+use App\Models\ListingMedia;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
-class listingImageSeeder extends Seeder
+class listingMediaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class listingImageSeeder extends Seeder
 
         foreach ($listings as $listing) {
 
-            ListingImage::factory()
+            ListingMedia::factory()
                 ->for($listing)
                 ->count(3)
                 ->sequence(function ($sequence) use ($images) {

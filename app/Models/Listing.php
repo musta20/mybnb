@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Listing extends Model
 {
 
-    use HasFactory, HasUlids,SoftDeletes;
+    use HasFactory, HasUlids ,SoftDeletes;
 
 
     protected $fillable = [
@@ -32,8 +32,7 @@ class Listing extends Model
 
 
     protected $casts = [
-        'amenities' => 'array',
-        'images' => 'array'
+        'amenities' => 'array'
 ]  ;
 
     /**
@@ -60,9 +59,9 @@ class Listing extends Model
         return $this->hasMany(Reviews::class);
     }
 
-    public function images(): HasMany
+    public function media(): HasMany
     {
-        return $this->hasMany(ListingImage::class);
+        return $this->hasMany(ListingMedia::class);
     }
 
 }

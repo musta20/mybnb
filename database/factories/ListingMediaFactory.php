@@ -6,9 +6,9 @@ use App\Models\Listing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ListingImage>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ListingMedia>
  */
-class ListingImageFactory extends Factory
+class ListingMediaFactory extends Factory
 {
     /**
      * Define the model's default state.

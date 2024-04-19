@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             bookingSeeder::class,
             messagesSeeder::class,
             reviewsSeeder::class,
-            listingImageSeeder::class
+            ListingMediaSeeder::class
         ]);
 
 

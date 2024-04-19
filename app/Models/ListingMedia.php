@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ListingImage extends Model
+class ListingMedia extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['listing_id', 'path', 'alt_text'];
+    protected $fillable = ['listing_id', 'path','type', 'alt_text'];
 
     public function listing(): BelongsTo
     {
