@@ -21,7 +21,7 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' =>fake()->randomElement(["فيلا","بيت","شقة","عمارة"])." " . __("messages.".fake()->randomElement(Cities::cases())->value) ,
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
             'city' => fake()->randomElement(Cities::cases())->value,

@@ -1,9 +1,11 @@
 <?php
 
+use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 Route::view('/', 'welcome');
 
@@ -27,8 +29,12 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         Route::get('listing/{listing}', EditListing::class)
         ->name('EditListing');
 
+        Route::get('booking/', Booking::class)
+        ->name('Booking');
 
-  
+        Volt::route('booking/detail/{booking}', 'host.booking.detail-booking')
+        ->name('BookingDetail');
+ 
 
 
 });
