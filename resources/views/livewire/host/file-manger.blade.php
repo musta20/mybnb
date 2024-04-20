@@ -1,8 +1,11 @@
 <div x-data="{ uploading: false,fileLoded:false, progress: 0  }"
-    class="flex flex-col items-center m-4  bg-slate-200 border-2 border-bodydark1  ">
+    class="flex flex-col items-center m-4  light:bg-slate-200
+    light:border-bodydark1  ">
     <div x-ref="dnd" class="relative flex w-full flex-col items-center justify-center  
-    h-full border-2 border-dashed  hover:border-primary hover:border-3 bg-slate-50 rounded-lg 
-                 bg-gray-50 hover:bg-gray-100 ">
+    dark:bg-slate-700
+    h-full border-2 border-dashed  hover:border-primary hover:border-3 light:bg-slate-50 rounded-lg 
+    dark:border-slate-600 dark:hover:border-slate-500
+                 light:bg-gray-50 light:hover:bg-gray-100 ">
         <input multiple wire:model='photo' id="dropzone-file" type="file"
             class="absolute h-full w-full opacity-0 cursor-pointer p-5 m-5" for="dropzone-file"
             x-on:livewire-upload-start="uploading = true" x-on:livewire-upload-finish="uploading = false;fileLoded=true"
@@ -43,24 +46,29 @@
 
     @if ($subFiles)
     <div class=" grid  2xl:grid-cols-3   xsm:grid-cols-1 gap-2 items-center p-3  w-full ">
-        @foreach ($subFiles as $item =>$type)
-        <div x-data="{showCancle:false}" wire:key='{{$item}}' >
+        @foreach ($subFiles as $item )
+
+        <div x-data="{showCancle:false}" wire:key='{{$item['id']}}' >
             <div @mouseenter="showCancle=true" @mouseleave="showCancle=false" class=" rounded-lg relative  ">
                 <img :class="{'blur-sm' : showCancle==true}" class=" rounded-lg   "
-                    src="{{ tenant_asset('media/'.$item) }}" {{-- src="{{$item->temporaryUrl()}}" --}} />
-                <button wire:click.prevent="remove('{{$item}}')" x-show="showCancle"
+                    src="{{ asset('listings/'.$item['path']) }}" {{-- src="{{$item->temporaryUrl()}}" --}} />
+                <button wire:click.prevent="remove('{{$item['id']}}')" x-show="showCancle"
                     class="absolute bg-white hover:bg-slate-200 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <svg class="w-10 h-10 text-gray-900 dark:text-white" aria-hidden="true"
+                    <svg class="w-10 h-10 text-gray-900 dark:text-gray-300" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18 18 6m0 12L6 6" />
                     </svg>
                 </button>
             </div>
-            <input hidden name="subFiles[]" value="{{ json_encode([
+            <input hidden name="subFiles[]" 
+            
+            {{-- value="{{ json_encode([
                 "name"=>$item,
             "type"=>$type
-            ]) }}" />
+            ]) }}"  --}}
+            
+            />
         </div>
         @endforeach
     </div>

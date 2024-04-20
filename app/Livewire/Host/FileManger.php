@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Host;
 
 use App\Enums\MediaType;
 use App\Models\ListingMedia;
@@ -16,8 +16,8 @@ class FileManger extends Component
 
     #[Validate(['photo.*' => 'image|max:1024'])]
     public $photo;
-    
-    #[Modelable] 
+
+    #[Modelable]
     public $subFiles;
 
     public $listing;
@@ -25,41 +25,40 @@ class FileManger extends Component
     public function updatedPhoto()
     {
         foreach ($this->photo as $imge) {
-            $imgename  = $imge->store();
+            $imgename  = $imge->store(path:'listings');
 
 
-            if ($this->product) {
-                $this->subFiles[$imgename] = MediaType::IMAGE->value;
+            if ($this->listing) {
 
-                ListingMedia::create(
+
+                $StoredImage =  ListingMedia::create(
                     [
-                        'name' => $imgename,
+                        'path' => $imgename,
                         'type' => MediaType::IMAGE->value,
-                        'product_id' => $this->product->id,
+                        'listing_id' => $this->listing->id,
+
                     ]
                 );
-            }else
-            {
-                $this->dispatch('addImage',$imgename);
 
+                $this->subFiles[] = $StoredImage;
+            } else {
+                $this->dispatch('addImage', $imgename);
             }
         }
     }
 
 
-    public function  remove($imageName)
+    public function  remove($imageId)
     {
 
         if ($this->listing) {
-            ListingMedia::where('name', $imageName)->first()->delete();
 
-            $this->subFiles = array_filter($this->subFiles, fn ($type, $name) => $name != $imageName, ARRAY_FILTER_USE_BOTH);
-
-        }else{
-            $this->dispatch('removeImage',$imageName);
-
+            ListingMedia::where('id', $imageId)->first()->delete();
+            //
+            $this->subFiles = array_filter($this->subFiles, fn ($image) => $image['id'] != $imageId);
+        } else {
+            $this->dispatch('removeImage', $imageId);
         }
-
     }
 
 

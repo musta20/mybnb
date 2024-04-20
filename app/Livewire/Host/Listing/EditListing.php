@@ -25,7 +25,6 @@ class EditListing extends Component
 
     public function render()
     {
-        return view('livewire.host.listings.edit-listing',
-    );
+        return view('livewire.host.listings.edit-listing');
     }
 }

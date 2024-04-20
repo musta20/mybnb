@@ -23,6 +23,9 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         Route::get('listing/{listing}', EditListing::class)
         ->name('EditListing');
 
+  
+
+
 });
 
 
