@@ -2,6 +2,10 @@
 
 use Livewire\Volt\Component;
 use App\Enums\Amenities;
+use App\Enums\Cities;
+use App\Models\Listing;
+use Illuminate\Validation\Rule;
+
 new class extends Component {
 
    public $listing;
@@ -28,6 +32,9 @@ new class extends Component {
 
    public $price;
 
+   public $city;
+
+   public $Allcities;
 
    public function updateListing(){
 
@@ -36,16 +43,19 @@ new class extends Component {
             'address' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'guests' => ['required', 'numeric'],
-            'bedrooms' => ['required', 'numeric'],
             'beds' => ['required', 'numeric'],
             'baths' => ['required', 'numeric'],
             'price' => ['required','numeric'],
+            'city' => ['required', Rule::in(Cities::cases())],
 
         ]);
 
+        if ($this->listing) {
+            
         $this->listing->update([
             'title' => $validated['title'],
             'address' => $validated['address'],
+            'city' => $validated['city'],
             'description' => $validated['description'],
             'number_of_guests' =>   $validated['guests'],
             'number_of_bedrooms' => $validated['beds'],
@@ -55,7 +65,26 @@ new class extends Component {
 
         ]);
 
-        $this->dispatch('listing-updated');
+        return  $this->dispatch('listing-updated');
+    }
+
+   $newListing = Listing::create([
+        'title' => $validated['title'],
+            'address' => $validated['address'],
+            'description' => $validated['description'],
+            'number_of_guests' =>   $validated['guests'],
+            'number_of_bedrooms' => $validated['beds'],
+            'number_of_bathrooms' => $validated['baths'],
+            'price_per_night' => $validated['price'],
+            'city' => $validated['city'],
+            'host_id' => Auth::user()->id,
+            'amenities' => json_encode($this->amenities)
+    ]);
+      $this->dispatch('saveListingImages', $newListing->id);
+
+
+  
+
 
    }
 
@@ -68,10 +97,15 @@ new class extends Component {
 
    }
 
-   public function mount($listing)
+   public function mount($listing=null)
    {
-    $this->listing = $listing;
+
     $this->allAmenities = Amenities::cases();
+    $this->Allcities = Cities::cases();
+
+    if ($listing) {
+   
+    $this->listing = $listing;
     $this->amenities = json_decode($listing->amenities);
 
     $this->title = $listing->title;
@@ -81,8 +115,9 @@ new class extends Component {
     $this->beds = $listing->number_of_bedrooms;
     $this->baths = $listing->number_of_bathrooms;
     $this->price = $listing->price_per_night;
+    $this->city = $listing->city;
 
-
+    }
    }
  
    public function removeAmenity($item)
@@ -98,9 +133,17 @@ new class extends Component {
 
 
 <section>
- 
-    
- 
+
+    @if($errors->isNotEmpty())
+    <div class="text-red-500">
+        @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+        @endforeach
+    </div>
+    @endif
+
+
+
     <form wire:submit="updateListing" class="mt-6 space-y-6   ">
         <div class="flex gap-3 ">
             <div class="w-full ">
@@ -112,18 +155,20 @@ new class extends Component {
             <div class="w-full ">
                 <x-input-label for="listing_address" :value="__('messages.host_address')" />
                 <x-text-input wire:model="address" id="listing_address" name="address" type="text"
-                    class="mt-1 block w-full"
-                   
-                    autocomplete="listing_address" />
+                    class="mt-1 block w-full" autocomplete="listing_address" />
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
         </div>
-        <div>
+
+        <div class="flex  gap-3 ">
+
+
+        <div class="w-full" >
             <x-input-label for="listing_amenities" :value="__('messages.listing_amenities')" />
-            <div class="flex gap-3 my-3 ">
+            <div class="flex gap-2 my-3  min-h-[40px]">
                 @foreach ($amenities as $item)
                 <span
-                    class="inline-flex items-center gap-x-1.5 py-1.5 ps-3 pe-2 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
+                    class="inline-flex items-center   gap-x-1.5 py-0.5 ps-3 pe-2 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
                     {{__("messages.".$item) }}
                     <button type="button" wire:click="removeAmenity('{{$item}}')"
                         class="flex-shrink-0 size-4 inline-flex items-center justify-center rounded-full hover:bg-blue-200 focus:outline-none focus:bg-blue-200 focus:text-blue-500 dark:hover:bg-blue-900">
@@ -139,7 +184,8 @@ new class extends Component {
             </div>
 
             <select wire:model.live="selectedAmenities"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+
+                class="border-gray-300 w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
 
                 @foreach ($allAmenities as $key => $value)
 
@@ -151,8 +197,13 @@ new class extends Component {
 
             <x-input-error :messages="$errors->get('amenities')" class="mt-2" />
         </div>
+        <div class="w-full mt-12"  >
+            <x-input-label for="listing_title" class="py-2" :value="__('messages.host_title')" />
+          
+            <x-select-input class="w-full"   :options="$Allcities"  wire:model="city"  />
+        </div>
 
-
+    </div>
 
         <div>
             <x-input-label for="listing_description" :value="__('messages.listing_description')" />
@@ -183,19 +234,15 @@ new class extends Component {
 
             <div class="w-full ">
                 <x-input-label for="listing_guests" :value="__('messages.number_of_bathrooms')" />
-                <x-text-input wire:model="baths" id="number_of_bathrooms" name="number_of_bathrooms"
-                    type="number" class="mt-1 block w-full" autocomplete="number_of_bathrooms" />
+                <x-text-input wire:model="baths" id="number_of_bathrooms" name="number_of_bathrooms" type="number"
+                    class="mt-1 block w-full" autocomplete="number_of_bathrooms" />
                 <x-input-error :messages="$errors->get('baths')" class="mt-2" />
             </div>
 
             <div class="w-full ">
                 <x-input-label for="price_per_night" :value="__('messages.price_per_night')" />
-                <x-text-input
-                type="number"
-                min="0" 
-        max="1000" step="0.01" 
-                wire:model="price" id="price_per_night" name="price_per_night" 
-                    class="mt-1 block w-full" autocomplete="price_per_night" />
+                <x-text-input type="number" min="0" max="1000" step="0.01" wire:model="price" id="price_per_night"
+                    name="price_per_night" class="mt-1 block w-full" autocomplete="price_per_night" />
                 <x-input-error :messages="$errors->get('price')" class="mt-2" />
             </div>
 

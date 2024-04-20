@@ -18,6 +18,16 @@ return [
     'listing_description'=>'وصف العقار',
     'Save'=>'حفظ',
     'Saved.'=>'تم الحفظ',
+    'Cairo'=>'القاهرة',
+    'Alexandria'=>'الاسكندرية',
+    'Giza'=>'الجيزة',
+    'Luxor'=>'اللوكسور',
+    'Aswan'=>'أسوان',
+    'SharmElSheikh'=>'شرم الشيخ',
+    'PortSaid'=>'بورسعيد',
+    'Suez'=>'السويس',
+
+
 
 
 

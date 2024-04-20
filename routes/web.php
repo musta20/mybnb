@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,12 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         Route::get('listing', Listing::class)
         ->name('listing');
 
+        Route::get('listing/new', AddListing::class)
+        ->name('AddListing');
+
         Route::get('listing/{listing}', EditListing::class)
         ->name('EditListing');
+
 
   
 

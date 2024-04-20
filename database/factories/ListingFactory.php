@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\Amenities;
+use App\Enums\Cities;
 use App\Enums\HostType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +24,7 @@ class ListingFactory extends Factory
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
-            'city' => fake()->city(),
+            'city' => fake()->randomElement(Cities::cases())->value,
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'number_of_guests' => fake()->numberBetween(1, 10),

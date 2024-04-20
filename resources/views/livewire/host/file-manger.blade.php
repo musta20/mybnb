@@ -6,6 +6,7 @@
     h-full border-2 border-dashed  hover:border-primary hover:border-3 light:bg-slate-50 rounded-lg 
     dark:border-slate-600 dark:hover:border-slate-500
                  light:bg-gray-50 light:hover:bg-gray-100 ">
+
         <input multiple wire:model='photo' id="dropzone-file" type="file"
             class="absolute h-full w-full opacity-0 cursor-pointer p-5 m-5" for="dropzone-file"
             x-on:livewire-upload-start="uploading = true" x-on:livewire-upload-finish="uploading = false;fileLoded=true"
@@ -48,11 +49,38 @@
     <div class=" grid  2xl:grid-cols-3   xsm:grid-cols-1 gap-2 items-center p-3  w-full ">
         @foreach ($subFiles as $item )
 
-        <div x-data="{showCancle:false}" wire:key='{{$item['id']}}' >
+        <div x-data="{showCancle:false}" 
+        @if ($listing)
+        wire:key='{{$item['id']}}'
+        @else
+        wire:key='{{$item->getfileName()}}'
+        @endif 
+         >
             <div @mouseenter="showCancle=true" @mouseleave="showCancle=false" class=" rounded-lg relative  ">
                 <img :class="{'blur-sm' : showCancle==true}" class=" rounded-lg   "
-                    src="{{ asset('listings/'.$item['path']) }}" {{-- src="{{$item->temporaryUrl()}}" --}} />
-                <button wire:click.prevent="remove('{{$item['id']}}')" x-show="showCancle"
+
+                @if ($listing)
+
+                src="{{ asset('listings/'.$item['path']) }}"
+
+                @else
+
+                src="{{$item->temporaryUrl()}}" 
+
+                @endif
+                     
+                     />
+                <button 
+                @if ($listing)
+
+                wire:click.prevent="remove('{{$item['id']}}')"
+
+                @else
+                wire:click.prevent="remove('{{$item->getfileName()}}')"
+
+                @endif
+                
+                x-show="showCancle"
                     class="absolute bg-white hover:bg-slate-200 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <svg class="w-10 h-10 text-gray-900 dark:text-gray-300" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
