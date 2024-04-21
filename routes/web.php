@@ -32,7 +32,7 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         Route::get('booking/', Booking::class)
         ->name('Booking');
 
-        Volt::route('booking/detail/{booking}', 'host.booking.detail-booking')
+        Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
         ->name('BookingDetail');
  
 
