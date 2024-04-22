@@ -36,5 +36,18 @@ class ListingFactory extends Factory
                 'type' => HostType::HOST->value,
             ]),
         ];
+
     }
+
+
+    public function withHost(User $user){
+
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'host_id' => $user->id,
+            ];
+        });
+    }
+
+
 }

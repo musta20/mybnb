@@ -23,13 +23,34 @@ class MessagesFactory extends Factory
         do {
             $senderId = fake()->randomElement($users);
             $recipientId = fake()->randomElement($users);
+
         } while ($senderId === $recipientId); // Ensure sender and recipient are different
 
         return [
             'sender_id' => $senderId,
             'recipient_id' => $recipientId,
-            'content' => fake()->sentence(),
+            'content' => $this->faker->paragraph(),
             'is_read' => fake()->boolean(),
         ];
     }
+
+    public function withSender(User $user)
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'sender_id' => $user->id,
+            ];
+        });
+    }
+
+    public function withRecipient(User $user)
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'recipient_id' => $user->id,
+            ];
+        });
+    }
+
+
 }

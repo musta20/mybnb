@@ -32,6 +32,10 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         Route::get('booking/', Booking::class)
         ->name('Booking');
 
+
+        Volt::route('messages/{Messages?}', 'host.messages.messages')
+        ->name('Message');
+ 
         Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
         ->name('BookingDetail');
  

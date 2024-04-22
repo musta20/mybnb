@@ -29,7 +29,8 @@ new class extends Component
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden gap-2 space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -39,10 +40,14 @@ new class extends Component
                         {{ __('Listing') }}
                     </x-nav-link>
 
-
                     <x-nav-link :href="route('host.Booking')" :active="request()->routeIs('host.Booking')"
                         wire:navigate>
                         {{ __('booking') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('host.Message')" :active="request()->routeIs('host.Message')"
+                        wire:navigate>
+                        {{ __('messages.messages') }}
                     </x-nav-link>
 
 

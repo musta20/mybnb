@@ -25,8 +25,8 @@ public function mount(Booking $Booking){
 
     
     $this->month = Carbon::parse($Booking->check_out_date)->subMonth()->month;
-    //@dd($this->month);
 
+    
     $this->events = [
         [
       "event_date"=>$Booking->check_in_date,
