@@ -3,6 +3,7 @@ use Livewire\Volt\Component;
 use App\Models\Booking;
 use App\Models\Messages;
 use Livewire\WithPagination;
+use Illuminate\Validation\ValidationException;
 
 new class extends Component
 {
@@ -11,46 +12,46 @@ new class extends Component
     public $mail;
     public $users;
 
-    public $content;
-    public $recipient_id;
+    public $allUsers=[];
+    
+    public string $content;
+
+    public string $recipient_id;
+    
     public function getMessages(){
 
         $myID =auth()->user()->id;
 
-        $messages=[];
+        $messagescontent=[];
 
         switch ($this->mail) {
                 case 'Inbox':
-                $messages= Messages::where('recipient_id',$myID )->latest()->paginate(20);
+                $messagescontent= Messages::where('recipient_id',$myID )->latest()->paginate(20);
                 break;
                 case 'sent':
-                $messages= Messages::where('sender_id', $myID)->latest()->paginate(20);
+                $messagescontent= Messages::where('sender_id', $myID)->latest()->paginate(20);
                 break;
                 case 'all':
-                $messages= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
+                $messagescontent= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
                 break;  
                 case 'new':
                 $allbooking = Booking::whereIn('listing_id', function ($query) use ($myID) {
                         $query->select('id')->from('listings')->where('host_id', $myID);
                     })->with('guest')->get();
 
-                
-                $messages = $allbooking->pluck('guest');
-                
-                    // $messages = $bookings->map(function ($booking) {
-                    //     return Messages::where('booking_id', $booking->id)->latest()->first();
-                    // })->filter()->paginate(20);
+                    $this->allUsers =  $allbooking->pluck('guest')->pluck('id')->toArray();
+                $messagescontent = $allbooking->pluck('guest');
+             
                 break; 
 
             
-                $messages= null;
                 break;  
                 default:
-                $messages= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
+                $messagescontent= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
                 break;
         }
         
-        return $messages;
+        return $messagescontent;
 
     }
 
@@ -70,16 +71,32 @@ new class extends Component
 
     }
 
-
-    public function sendMessage(){
+    public function sendMessag():void{
+  
         
-    Messages::create([
-        'sender_id' => auth()->user()->id,
-        'recipient_id' => $this->currentMessage->sender_id,
-        'booking_id' => $this->recipient_id,
-        'content' => $this->content
-    ])
+        $messages= [
+            'recipient_id.required' => 'The recipient field is required.',
+            'content.required' => 'The content field is required.'
+        ];
+        
+        $validated = $this->validate([
+            'recipient_id' => ['required'],
+            'content' => ['required'],
+        ], $messages);
 
+        if(!in_array($this->recipient_id, $this->allUsers)) {
+            throw ValidationException::withMessages(['recipient_id' => 'Invalid recipient_id.']);
+        }
+
+
+        Messages::create([
+            'sender_id' => auth()->user()->id,
+            'recipient_id' => $this->recipient_id,
+            'content' => $this->content,
+            'is_read' => 0
+        ]);
+
+        $this->redirect('/host/messages', navigate: true);
 
     }
 
@@ -141,11 +158,10 @@ new class extends Component
         <div class="p-2 sm:p-8  w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <div class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
                 <a href="{{route('host.Message')}}?mail=new" class="text-sm py-2 text-md flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                      </svg>
+                      
                     انشاء رسالة
                 </a>
             </div>
@@ -183,26 +199,6 @@ new class extends Component
                 </a>
             </div>
         </div>
-
-
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-                    تفاصيل الحجز
-                </h3>
-                <p class="mt-1 flex gap-2 max-w-2xl m-5 py-3 text-sm text-gray-500 dark:text-gray-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                    بببببببببب
-                </p>
-            </div>
-        </div>
-
-
-
     </div>
 
     <div class="w-5/6 mx-auto sm:px-6 lg:px-8 space-y-6 ">
@@ -215,7 +211,7 @@ new class extends Component
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
-                {{ $this->currentMessage->sender->id == auth()->user()->id ? "المرسل :". $this->currentMessage->recipient->name : $this->currentMessage->sender->name  }}
+                {{ $this->currentMessage->sender->id == auth()->user()->id ? "الى :". $this->currentMessage->recipient->name : $this->currentMessage->sender->name  }}
                 {{-- {{$this->currentMessage->sender->name}} --}}
             </p>
             <p class="font-bold  py-2 text-md  flex gap-2">
@@ -233,23 +229,27 @@ new class extends Component
 
         </div>
         @elseif($mail=='new')
-        <div class=" p-4 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 shadow sm:rounded-lg">
+        <form wire:submit='sendMessag'  class=" p-4 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 shadow sm:rounded-lg">
 
             
       
 
-            <x-input-label for="email" value="المستخدميين" />
-            <x-select-input  id="email" class="block mt-1 w-4/6" :options="$allmessages" name="email" :value="old('email')" required
-                autocomplete="email" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="user" value="المستخدميين" />
+            <x-select-input  id="recipient_id" class="block mt-1 w-4/6" :options="$allmessages"
+             wire:model.live='recipient_id' name="recipient_id" :value="old('recipient_id')" required
+                autocomplete="recipient_id" />
+            <x-input-error :messages="$errors->get('recipient_id')" class="mt-2" />
 
-            <x-input-label for="subject" value="الموضوع" />
-            <x-text-area id="subject" class="block mt-1 w-4/6" type="text" name="subject" :value="old('subject')" required
-                autocomplete="subject" ></x-text-area>
-            <x-input-error :messages="$errors->get('subject')" class="mt-2" />
+            <x-input-label for="content" value="الموضوع" />
+            <x-text-area id="content" class="block mt-1 w-4/6" type="text" wire:model='content' name="content" :value="old('content')" required
+                autocomplete="content" ></x-text-area>
+
+            <x-input-error 
+            :messages="$errors->get('content')"
+             class="mt-2" />
                 <x-primary-button class="mt-4" type="submit">ارسال</x-primary-button>
 
-            </div>
+        </form>
         
 
         @else

@@ -7,7 +7,7 @@ use App\Livewire\Host\Listing\Listing;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::view('/', 'welcome');
+Route::view('/', 'index');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -33,7 +33,7 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         ->name('Booking');
 
 
-        Volt::route('messages/{Messages?}', 'host.messages.messages')
+        Volt::route('messages/{Messages?}', 'host.messages.messages-component')
         ->name('Message');
  
         Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
