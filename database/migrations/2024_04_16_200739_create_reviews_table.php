@@ -12,13 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
+
             $table->ulid('id')->primary();
+
             $table->foreignUlid('listing_id')->constrained('listings')->onDelete('cascade');
+
             $table->foreignUlid('guest_id')->constrained('users')->onDelete('cascade');
+
             $table->integer('rating');
+
+        
+
             $table->text('comment');
+
             $table->timestamps();
+
             $table->softDeletes();
+            
                 });
     }
 

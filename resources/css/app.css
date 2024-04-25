@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* @font-face {
+    font-family: "Rubik";
+    src: url("./Rubik.ttf") format("ttf"),
+  } */
+
+    
+*{
+  transition: all .01s;
+}

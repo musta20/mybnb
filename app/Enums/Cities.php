@@ -12,8 +12,6 @@ enum Cities :string
     case SharmElSheikh = 'SharmElSheikh';
     case PortSaid = 'PortSaid';
     case Suez = 'Suez';
-
-
   
 }
 

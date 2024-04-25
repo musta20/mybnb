@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,10 @@ return new class extends Migration
             $table->integer('number_of_bedrooms');
             $table->integer('number_of_bathrooms');
             $table->json('amenities')->nullable();
+
+            $table->string('status')->default(Status::DRAFT->value)->nullable();
+
+
             $table->decimal('price_per_night', 8, 2);
             $table->foreignUlid('host_id')->constrained('users')->onDelete('cascade');
             $table->softDeletes();

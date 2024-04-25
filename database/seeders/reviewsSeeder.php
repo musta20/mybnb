@@ -15,15 +15,16 @@ class reviewsSeeder extends Seeder
     public function run(): void
     {
         $listings = Listing::all();
-        Reviews::factory()
-        ->count(20)
-        ->sequence(function ($sequence) use ($listings) {
+        foreach ($listings as $listing) {
+       
+            Reviews::factory()
+            ->count(20)
+            ->for($listing)
+            ->create(); 
 
-            return [
-                'listing_id' => $listings->random()->id
-            ];
-        })
-        ->create(); // Create 20 reviews
+
+        }
+     
 
     }
 }

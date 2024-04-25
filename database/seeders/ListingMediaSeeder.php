@@ -24,7 +24,7 @@ class listingMediaSeeder extends Seeder
 
             ListingMedia::factory()
                 ->for($listing)
-                ->count(3)
+                ->count(6)
                 ->sequence(function ($sequence) use ($images) {
 
                     return [
