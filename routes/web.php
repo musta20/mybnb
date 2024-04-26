@@ -10,6 +10,7 @@ use Livewire\Volt\Volt;
 
 use App\Enums\Status;
 use App\Http\Controllers\CartController;
+use App\Models\Booking as ModelsBooking;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 
@@ -82,6 +83,22 @@ Route::get('listing/{listing}', function (ModelsListing $listing) {
     ]);
 })->name('listing');
 
+
+Route::post('saveBooking/{listing}', function (ModelsListing $listing,Request $request) {
+
+
+    ModelsBooking::create([
+        'listing_id' => $listing->id,
+        'guest_id' => auth()->user()->id,
+        'check_in_date' => $request->start,
+        'check_out_date' => $request->end,
+        'total_price' => $listing->price_per_night * $request->beds
+
+    ]);
+
+    return;
+})->name('saveBooking');
+
 Route::post('booking/{listing}', function (ModelsListing $listing, Request $request) {
 
 
@@ -100,9 +117,6 @@ Route::post('booking/{listing}', function (ModelsListing $listing, Request $requ
     
     $price = $listing->price_per_night * $numberOfDays;
  
-        
-    // dd($beds, $start, $end);
-
     return view('booking', [
         'listing' => $listing,
         'price' => $price,
