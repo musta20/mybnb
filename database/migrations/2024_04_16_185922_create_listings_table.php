@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->string('status')->default(Status::DRAFT->value)->nullable();
 
+            $table->Float('rating')->nullable();
 
             $table->decimal('price_per_night', 8, 2);
             $table->foreignUlid('host_id')->constrained('users')->onDelete('cascade');

@@ -23,6 +23,19 @@ class reviewsSeeder extends Seeder
             ->create(); 
 
 
+
+            $allRating = Reviews::where('listing_id', $listing->id)->pluck('rating')->toArray();
+            $totalRating = 0;
+
+            if (count($allRating) > 0) {
+                $totalRating = array_sum($allRating) / count($allRating);
+            }
+
+            $listing->update([
+                'rating' => $totalRating
+            ]);
+
+
         }
      
 

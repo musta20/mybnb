@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 use App\Enums\Status;
+use App\Http\Controllers\CartController;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ Route::get(
     '/',
 
     function () {
+
         $listings = ModelsListing::where('status', Status::PUBLISHED->value)->paginate(10);
 
         return view('index', [
@@ -77,6 +79,45 @@ Route::get('listing/{listing}', function (ModelsListing $listing) {
         'recomendedProduct' => $recomendedProduct
     ]);
 })->name('listing');
+
+Route::post('booking/{listing}', function (ModelsListing $listing, Request $request) {
+
+
+    if ($listing->status != Status::PUBLISHED->value) return     abort(404);
+
+    $beds = $request->bedrooms;
+    $start = $request->start;
+    $end = $request->end;
+
+
+    $startDate = \Carbon\Carbon::parse($start);
+    
+    $endDate = \Carbon\Carbon::parse($end);
+    
+    $numberOfDays = $startDate->diffInDays($endDate) + 1; // add 1 because the diffInDays does not include the end date
+    
+    $price = $listing->price_per_night * $numberOfDays;
+ 
+        
+    // dd($beds, $start, $end);
+
+    return view('booking', [
+        'listing' => $listing,
+        'price' => $price,
+        'beds' => $beds,
+        'start' => $start,
+        'end' => $end
+  
+    ]);
+})->name('booking');
+
+//showCart
+Route::get('/showCart', function(){
+    
+})->name('showCart');
+
+Route::get('/addToCart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/removeCart/{product}', [CartController::class, 'removeCart'])->name('removeCart');
 
 Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], function () {
 

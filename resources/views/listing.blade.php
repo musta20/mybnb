@@ -73,7 +73,11 @@
 
 
             <div class="flex  justify-center  py-5 w-1/2">
+
                 <div class="rounded-lg  border-2 max-h-64 w-1/2  p-5 bg-white ">
+                    
+                    <form  action="{{route('booking', $listing->id)}}" method="POST" >
+                        @csrf
                     <div class="my-5 gap-2">
                         {{$listing->price_per_night}} <span class="text-xs" >{{__('messages.EGP')}}</span>    {{__('messages.per night')}}
                     </div>
@@ -81,7 +85,10 @@
                     <hr class="my-5">
                     <x-layout.guest />
 
+
                     <button class="w-full bg-slate-500 rounded-lg text-white p-2 mt-5">Book now</button>
+
+                    </form>
                 </div>
             </div>
 

@@ -27,7 +27,7 @@
         <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">out of</p>
         <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">5</p>
         @else
-        {{$rating}}
+       ( {{$rating}} )
         @endif
 
     </div>
