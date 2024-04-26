@@ -71,11 +71,13 @@ Route::get('listing/{listing}', function (ModelsListing $listing) {
         $totalRating = array_sum($r) / array_sum($allRating);
     }
 
-
+  $reviews=  Reviews::where('listing_id', $listing->id)->paginate(10);
+   //$reviews = $listing->reviews->paginate(10); 
     return view('listing', [
         'listing' => $listing,
         'totalRating' => $totalRating,
         'allRating' => $allRating,
+        'reviews'=>$reviews,
         'recomendedProduct' => $recomendedProduct
     ]);
 })->name('listing');
@@ -113,11 +115,16 @@ Route::post('booking/{listing}', function (ModelsListing $listing, Request $requ
 
 //showCart
 Route::get('/showCart', function(){
+
+
     
+    
+    return view('wishList');
+
 })->name('showCart');
 
-Route::get('/addToCart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
-Route::get('/removeCart/{product}', [CartController::class, 'removeCart'])->name('removeCart');
+Route::get('/addToList/{listing}', [CartController::class, 'addToList'])->name('addToList');
+Route::get('/removeList/{listing}', [CartController::class, 'removeList'])->name('removeList');
 
 Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], function () {
 

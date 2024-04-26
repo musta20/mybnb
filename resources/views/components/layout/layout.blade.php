@@ -22,7 +22,7 @@
     @vite(['resources/css/app.css', 'resources/js/main.js'])
 </head>
 
-<body class="bg-gray-100 font-Rubik dark:bg-slate-800 dark:text-slate-500 ">
+<body class="bg-gray-100 text-slate-600 font-Rubik dark:bg-slate-800 dark:text-slate-500 ">
     <div class="bg-slate-100 dark:bg-slate-800 py-3">
         <x-layout.header />
     </div>

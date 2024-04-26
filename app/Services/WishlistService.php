@@ -4,35 +4,35 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 
-class CartService
+class WishlistService
 {
     public static function add($productid): void
     {
         //dd($productid);
-        $cart = self::getCart();
+        $cart = self::getList();
 
 
         $cartItem = $cart->where('id', $productid->id)->first();
         if (!$cartItem) {
 
             $cart->push($productid);
-            session()->put('cart', $cart);
+            session()->put('List', $cart);
         }
     }
 
 
     public static function remove($productId): void
     {
-        $cart = self::getCart();
+        $cart = self::getList();
         
         $cart = $cart->filter(fn($item) => $item->id!= $productId);
 
 
-        session()->put('cart', $cart);
+        session()->put('List', $cart);
     }
 
-    public static function getCart()
+    public static function getList()
     {
-        return session()->has('cart') ? session()->get('cart') : collect([]);
+        return session()->has('List') ? session()->get('List') : collect([]);
     }
 }

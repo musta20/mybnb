@@ -2,7 +2,7 @@
     <div class="w-5/6 mx-auto ">
         <div class="flex gap-3 w-2/6 justify-between py-2">
             <h3 class="text-2xl ">{{$listing->title}}</h3>
-            <x-user-rating :rating="$totalRating" />
+            <x-user-rating :showText="false" :rating="$totalRating" />
         </div>
         <hr>
         <div class="flex gap-2  py-3">
@@ -36,7 +36,7 @@
                 <hr class="my-5">
                 <div class="">
                     <span class="flex sm:flex-col justify-between my-2">
-                        <x-user-rating :rating="$totalRating" />
+                        <x-user-rating :showText="false" :rating="$totalRating" />
                         <strong>
                             {{__('messages.over all rating')}}
 
@@ -66,9 +66,12 @@
                     <hr class="my-5">
                     <x-add-review :$listing />
                 </div>
-                @foreach ($listing->reviews as $review)
+                @foreach ($reviews as $review)
                 <x-comment-card :$review />
                 @endforeach
+                <span>
+                    {{$reviews->links()}}
+                </span>
             </div>
 
 

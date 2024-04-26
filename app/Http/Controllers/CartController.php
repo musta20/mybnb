@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\Product;
-use App\Models\ShopCart;
 use App\Models\WishList;
-use App\Services\CartService;
+use App\Services\WishlistService;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -20,7 +19,7 @@ class CartController extends Controller
      * @param Product $product The product to be added to the cart.
      * @return \Illuminate\Http\RedirectResponse Redirects back to the previous page with a success message.
      */
-    public function addToCart(Listing $product)
+    public function addToList(Listing $listing)
     {
         // Check if the user is authenticated
         if (Auth::check()) {
@@ -29,16 +28,16 @@ class CartController extends Controller
 
             // Add the product to the user's shopping cart
             WishList::firstOrCreate(
-                ["product_id" =>  $product->id],
+                ["listing_id" =>  $listing->id],
                 ["user_id" => $user->id]
             );
         } else {
             // Add the product to the session cart
-            CartService::add(
+            WishlistService::add(
                 (object)  [
-                'id' => $product->id,
-                'name' => $product->name,
-                'image' => $product->image
+                'id' => $listing->id,
+                'title' => $listing->title,
+                'image' => $listing->media[0]->path
             ]);
         }
 
@@ -55,10 +54,10 @@ class CartController extends Controller
             $cart = $user->products;
 
         }else{
-            $cart = CartService::getCart();
+            $cart = WishlistService::getList();
         }
 
-        return view('cart',['cart' => $cart]);   
+        return view('List',['List' => $cart]);   
     }
 
 
@@ -70,14 +69,14 @@ class CartController extends Controller
      * @throws Some_Exception_Class Description of exception
      * @return Some_Return_Value
      */
-    public function removeCart(Listing $product){
+    public function removeList(Listing $listing){
 
 
         if (Auth::check()) {
 
             $user = Auth::user();
 
-            $productItem =wishList::where('user_id',$user->id)->where('product_id',$product->id)->get();
+            $productItem =wishList::where('user_id',$user->id)->where('listing_id',$listing->id)->get();
             
            
              $productItem->first()->delete();
@@ -86,7 +85,7 @@ class CartController extends Controller
 
         }
 
-        CartService::remove($product->id);
+        WishlistService::remove($listing->id);
 
         return redirect()->back()->with('OkToast',__('messages.product removed'));
     }
