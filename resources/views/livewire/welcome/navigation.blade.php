@@ -1,16 +1,31 @@
-<nav class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-12 flex  justify-between">
+<nav x-data="{ UserdropdownOpen: false,dropdownOpen: false , open: false ,darkMode: localStorage.theme === 'dark' ? true:false }" class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-12 flex  justify-between">
     @auth
-    <div class="relative !min-w-90 p-1 " x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
+
+    
+    <div class="relative !min-w-90 p-1 "@click.outside="dropdownOpen = false">
+       
         <a class="flex items-center gap-2" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
+
+
+            @if (auth()->user()->profile_picture)
+                <img  src="{{ asset('listings/'.auth()->user()->profile_picture) }}" alt="{{ auth()->user()->name }}" 
+                class="w-9  h-9 rounded-full object-cover">
+
+            @else
             <div class="flex justify-center justify-items-center p-1 uppercase font-bold text-lg 
             text-center w-10 h-9 rounded-full bg-yellow-200 
              border-3 text-slate-700">
                 <p>{{ substr(auth()->user()->name,0*2,1*2) }}</p>
             </div>
+            @endif
+
+
+
         </a>
+
         <!-- Dropdown Start -->
         <div x-show="dropdownOpen"
-            class="absolute ltr:-right-25 mt-4 flex w-40 flex-col rounded-sm border border-stroke bg-white shadow-default">
+            class="absolute ltr:-right-25 mt-2 flex w-40 flex-col rounded-sm border border-stroke bg-white shadow-default">
             <ul class="flex  flex-col border-b border-stroke px-5 py-7.5">
                 <li>
                     <a href="{{route('dashboard')}}"
@@ -33,15 +48,10 @@
                 <li>
                     <a href="{{route('dashboard')}}"
                         class="flex items-center py-4 gap-3.5 text-xs font-medium duration-300 ease-in-out hover:text-primary ">
-                        <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11 9.62499C8.42188 9.62499 6.35938 7.59687 6.35938 5.12187C6.35938 2.64687 8.42188 0.618744 11 0.618744C13.5781 0.618744 15.6406 2.64687 15.6406 5.12187C15.6406 7.59687 13.5781 9.62499 11 9.62499ZM11 2.16562C9.28125 2.16562 7.90625 3.50624 7.90625 5.12187C7.90625 6.73749 9.28125 8.07812 11 8.07812C12.7188 8.07812 14.0938 6.73749 14.0938 5.12187C14.0938 3.50624 12.7188 2.16562 11 2.16562Z"
-                                fill="" />
-                            <path
-                                d="M17.7719 21.4156H4.2281C3.5406 21.4156 2.9906 20.8656 2.9906 20.1781V17.0844C2.9906 13.7156 5.7406 10.9656 9.10935 10.9656H12.925C16.2937 10.9656 19.0437 13.7156 19.0437 17.0844V20.1781C19.0094 20.8312 18.4594 21.4156 17.7719 21.4156ZM4.53748 19.8687H17.4969V17.0844C17.4969 14.575 15.4344 12.5125 12.925 12.5125H9.07498C6.5656 12.5125 4.5031 14.575 4.5031 17.0844V19.8687H4.53748Z"
-                                fill="" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                          </svg>
+                          
                         {{__('messages.Dashboard')}}
                     </a>
                 </li>
@@ -75,29 +85,68 @@
     </div>
 
 
-    @else
-    <a href="{{ route('login') }}"
-        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-        Log in
-    </a>
 
-    @if (Route::has('register'))
-    <a href="{{ route('register') }}"
-        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-        Register
-    </a>
-    @endif
-    @endauth
-    <div x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }"
-    class="flex px-2 items-center justify-end  pr-4">
-    <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" x-model="darkMode"
-            @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
-            value="" class="sr-only peer">
-        <div
-            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-sky-900 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-sky-900">
+    @else
+        <button @click="UserdropdownOpen = ! UserdropdownOpen">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24" 
+             class="w-10 h-10 hover:text-slate-400 dark:text-slate-300" 
+             fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                    clip-rule="evenodd" />
+            </svg>
+
+        </button>
+
+        <div x-show="UserdropdownOpen"
+            class="absolute ltr:-right-25 mt-11  flex w-44 flex-col rounded-md border border-stroke bg-white shadow-default">
+
+            
+            <ul class="flex py-4  flex-col border-b border-stroke py-7.5">
+                <li class="mb-4">
+                    <a href="{{ route('login') }}"
+                        class="flex gap-2 rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none
+                         focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm5.03 4.72a.75.75 0 0 1 0 1.06l-1.72 1.72h10.94a.75.75 0 0 1 0 1.5H10.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+                          </svg>
+                          
+                        {{ __('messages.Log In') }}
+                    </a>
+                </li>
+
+                <li class=" ">
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}"
+                        class="flex gap-2  rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70
+                         focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                          </svg>
+                          
+                        {{ __('messages.Register') }}
+
+                    </a>
+                    @endif
+                </li>
+            </ul>
         </div>
-    </label>
-</div>
+
+
+
+    @endauth
+    <div 
+        class="flex px-2 items-center justify-end  pr-4">
+        <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" x-model="darkMode"
+                @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
+                value="" class="sr-only peer">
+            <div
+                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-sky-900 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-sky-900">
+            </div>
+        </label>
+    </div>
     <x-wishlist />
 </nav>

@@ -23,8 +23,18 @@
         <div class="flex">
 
             <div class=" py-5  w-1/2">
-                <div>
-                    {{$listing->host->name}}
+                <div class="flex gap-3">
+                    @if($listing->host->profile_picture)
+                    <img src="{{asset('listings/'.$listing->host->profile_picture)}}" 
+                    class="w-14 h-14 rounded-full"  />                    @else
+                        <svg class="w-14 h-14 rounded-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    @endif
+              
+                    <span class="text-xl font-bold my-auto">
+                        {{$listing->host->name}}
+                    </span>
                 </div>
 
                 <hr class="my-5">
@@ -77,19 +87,21 @@
 
             <div class="flex  justify-center  py-5 w-1/2">
 
-                <div class="rounded-lg  border-2 max-h-64 w-1/2  p-5 bg-white ">
-                    
-                    <form  action="{{route('booking', $listing->id)}}" method="POST" >
+                <div class="rounded-lg  border-2 max-h-64 w-1/2  p-5 dark:bg-slate-800 bg-white ">
+
+                    <form action="{{route('booking', $listing->id)}}" method="POST">
                         @csrf
-                    <div class="my-5 gap-2">
-                        {{$listing->price_per_night}} <span class="text-xs" >{{__('messages.EGP')}}</span>    {{__('messages.per night')}}
-                    </div>
-                    <x-layout.check-date />
-                    <hr class="my-5">
-                    <x-layout.guest />
+                        <div class="my-5 gap-2">
+                            {{$listing->price_per_night}} <span class="text-xs">{{__('messages.EGP')}}</span>
+                            {{__('messages.per night')}}
+                        </div>
+                        <x-layout.check-date />
+                        <hr class="my-5">
+                        <x-layout.guest />
 
 
-                    <button class="w-full bg-slate-500 rounded-lg text-white p-2 mt-5">Book now</button>
+                        <button class="w-full bg-slate-500 rounded-lg text-white p-2 mt-5">
+                            {{__('messages.Book now')}}</button>
 
                     </form>
                 </div>

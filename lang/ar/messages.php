@@ -9,7 +9,10 @@ return [
     'Kitchen'=>'مطبخ',
     'Parking'=>'موقف',
     'Pool'=>'مسبح',
+    'Check Out'=>' المغادرة',
+    'Check In'=>'تسجيل الوصول',
     'Heating'=>'تدفئة',
+    'guests'=>'الضيوف',
     'Air conditioning'=>'تكييف',
     'price_per_night'=>'سعر اليوم',
     'number_of_guests'=>'عدد الضيوف',
@@ -26,9 +29,9 @@ return [
     'SharmElSheikh'=>'شرم الشيخ',
     'PortSaid'=>'بورسعيد',
     'Suez'=>'السويس',
-
-
-
+    'your wishlist is empty' => 'المفضلة فارغة',
+    'Log In' => 'تسجيل الدخول',
+    'Register'=> 'إنشاء حساب',
 
     'EGP' => 'جنيه',
     'add review' => 'إصافة تقييم',
@@ -226,7 +229,8 @@ return [
     'Enable footer links' => 'اتاحة الروابط اسفل الصفحة',
     'Enable user registration' => 'إتاحة تسجيل المستخدميين',
     'Allow unregistered users to review' => 'السماح للمستخدمين غير المسجلين بالتقييم',
-    'User deleted' => 'تم حذف المستخدم'
+    'User deleted' => 'تم حذف المستخدم',
+    'Book now' => 'حجز الان',
 
 
 ];

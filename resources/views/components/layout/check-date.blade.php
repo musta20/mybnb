@@ -10,7 +10,7 @@
     </div>
     <input name="start" value="{{$start}}" type="text"
       class="bg-gray-50 border w-32 border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block  ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Check In">
+      placeholder="{{__('messages.Check In')}}">
   </div>
   <div class="relative w-32">
     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -23,6 +23,7 @@
     <input name="end" value="{{$end}}" type="text" id="dateRangePickerId" class="bg-gray-50 border w-32 border-gray-300 text-gray-900 text-sm rounded-full
       focus:ring-blue-500 focus:border-blue-500 block ps-10 p-2.5 
        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-        dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Check Out">
+        dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        placeholder="{{__('messages.Check Out')}}">
   </div>
 </div>

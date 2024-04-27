@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('languages')->nullable(); // Languages spoken by hosts
             $table->string('response_time')->nullable(); // Host response time
             $table->string('response_rate')->nullable(); // Host response rate
-
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

@@ -1,7 +1,7 @@
 @auth
 
 <a href="{{route('showCart')}}" class="hover:bg-slate-100 rounded-full p-2 flex justify-center justify-items-center">
-    <span class="relative inline-block">
+    <span class="relative inline-block my-auto">
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
@@ -21,7 +21,7 @@
     </span>
 </a>
 @else
-<a href="{{route('showCart')}}" class="hover:bg-slate-100 rounded-full p-2 flex justify-center justify-items-center">
+<a href="{{route('showCart')}}" class="hover:text-red-400 rounded-full my-auto px-2 flex justify-center justify-items-center">
     <span class="relative inline-block">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">

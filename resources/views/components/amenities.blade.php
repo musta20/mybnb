@@ -8,7 +8,7 @@
             <path stroke-linecap="round" stroke-linejoin="round"
                 d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z" />
         </svg>
-        <span>WIFI</span>
+        <span>{{ __('messages.Wifi') }}</span>
     </div>
 
     @break
@@ -30,7 +30,7 @@
                 d="M428.4 268c0 7.5 6.1 14 13.7 14h84.5c7.7 0 13.7-6.3 13.7-14 0-7.5-6.1-14-13.7-14h-84.5c-7.7 0-13.7 6.3-13.7 14zM260.4 268c0 7.5 6.3 14 14 14 7.5 0 14-6.3 14-14 0-7.5-6.3-14-14-14-7.5 0-14 6.3-14 14z"
                 fill="#FFFFFF"></path>
         </svg>
-        <span>Air condition</span>
+        <span>{{ __('messages.Air conditioning') }}</span>
     </div>
     @break
     @case(App\Enums\Amenities::KITCHEN->value)
@@ -84,7 +84,7 @@
 
         </svg>
 
-        <span>kitchen</span>
+        <span>{{ __('messages.Kitchen') }}</span>
     </div>
 
     @break
@@ -102,7 +102,7 @@
             </path>
         </svg>
 
-        <span>parking</span>
+        <span>{{__('messages.Parking')}}</span>
     </div>
     @break
     @case(App\Enums\Amenities::POOL->value)
@@ -122,7 +122,7 @@
                 stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
 
-        <span>pool</span>
+        <span>{{ __('messages.Pool') }}</span>
 
     </div>
     @break
@@ -156,7 +156,7 @@
             <line class="cls-1" x1="0.55" y1="22.5" x2="23.45" y2="22.5"></line>
         </svg>
 
-        <span>heating</span>
+        <span>{{__('messages.Heating')}}</span>
 
     </div>
     @break
