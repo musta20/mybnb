@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\HostType;
 use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\EditListing;
@@ -12,6 +13,7 @@ use App\Enums\Status;
 use App\Http\Controllers\CartController;
 use App\Models\Booking as ModelsBooking;
 use App\Models\Reviews;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 Route::get(
@@ -45,6 +47,24 @@ Route::post('Addreview', function (Request $request) {
     return redirect()->back();
 })->name('Addreview');
 
+
+
+
+
+
+
+
+Route::get('booking/{booking}', function (ModelsBooking $booking) {
+
+    return view('booking-detail', [
+        'booking' => $booking
+    ]);
+})->name('booking-detail');
+
+
+
+
+
 Route::get('listing/{listing}', function (ModelsListing $listing) {
 
 
@@ -72,19 +92,32 @@ Route::get('listing/{listing}', function (ModelsListing $listing) {
         $totalRating = array_sum($r) / array_sum($allRating);
     }
 
-  $reviews=  Reviews::where('listing_id', $listing->id)->paginate(10);
-   //$reviews = $listing->reviews->paginate(10); 
+    $reviews =  Reviews::where('listing_id', $listing->id)->paginate(10);
+    //$reviews = $listing->reviews->paginate(10); 
     return view('listing', [
         'listing' => $listing,
         'totalRating' => $totalRating,
         'allRating' => $allRating,
-        'reviews'=>$reviews,
+        'reviews' => $reviews,
         'recomendedProduct' => $recomendedProduct
     ]);
 })->name('listing');
 
+Route::get('hostProfile/{user}', function (User $user) {
 
-Route::post('saveBooking/{listing}', function (ModelsListing $listing,Request $request) {
+
+    if ($user->type != HostType::HOST->value) return abort(403);
+    $listings = ModelsListing::where('status', Status::PUBLISHED->value)->where('host_id', $user->id)->paginate(10);
+    return view(
+        'hostProfile',
+        [
+            'user' => $user,
+            'listings' => $listings
+        ]
+    );
+})->name('hostProfile');
+
+Route::post('saveBooking/{listing}', function (ModelsListing $listing, Request $request) {
 
 
     ModelsBooking::create([
@@ -110,31 +143,30 @@ Route::post('booking/{listing}', function (ModelsListing $listing, Request $requ
 
 
     $startDate = \Carbon\Carbon::parse($start);
-    
+
     $endDate = \Carbon\Carbon::parse($end);
-    
+
     $numberOfDays = $startDate->diffInDays($endDate) + 1; // add 1 because the diffInDays does not include the end date
-    
+
     $price = $listing->price_per_night * $numberOfDays;
- 
+
     return view('booking', [
         'listing' => $listing,
         'price' => $price,
         'beds' => $beds,
         'start' => $start,
         'end' => $end
-  
+
     ]);
 })->name('booking');
 
 //showCart
-Route::get('/showCart', function(){
+Route::get('/showCart', function () {
 
 
-    
-    
+
+
     return view('wishList');
-
 })->name('showCart');
 
 Route::get('/addToList/{listing}', [CartController::class, 'addToList'])->name('addToList');
