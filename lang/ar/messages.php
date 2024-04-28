@@ -239,5 +239,8 @@ return [
     'APPROVED'=>'موافقة',
     'REJECTED'=>'مرفوضة',
     'CANCELED'=>'ملغية',
-
+    'Listing'=>'العقارات',
+    'messages'=>'الرسائل',
+    'booking'=>'الحجوزات',
+    'BookingRequests'=>'طلبات الحجوزات',
 ];

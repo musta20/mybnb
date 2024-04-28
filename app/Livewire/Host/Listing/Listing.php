@@ -11,12 +11,13 @@ class Listing extends Component
 
 
     public function mount(){
+
         $this->listings = ModelsListing::with('media')->get();
+        
     }
 
     public function render()
     {
-
         return view('livewire.host.listings.index');
     }
 }

@@ -11,6 +11,7 @@ use Livewire\Volt\Volt;
 
 use App\Enums\Status;
 use App\Http\Controllers\CartController;
+use App\Livewire\Host\Listing\Bookingrequest;
 use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,9 +24,7 @@ Route::get(
         if (request()->filled(['search','start','end','bedrooms'])) {
            
             $listings = ModelsListing::where('status', Status::PUBLISHED->value)->where('title', 'like', '%' . request('search') . '%')->paginate(10);
-            // $listings = ModelsListing::where('status', Status::PUBLISHED->value)
-            //     ->nearestTo(request('lat'), request('lng'))
-            //     ->paginate(10);
+
             return view('index', [
                 'listings' => $listings
             ]);
@@ -38,12 +37,6 @@ Route::get(
         ]);
     }
 )->name('home');
-
-
-
-
-
-
 
 
 
@@ -139,6 +132,10 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
 
     Route::view('profile', 'profile')
         ->name('profile');
+
+    
+    Route::get('BookingRequests', Bookingrequest::class)
+        ->name('BookingRequests');
 
     Route::get('listing', Listing::class)
         ->name('listing');
