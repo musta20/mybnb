@@ -47,6 +47,9 @@ const options = {
 }
 
 const dateRangePickerEl = document.getElementById('dateRangePickerId');
+const dateRangePickerElBooking = document.getElementById('dateRangePickerIdBookign');
 new DateRangePicker(dateRangePickerEl, {
     options
-}); 
+}); new DateRangePicker(dateRangePickerElBooking, {
+    options
+});

@@ -10,7 +10,7 @@ return [
     'Parking'=>'موقف',
     'Pool'=>'مسبح',
     'Check Out'=>' المغادرة',
-    'Check In'=>'تسجيل الوصول',
+    'Check In'=>' النزول',
     'Heating'=>'تدفئة',
     'guests'=>'الضيوف',
     'Air conditioning'=>'تكييف',
@@ -231,6 +231,13 @@ return [
     'Allow unregistered users to review' => 'السماح للمستخدمين غير المسجلين بالتقييم',
     'User deleted' => 'تم حذف المستخدم',
     'Book now' => 'حجز الان',
-
+    'pending'=>'قيد الانتظار',
+    'approved'=>'موافقة',
+    'rejected'=>'مرفوضة',
+    'bookings'=>'حجوزات',
+    'PENDING'=>'قيد الانتظار',
+    'APPROVED'=>'موافقة',
+    'REJECTED'=>'مرفوضة',
+    'CANCELED'=>'ملغية',
 
 ];

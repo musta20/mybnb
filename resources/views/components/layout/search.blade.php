@@ -1,4 +1,5 @@
-<form x-data="{ open: false }" class="max-w-[700px] mx-auto">
+<div x-data="{ open: false }"
+class="max-w-[700px] mx-auto">
     <div class="flex">
         <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
             Email</label>
@@ -13,26 +14,21 @@
         <div id="dropdown" x-show="open"
             class="z-10 absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                @php($cites = App\Enums\Cities::cases())
+                @foreach($cites as $city)
                 <li>
                     <button type="button"
-                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mockups</button>
+                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
+                        __('messages.'.$city->value) }}</button>
                 </li>
-                <li>
-                    <button type="button"
-                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Templates</button>
-                </li>
-                <li>
-                    <button type="button"
-                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
-                </li>
-                <li>
-                    <button type="button"
-                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
-                </li>
+                @endforeach
+
             </ul>
         </div>
         <div class="relative w-full">
-            <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-full border-s-gray-50 border-s-2 border
+            <input type="search"
+            name="search"
+             id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-full border-s-gray-50 border-s-2 border
             border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 
              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                 placeholder="المدينة , المنتطقة , المحافظة" required />
@@ -49,4 +45,4 @@
     </div>
 
 
-</form>
+</div>

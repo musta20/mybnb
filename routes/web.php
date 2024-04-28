@@ -11,7 +11,6 @@ use Livewire\Volt\Volt;
 
 use App\Enums\Status;
 use App\Http\Controllers\CartController;
-use App\Models\Booking as ModelsBooking;
 use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,13 +20,33 @@ Route::get(
 
     function () {
 
+        if (request()->filled(['search','start','end','bedrooms'])) {
+           
+            $listings = ModelsListing::where('status', Status::PUBLISHED->value)->where('title', 'like', '%' . request('search') . '%')->paginate(10);
+            // $listings = ModelsListing::where('status', Status::PUBLISHED->value)
+            //     ->nearestTo(request('lat'), request('lng'))
+            //     ->paginate(10);
+            return view('index', [
+                'listings' => $listings
+            ]);
+        }
+
         $listings = ModelsListing::where('status', Status::PUBLISHED->value)->paginate(10);
 
         return view('index', [
             'listings' => $listings
         ]);
     }
-);
+)->name('home');
+
+
+
+
+
+
+
+
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -48,21 +67,7 @@ Route::post('Addreview', function (Request $request) {
 })->name('Addreview');
 
 
-
-
-
-
-
-
-Route::get('booking/{booking}', function (ModelsBooking $booking) {
-
-    return view('booking-detail', [
-        'booking' => $booking
-    ]);
-})->name('booking-detail');
-
-
-
+Volt::route('booking/','booking-detail')->name('bookingdetail');
 
 
 Route::get('listing/{listing}', function (ModelsListing $listing) {
@@ -117,59 +122,17 @@ Route::get('hostProfile/{user}', function (User $user) {
     );
 })->name('hostProfile');
 
-Route::post('saveBooking/{listing}', function (ModelsListing $listing, Request $request) {
+
+Volt::route('booking/{listing}','booking')->name('booking');
 
 
-    ModelsBooking::create([
-        'listing_id' => $listing->id,
-        'guest_id' => auth()->user()->id,
-        'check_in_date' => $request->start,
-        'check_out_date' => $request->end,
-        'total_price' => $listing->price_per_night * $request->beds
-
-    ]);
-
-    return;
-})->name('saveBooking');
-
-Route::post('booking/{listing}', function (ModelsListing $listing, Request $request) {
-
-
-    if ($listing->status != Status::PUBLISHED->value) return     abort(404);
-
-    $beds = $request->bedrooms;
-    $start = $request->start;
-    $end = $request->end;
-
-
-    $startDate = \Carbon\Carbon::parse($start);
-
-    $endDate = \Carbon\Carbon::parse($end);
-
-    $numberOfDays = $startDate->diffInDays($endDate) + 1; // add 1 because the diffInDays does not include the end date
-
-    $price = $listing->price_per_night * $numberOfDays;
-
-    return view('booking', [
-        'listing' => $listing,
-        'price' => $price,
-        'beds' => $beds,
-        'start' => $start,
-        'end' => $end
-
-    ]);
-})->name('booking');
-
-//showCart
 Route::get('/showCart', function () {
-
-
-
 
     return view('wishList');
 })->name('showCart');
 
 Route::get('/addToList/{listing}', [CartController::class, 'addToList'])->name('addToList');
+
 Route::get('/removeList/{listing}', [CartController::class, 'removeList'])->name('removeList');
 
 Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], function () {

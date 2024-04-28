@@ -1,12 +1,9 @@
-<nav x-data="{ UserdropdownOpen: false,dropdownOpen: false , open: false ,darkMode: localStorage.theme === 'dark' ? true:false }" class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-12 flex  justify-between">
+<nav x-data="{ UserdropdownOpen: false,dropdownOpen: false , open: false ,darkMode: localStorage.theme === 'dark' ? true:false }" 
+class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-12 flex  justify-between">
     @auth
-
     
     <div class="relative !min-w-90 p-1 "@click.outside="dropdownOpen = false">
-       
         <a class="flex items-center gap-2" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
-
-
             @if (auth()->user()->profile_picture)
                 <img  src="{{ asset('listings/'.auth()->user()->profile_picture) }}" alt="{{ auth()->user()->name }}" 
                 class="w-9  h-9 rounded-full object-cover">
@@ -18,9 +15,6 @@
                 <p>{{ substr(auth()->user()->name,0*2,1*2) }}</p>
             </div>
             @endif
-
-
-
         </a>
 
         <!-- Dropdown Start -->
@@ -40,6 +34,17 @@
                                 fill="" />
                         </svg>
                         {{__('messages.Profile')}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('bookingdetail')}}"
+                        class="flex items-center py-4 gap-3.5 text-xs font-medium duration-300 ease-in-out hover:text-primary ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
+                          </svg>
+                          
+                          
+                        {{__('messages.bookings')}}
                     </a>
                 </li>
 
@@ -101,7 +106,7 @@
         </button>
 
         <div x-show="UserdropdownOpen"
-            class="absolute ltr:-right-25 mt-11  flex w-44 flex-col rounded-md border border-stroke bg-white shadow-default">
+            class="absolute ltr:-right-25 mt-11 dark:bg-slate-800  flex w-44 flex-col rounded-md border border-stroke bg-white shadow-default">
 
             
             <ul class="flex py-4  flex-col border-b border-stroke py-7.5">

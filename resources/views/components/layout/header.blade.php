@@ -30,8 +30,14 @@ items-center p-3">
 
 
 </div>
+<form
+action="{{route('home')}}"
+method="GET"
+>
 <nav class="bg-white flex justify-between border-2
-     border-gray-200 mx-auto w-3/6 my-10 sm:px-4 py-2.5 rounded-2xl dark:bg-gray-700">
+     border-gray-200 mx-auto w-3/6 my-10 sm:px-4 py-2.5 
+     dark:border-gray-600
+     rounded-2xl dark:bg-gray-700">
 
     <x-layout.check-date />
 
@@ -43,5 +49,4 @@ items-center p-3">
 
 
 
-
-</nav>
+</nav></form>

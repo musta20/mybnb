@@ -7,6 +7,11 @@ enum Status :string
 
     case PUBLISHED = 'PUBLISHED';
     case DRAFT = 'DRAFT';  
+
+    case PENDING = 'PENDING';
+    case ACTIVE = 'ACTIVE';
+    case REJECTED = 'REJECTED';
+    case CANCELED = 'CANCELED';
     
 }
 
