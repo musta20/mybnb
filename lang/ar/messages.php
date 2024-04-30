@@ -246,5 +246,9 @@ return [
     'confirmed'=>'موافقة',
     'active'=>'نشطة',
     'canceled'=>'ملغية',
-    
+    'booking requests'=>'طلبات الحجوزات',
+    'Booking Requests'=>'طلبات الحجوزات',
+    'listings'=>'العقارات',
+    'booking detail'=>'تفاصيل الحجز',
+    'edit listing'=>'تعديل بيانات العقار',
 ];

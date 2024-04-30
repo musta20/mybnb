@@ -128,7 +128,7 @@ new class extends Component
 
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('edit listing') }}
+        {{ __('messages.messages') }}
     </h2>
 </x-slot>
 

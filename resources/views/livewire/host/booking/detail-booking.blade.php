@@ -2,7 +2,7 @@
 use Livewire\Volt\Component;
 use Carbon\Carbon;
 use App\Enums\Status;
-use App\Enums\Bookingstatus;
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 new class extends Component
 {
@@ -70,7 +70,7 @@ public function mount(Booking $Booking){
 ?>
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('edit listing') }}
+        {{ __('messages.booking detail') }}
     </h2>
 </x-slot>
 
@@ -78,8 +78,10 @@ public function mount(Booking $Booking){
 <div x-data class="py-12 flex gap-1 w-full ">
     <x-toast />
 
-
+    
     <div class="w-1/2 mx-auto sm:px-6 lg:px-8 space-y-6 ">
+        @if ($booking->status != 'canceled')
+
         <div class="p-4 sm:p-8 flex gap-2 bg-white justify-evenly dark:bg-gray-800 shadow sm:rounded-lg">
             @if ($booking->status == 'pending')
 
@@ -99,6 +101,7 @@ public function mount(Booking $Booking){
 
             </button>
         </div>
+        @endif
 
 
 
