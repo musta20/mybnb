@@ -251,4 +251,5 @@ return [
     'listings'=>'العقارات',
     'booking detail'=>'تفاصيل الحجز',
     'edit listing'=>'تعديل بيانات العقار',
+    'new listing'=>'اضافة عقار',
 ];

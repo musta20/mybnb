@@ -93,13 +93,13 @@ new class extends Component
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('host.profile')" wire:navigate>
-                            {{ __('Profile') }}
+                            {{ __('messages.Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                {{ __('messages.Log Out') }}
                             </x-dropdown-link>
                         </button>
                     </x-slot>
@@ -143,13 +143,13 @@ new class extends Component
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('host.profile')" wire:navigate>
-                    {{ __('Profile') }}
+                    {{ __('messages.Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                        {{ __('messages.Log Out') }}
                     </x-responsive-nav-link>
                 </button>
             </div>

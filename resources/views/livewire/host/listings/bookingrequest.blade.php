@@ -5,12 +5,12 @@
 </x-slot>
 
 <div x-data class="py-12  gap-1 w-full ">
-    <div class=" w-5/6 my-5  gap-10 bg-slate-50 dark:bg-slate-700
+    {{-- <div class=" w-5/6 my-5  gap-10 bg-slate-50 dark:bg-slate-700
 dark:text-slate-300
 dark:border-slate-600 p-5 border rounded-lg mx-auto">
-        {{-- {!! $filterBox !!} --}}
+        {!! $filterBox !!}
 
-    </div>
+    </div> --}}
     <div class=" w-5/6  gap-10 bg-slate-50 dark:bg-slate-700
 dark:text-slate-300
 dark:border-slate-600 p-5 border rounded-lg mx-auto">

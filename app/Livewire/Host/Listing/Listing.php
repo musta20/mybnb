@@ -4,20 +4,26 @@ namespace App\Livewire\Host\Listing;
 
 use App\Models\Listing as ModelsListing;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Listing extends Component
 {
-    public $listings;
+    use WithPagination;
 
 
-    public function mount(){
+    public function mount()
+    {
 
-        $this->listings = ModelsListing::with('media')->get();
-        
     }
 
     public function render()
     {
-        return view('livewire.host.listings.index');
+        $listings = ModelsListing::with('media')->where('host_id', auth()->user()->id)->paginate(10);
+
+        return view(
+            'livewire.host.listings.index',
+            ['listings' => $listings]
+            // ['listings' => ModelsListing::with('media')->paginate(10)]
+        );
     }
 }
