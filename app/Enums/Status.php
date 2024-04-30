@@ -12,6 +12,7 @@ enum Status :string
     case ACTIVE = 'ACTIVE';
     case REJECTED = 'REJECTED';
     case CANCELED = 'CANCELED';
+    case CREATED = 'CREATED';
     
 }
 

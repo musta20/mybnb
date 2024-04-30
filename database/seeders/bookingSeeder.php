@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\BookingStatus;
+use App\Enums\Status;
 use App\Models\Booking;
 use App\Models\Listing;
 use App\Models\User;
@@ -15,19 +17,34 @@ class bookingSeeder extends Seeder
      */
     public function run(): void
     {
-        $listing = Listing::all();
-        $user = User::where('email', 'admin@admin.com')->first();
-
-        $listingAdmin = Listing::where('host_id', $user->id)->get();
+        $listing = Listing::where('status', Status::PUBLISHED->value)->get();
         
-        Booking::factory(10)
-            ->sequence(function ($sequence) use ($listingAdmin) {
+        $user = User::where('email', 'admin@admin.com')->first();
+        $samah = User::where('email', 'samah@samah.com')->first();
+        $ALI = User::where('email', 'ALI@ALI.com')->first();
 
+        $listingAdmin = Listing::where('status', Status::PUBLISHED->value)->where('host_id', $user->id)->get();
+        
+        Booking::factory(5)
+            ->sequence(function ($sequence) use ($listingAdmin , $samah) {
                 return [
-                    'listing_id' => $listingAdmin->random()->id
+                    'listing_id' => $listingAdmin->random()->id,
+                    'guest_id' => $samah->id,
+                    'status' => BookingStatus::PENDING->value
                 ];
             })
             ->create();
+
+            Booking::factory(5)
+            ->sequence(function ($sequence) use ($listingAdmin , $ALI) {
+                return [
+                    'listing_id' => $listingAdmin->random()->id,
+                    'guest_id' => $ALI->id,
+                    'status' => BookingStatus::PENDING->value
+                ];
+            })
+            ->create();
+
 
         Booking::factory(10)
             ->sequence(function ($sequence) use ($listing) {

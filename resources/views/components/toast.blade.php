@@ -17,7 +17,7 @@
             </svg>
           </div>
           <div>
-            <h4 class="mb-0.5 text-title-xsm font-medium text-black dark:text-white">
+            <h4 class="mb-0.5 text-title-xsm font-medium text-black ">
               {{session('OkToast')}}
             </h4>
             {{-- <p class="text-sm font-medium">

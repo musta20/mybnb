@@ -9,7 +9,7 @@ use Livewire\Volt\Component;
 use App\Enums\Status;
 use Illuminate\Http\Request;
 use App\Models\Booking as ModelsBooking;
-use Livewire\WithPagination;
+use Livewire\WithPagination ;
 
 use Livewire\Attributes\{Layout, Title};
 
@@ -17,14 +17,13 @@ new
 #[layout('components.layout.layout')]
 class extends Component
 {
-    use WithPagination;
 
-    
+use WithoutUrlPagination;
+
 
   public $bookingId;
 
   public string $password = '';
-
 
     public function cancleBooking()
     {
@@ -45,7 +44,10 @@ class extends Component
             {
 
             return [ 
-                    'bookings' => ModelsBooking::where('guest_id', auth()->user()->id)->latest()->paginate(10) ,
+                    'bookings' => ModelsBooking::where('guest_id', auth()->user()->id)->latest()->paginate(5) ,
+
+                   // 'filterBox' => ModelsBooking::showFilter()
+
                  ];
 
             }
@@ -55,6 +57,8 @@ class extends Component
 ?>
 <div class=" w-5/6 gap-10 bg-slate-50 dark:bg-slate-700 dark:border-slate-600 p-5 border rounded-lg mx-auto">
     <x-toast />
+               {{-- {!! $filterBox !!} --}}
+
     @foreach ($bookings as $item)
     <div class="w-3/4 mx-auto flex gap-3 justify-evenly border-t-2 p-2">
         <img src="{{asset('listings/'.$item->listing->media[0]->path)}}" class="w-32 h-32 border rounded-lg" alt="">
@@ -74,13 +78,13 @@ class extends Component
                 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">
             {{__('messages.'.$item->status)}}</span>
         @break
-        @case('ACTIVE')
+        @case('active')
         <span class="bg-green-100 my-auto text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700
                  dark:text-green-400 border border-green-400">
             {{__('messages.'.$item->status)}}</span>
 
         </span>
-        @case('REJECTED')
+        @case('canceled')
         <span class="bg-red-100 my-auto text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded
                  dark:bg-gray-700 dark:text-red-400 border border-red-400">
             {{__('messages.'.$item->status)}}</span>

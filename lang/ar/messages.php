@@ -243,4 +243,8 @@ return [
     'messages'=>'الرسائل',
     'booking'=>'الحجوزات',
     'BookingRequests'=>'طلبات الحجوزات',
+    'confirmed'=>'موافقة',
+    'active'=>'نشطة',
+    'canceled'=>'ملغية',
+    
 ];

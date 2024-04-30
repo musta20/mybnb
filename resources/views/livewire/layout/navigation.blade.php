@@ -16,8 +16,12 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false ,darkMode: localStorage.theme === 'dark' ? true:false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false ,darkMode: localStorage.theme === 'dark' ? true:false }"
+    class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
+    <script>
+        console.log( localStorage);
+    </script>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -30,22 +34,16 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden gap-2 space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate >
+
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('messages.Dashboard') }}
                     </x-nav-link>
-                    
+
 
                     <x-nav-link :href="route('host.BookingRequests')" :active="request()->routeIs('host.Booking')"
                         wire:navigate>
                         {{ __('messages.BookingRequests') }}
-                    </x-nav-link>
-
-              
-                    <x-nav-link :href="route('host.Booking')" :active="request()->routeIs('host.Booking')"
-                        wire:navigate>
-                        {{ __('messages.booking') }}
-                    </x-nav-link>
+                    </x-nav-link>     
 
                     <x-nav-link :href="route('host.listing')" :active="request()->routeIs('host.listing')"
                         wire:navigate>
@@ -67,23 +65,16 @@ new class extends Component
 
                 <div class="flex px-2 items-center justify-end  pr-4">
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" 
-
-                        x-model="darkMode"
-                        
-                         @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
-
-
-
-                        
-                        value="" class="sr-only peer">
+                        <input type="checkbox" x-model="darkMode" 
+                            @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
+                            class="sr-only peer">
                         <div
                             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-sky-900 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-sky-900">
                         </div>
                     </label>
                 </div>
 
-    
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button

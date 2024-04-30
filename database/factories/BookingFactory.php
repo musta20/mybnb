@@ -26,7 +26,7 @@ class BookingFactory extends Factory
         return [
             'listing_id' => Listing::factory(),
             'guest_id' => User::factory()->create([
-                'type' => HostType::HOST->value,
+                'type' => HostType::GUEST->value,
             ]),
             'check_in_date' => $checkInDate,
             'check_out_date' => $checkOutDate,

@@ -20,6 +20,22 @@ class userSeeder extends Seeder
             'type' => HostType::HOST->value,
             'password' => Hash::make('password'),
         ]);
+
+        User::factory()->create([
+            'name' => 'samah',
+            'email' => 'samah@samah.com',
+            'type' => HostType::GUEST->value,
+            'password' => Hash::make('samah'),
+        ]);
+
+
+        User::factory()->create([
+            'name' => 'ALI',
+            'email' => 'ALI@ALI.com',
+            'type' => HostType::GUEST->value,
+            'password' => Hash::make('ALI'),
+        ]);
+
         User::factory()->count(10)->create(); 
     }
 }
