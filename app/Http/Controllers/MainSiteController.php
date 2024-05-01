@@ -131,20 +131,17 @@ class MainSiteController extends Controller
     public function hostProfile(User $user)
     {
 
-    if ($user->type != HostType::HOST->value) return abort(403);
-    $listings = Listing::where('status', Status::PUBLISHED->value)->where('host_id', $user->id)->paginate(10);
-    return view(
-        'hostProfile',
-        [
-            'user' => $user,
-            'listings' => $listings
-        ]
-    );
+        if ($user->type != HostType::HOST->value) return abort(403);
+        $listings = Listing::where('status', Status::PUBLISHED->value)->where('host_id', $user->id)->paginate(10);
+        return view(
+            'hostProfile',
+            [
+                'user' => $user,
+                'listings' => $listings
+            ]
+        );
     }
 
-    public function wishList(){
-
-    }
 
     /**
      * Adds a product to the cart.

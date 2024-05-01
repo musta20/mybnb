@@ -13,7 +13,6 @@ use App\Livewire\Host\Listing\Bookingrequest;
 
 Route::get('/',[MainSiteController::class, 'index'])->name('home');
 
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -39,7 +38,6 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
     Route::view('profile', 'profile')
         ->name('profile');
 
-
     Route::get('BookingRequests', Bookingrequest::class)
         ->name('BookingRequests');
 
@@ -62,8 +60,6 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
     Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
         ->name('BookingDetail');
 });
-
-
 
 
 require __DIR__ . '/auth.php';
