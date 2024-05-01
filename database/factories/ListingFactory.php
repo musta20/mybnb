@@ -21,18 +21,19 @@ class ListingFactory extends Factory
      */
     public function definition(): array
     {
+        $city = fake()->randomElement(Cities::cases())->value;
         return [
-            'title' =>fake()->randomElement(["فيلا","بيت","شقة","عمارة"])." " . __("messages.".fake()->randomElement(Cities::cases())->value) ,
+            'title' =>fake()->randomElement(["فيلا","بيت","شقة","عمارة"])." " . __("messages.".$city) ,
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
-            'city' => fake()->randomElement(Cities::cases())->value,
+            'city' => $city,
             'latitude' => fake()->latitude(),
             'status' => fake()->randomElement(Status::cases())->value, 
             'longitude' => fake()->longitude(),
             'number_of_guests' => fake()->numberBetween(1, 10),
             'number_of_bedrooms' => fake()->numberBetween(1, 5),
             'number_of_bathrooms' => fake()->numberBetween(1, 4),
-            'amenities' => json_encode(fake()->randomElements(Amenities::cases(), 3, false)),
+            'amenities' => json_encode(fake()->randomElements(Amenities::cases(), 5, false)),
             'price_per_night' => fake()->randomFloat(2, 50, 500),
             'host_id' => User::factory()->create([
                 'type' => HostType::HOST->value,

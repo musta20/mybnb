@@ -1,5 +1,5 @@
 @props(['beds'=>null])
-<div class="max-w-xs mx-auto" x-data="{ counter: {{$beds ?? 0}} }" >
+<div class="max-w-xs mx-auto px-2" x-data="{ counter: {{request('bedrooms') ?? 0}} }" >
     <div class="relative flex items-center max-w-[11rem]">
         <button type="button" @click="counter > 0 ? counter--:''" id="decrement-button" data-input-counter-decrement="bedrooms-input" 
         class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-full p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -9,6 +9,7 @@
         </button>
         <input  id="bedrooms-input" 
 
+        
         type="number" aria-describedby="helper-text-explanation" 
         name="bedrooms" class="bg-gray-50 border-x-0 border-gray-300 h-11 font-medium text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pb-6 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
          x-model="counter" required />

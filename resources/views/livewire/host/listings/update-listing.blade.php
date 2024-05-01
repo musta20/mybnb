@@ -36,6 +36,10 @@ new class extends Component {
 
    public $Allcities;
 
+   public $Latitude;
+
+   public $Longitude;
+
    public function updateListing(){
 
     $validated = $this->validate([
@@ -45,6 +49,9 @@ new class extends Component {
             'guests' => ['required', 'numeric'],
             'beds' => ['required', 'numeric'],
             'baths' => ['required', 'numeric'],
+            'Latitude' => ['required', 'numeric', 'between:-90,90'],
+            'Longitude' => ['required', 'numeric', 'between:-180,180'],
+
             'price' => ['required','numeric'],
             'city' => ['required', Rule::in(Cities::cases())],
 
@@ -61,6 +68,8 @@ new class extends Component {
             'number_of_bedrooms' => $validated['beds'],
             'number_of_bathrooms' => $validated['baths'],
             'price_per_night' => $validated['price'],
+            'Latitude' => $validated['Latitude'],
+            'Longitude' => $validated['Longitude'],
             'amenities' => json_encode($this->amenities)
 
         ]);
@@ -69,7 +78,9 @@ new class extends Component {
     }
 
    $newListing = Listing::create([
-        'title' => $validated['title'],
+            'title' => $validated['title'],
+            'Latitude' => $validated['Latitude'],
+            'Longitude' => $validated['Longitude'],
             'address' => $validated['address'],
             'description' => $validated['description'],
             'number_of_guests' =>   $validated['guests'],
@@ -80,6 +91,8 @@ new class extends Component {
             'host_id' => Auth::user()->id,
             'amenities' => json_encode($this->amenities)
     ]);
+
+
       $this->dispatch('saveListingImages', $newListing->id);
 
 
@@ -134,6 +147,11 @@ new class extends Component {
 
 <section>
 
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
     @if($errors->isNotEmpty())
     <div class="text-red-500">
         @foreach ($errors->all() as $error)
@@ -145,6 +163,15 @@ new class extends Component {
 
 
     <form wire:submit="updateListing" class="mt-6 space-y-6   ">
+
+
+        <div class="flex gap-3 ">
+            <div id="geoLoaction" class="w-full ">
+                
+            </div>
+          
+        </div>
+
         <div class="flex gap-3 ">
             <div class="w-full ">
                 <x-input-label for="listing_title" :value="__('messages.host_title')" />
@@ -258,4 +285,72 @@ new class extends Component {
             </x-action-message>
         </div>
     </form>
+    <script>
+
+let map, infoWindow;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("geoLoaction"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 6,
+  });
+  infoWindow = new google.maps.InfoWindow();
+
+  const locationButton = document.createElement("button");
+
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        },
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation.",
+  );
+  infoWindow.open(map);
+}
+
+window.initMap = initMap;
+        const x = document.getElementById("geoLoaction");
+        
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+        }
+        </script>
 </section>
