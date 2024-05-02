@@ -22,7 +22,7 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
             class="absolute ltr:-right-25 mt-2 flex w-40 flex-col rounded-sm border border-stroke bg-white shadow-default">
             <ul class="flex  flex-col border-b border-stroke px-5 py-7.5">
                 <li>
-                    <a href="{{route('dashboard')}}"
+                    <a href="{{route('profile')}}"
                         class="flex items-center py-4 gap-3.5  text-xs font-medium duration-300 ease-in-out hover:text-primary ">
                         <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -51,13 +51,13 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
                 @if (auth()->user()->type == App\Enums\HostType::HOST->value)
 
                 <li>
-                    <a href="{{route('dashboard')}}"
+                    <a href="{{route('profile')}}"
                         class="flex items-center py-4 gap-3.5 text-xs font-medium duration-300 ease-in-out hover:text-primary ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                           </svg>
                           
-                        {{__('messages.Dashboard')}}
+                        {{__('messages.Profile')}}
                     </a>
                 </li>
 

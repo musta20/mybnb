@@ -7,8 +7,6 @@ new class extends Component
     public $width;
     public $month;
 
-    
-
    public function mount($events,$month=null,$width='w-full')
    {
 
@@ -16,43 +14,12 @@ new class extends Component
     $this->width = $width;
     $this->month = $month;
 
-    
    }
-
-//    [[
-//                             "event_date"=> "2024-04-01",
-//                             "event_title"=> "April Fool's Day",
-//                             "event_theme"=> 'blue'
-//                         ],
-    
-//                         [
-//                             "event_date"=> "2024-04-10",
-//                             "event_title"=> "Birthday",
-//                             "event_theme"=> 'red'
-//                         ],
-    
-//                         [
-//                             "event_date" => "2024-04-11",
-//                             "event_title"=> "Upcoming Event",
-//                             "event_theme"=> 'green'
-//                         ]
-//                     ]
-
-
-
-
-
-
-
-
 
 
 }
 
-
 ?>
-
-
 
 
     <div class=" sans-serif {{$width}}">

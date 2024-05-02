@@ -96,7 +96,8 @@ new class extends Component
             'is_read' => 0
         ]);
 
-        $this->redirect('/host/messages', navigate: true);
+      //  $this->redirect('/messages', navigate: true)->with('OkToast', __('messages.message sent'));
+       redirect()->route('Message')->with('OkToast', __('messages.message sent'));
 
     }
 
@@ -105,7 +106,8 @@ new class extends Component
         Messages::find($deleteMessageId)->delete();
 
       
-        $this->redirect('/host/messages', navigate: true);
+       // $this->redirect('/messages', navigate: true)->with('OkToast', __('messages.message deleted'));
+        redirect()->route('Message')->with('OkToast', __('messages.message deleted'));
 
 
 
@@ -139,25 +141,26 @@ new class extends Component
         <form wire:submit="deleteMessage(deleteMessageId)" class="p-6">
 
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete this message?') }}
+                {{ __('messages.Are you sure you want to delete this message?') }}
             </h2>
 
             <div class="mt-6 flex justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
+                    {{ __('messages.Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ms-3">
-                    {{ __('Delete') }}
+                    {{ __('messages.Delete') }}
                 </x-danger-button>
             </div>
         </form>
     </x-modal>
 
     <div class="w-1/6 mx-auto  sm:px-6 lg:px-8 space-y-6 ">
+        <x-toast />
         <div class="p-2 sm:p-8  w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <div class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('host.Message')}}?mail=new" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{route('Message')}}?mail=new" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                       </svg>
@@ -167,7 +170,7 @@ new class extends Component
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('host.Message')}}?mail=Inbox" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{route('Message')}}?mail=Inbox" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -178,7 +181,7 @@ new class extends Component
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('host.Message')}}?mail=sent" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{route('Message')}}?mail=sent" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -189,7 +192,7 @@ new class extends Component
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('host.Message')}}?mail=all" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{route('Message')}}?mail=all" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -235,9 +238,13 @@ new class extends Component
       
 
             <x-input-label for="user" value="المستخدميين" />
+
             <x-select-input  id="recipient_id" class="block mt-1 w-4/6" :options="$allmessages"
-             wire:model.live='recipient_id' name="recipient_id" :value="old('recipient_id')" required
+
+             wire:model.live='recipient_id' 
+             name="recipient_id" :value="old('recipient_id')" required
                 autocomplete="recipient_id" />
+
             <x-input-error :messages="$errors->get('recipient_id')" class="mt-2" />
 
             <x-input-label for="content" value="الموضوع" />
@@ -269,7 +276,7 @@ new class extends Component
                 dark:hover:bg-gray-950
                 hover:bg-gray-200
                 m-2 py-3 text-sm text-gray-500 dark:text-gray-400">
-                <a class="flex w-3/4  justify-between  gap-2 " href="{{ route('host.Message', $item->id)}}">
+                <a class="flex w-3/4  justify-between  gap-2 " href="{{ route('Message', $item->id)}}">
                     <span class="text-gray-700 dark:text-gray-300">
                         {{ $item->sender->name }} </span>
 

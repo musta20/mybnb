@@ -21,7 +21,7 @@ public $booking;
 public function accept(){
         $this->booking->status = BookingStatus::ACTIVE->value;
         $this->booking->save();
-        return redirect()->route('host.BookingDetail', $this->booking->id)->with('OkToast', 'Booking accepted');
+        return redirect()->route('host.BookingDetail', $this->booking->id)->with('OkToast', __('messages.Booking accepted'));
 
     }
 
@@ -29,7 +29,7 @@ public function accept(){
         $this->booking->status = BookingStatus::CANCELED->value;
         $this->booking->save();
 
-        return redirect()->route('host.BookingDetail', $this->booking->id)->with('OkToast', 'Booking Declined');
+        return redirect()->route('host.BookingDetail', $this->booking->id)->with('OkToast', __('messages.Booking Declined'));
     }
 
 public function mount(Booking $Booking){

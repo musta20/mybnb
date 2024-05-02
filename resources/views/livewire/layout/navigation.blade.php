@@ -25,7 +25,7 @@ new class extends Component
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate>
+                    <a href="{{ route('profile') }}" wire:navigate>
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
@@ -33,10 +33,12 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden gap-2 space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('messages.Dashboard') }}
+                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
+                        {{ __('messages.Profile') }}
                     </x-nav-link>
 
+                    @if (auth()->user()->type==App\Enums\HostType::HOST->value)
+                        
 
                     <x-nav-link :href="route('host.BookingRequests')" :active="request()->routeIs('host.Booking')"
                         wire:navigate>
@@ -48,7 +50,10 @@ new class extends Component
                         {{ __('messages.Listing') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('host.Message')" :active="request()->routeIs('host.Message')"
+                    @endif
+
+
+                    <x-nav-link :href="route('Message')" :active="request()->routeIs('Message')"
                         wire:navigate>
                         {{ __('messages.messages') }}
                     </x-nav-link>
@@ -92,7 +97,7 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('host.profile')" wire:navigate>
+                        <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('messages.Profile') }}
                         </x-dropdown-link>
 
@@ -142,7 +147,7 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('host.profile')" wire:navigate>
+                <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('messages.Profile') }}
                 </x-responsive-nav-link>
 

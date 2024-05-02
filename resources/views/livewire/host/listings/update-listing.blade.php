@@ -49,8 +49,8 @@ new class extends Component {
             'guests' => ['required', 'numeric'],
             'beds' => ['required', 'numeric'],
             'baths' => ['required', 'numeric'],
-            'Latitude' => ['required', 'numeric', 'between:-90,90'],
-            'Longitude' => ['required', 'numeric', 'between:-180,180'],
+            // 'Latitude' => ['required', 'numeric', 'between:-90,90'],
+            // 'Longitude' => ['required', 'numeric', 'between:-180,180'],
 
             'price' => ['required','numeric'],
             'city' => ['required', Rule::in(Cities::cases())],
@@ -68,8 +68,8 @@ new class extends Component {
             'number_of_bedrooms' => $validated['beds'],
             'number_of_bathrooms' => $validated['baths'],
             'price_per_night' => $validated['price'],
-            'Latitude' => $validated['Latitude'],
-            'Longitude' => $validated['Longitude'],
+            // 'Latitude' => $validated['Latitude'],
+            // 'Longitude' => $validated['Longitude'],
             'amenities' => json_encode($this->amenities)
 
         ]);
@@ -79,8 +79,8 @@ new class extends Component {
 
    $newListing = Listing::create([
             'title' => $validated['title'],
-            'Latitude' => $validated['Latitude'],
-            'Longitude' => $validated['Longitude'],
+            // 'Latitude' => $validated['Latitude'],
+            // 'Longitude' => $validated['Longitude'],
             'address' => $validated['address'],
             'description' => $validated['description'],
             'number_of_guests' =>   $validated['guests'],

@@ -25,7 +25,7 @@ class bookingSeeder extends Seeder
 
         $listingAdmin = Listing::where('status', Status::PUBLISHED->value)->where('host_id', $user->id)->get();
         
-        Booking::factory(5)
+        Booking::factory()
             ->sequence(function ($sequence) use ($listingAdmin , $samah) {
                 return [
                     'listing_id' => $listingAdmin->random()->id,
@@ -33,9 +33,10 @@ class bookingSeeder extends Seeder
                     'status' => BookingStatus::PENDING->value
                 ];
             })
+            ->count(5)
             ->create();
 
-            Booking::factory(5)
+            Booking::factory()
             ->sequence(function ($sequence) use ($listingAdmin , $ALI) {
                 return [
                     'listing_id' => $listingAdmin->random()->id,
@@ -43,16 +44,20 @@ class bookingSeeder extends Seeder
                     'status' => BookingStatus::PENDING->value
                 ];
             })
+            ->count(5)
+
             ->create();
 
 
-        Booking::factory(10)
+        Booking::factory()
             ->sequence(function ($sequence) use ($listing) {
 
                 return [
                     'listing_id' => $listing->random()->id
                 ];
             })
+            ->count(5)
+
             ->create();
     }
 }

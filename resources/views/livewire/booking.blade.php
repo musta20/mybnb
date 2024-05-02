@@ -9,7 +9,7 @@ use Livewire\Volt\Component;
 use App\Enums\Status;
 use Illuminate\Http\Request;
 use App\Models\Booking as ModelsBooking;
-
+use Carbon\Carbon;
 use Livewire\Attributes\{Layout, Title};
 
 new
@@ -55,6 +55,8 @@ class extends Component
 
     $this->listing = $listing;
 
+    
+
     if ($listing->status != Status::PUBLISHED->value) return     abort(404);
 
           $this->beds = $request->bedrooms;
@@ -65,6 +67,11 @@ class extends Component
           // $this->numberOfDays = $startDate->diffInDays($endDate) + 1;
 
           $this->getDays();
+  //  dd($this->numberOfDays);
+        if($this->numberOfDays <= 0) return redirect()->route('host.listing',$this->listing)->with('ErorrToast',__("messages.Booking can not be done for the selected date"));
+
+
+
 
   }
 
@@ -78,10 +85,20 @@ public function saveBooking()
     ]);
 
 
-    $currentDate = \Carbon\Carbon::now();
+    $currentDate = Carbon::now();
     if($this->start < $currentDate || $this->end < $this->start){
-        session()->flash('ErorrToast','يجب ان يكون التاريخ البداية اكبر من تاريخ اليوم و يكون تاريخ النهاية اكبر من تاريخ البداية');
+        session()->flash('ErorrToast',__("messages.The check in date date must be greater than today's date and the check out date must be greater than the check in date"));
         return;
+    }
+
+    $hasBooking = $this->listing->bookings()->max('check_out_date');
+
+    $parsedDate = Carbon::parse($hasBooking)->format('F j, Y');
+    $parsedStartDate = Carbon::parse($this->start)->format('F j, Y');
+
+    if ($parsedDate > $parsedStartDate ) {
+      session()->flash('ErorrToast','messages.this listing is not avilble for booking at this date');
+
     }
 
     if(ModelsBooking::create([
@@ -93,17 +110,10 @@ public function saveBooking()
         'status' => Status::PENDING->value
     ])){
       
-      return redirect()->route('bookingdetail')->with('OkToast','تم الحجز بنجاح'); // session()->flash('okToast','تم اضافة الحجز بنجاح');
+      return redirect()->route('bookingdetail')->with('OkToast',__('messages.listing booked')); // session()->flash('okToast','تم اضافة الحجز بنجاح');
     }
 
-    // ModelsBooking::create([
-    //     'listing_id' => $listing->id,
-    //     'guest_id' => auth()->user()->id,
-    //     'check_in_date' => $request->start,
-    //     'check_out_date' => $request->end,
-    //     'total_price' => $listing->price_per_night * $request->beds
 
-    // ]); 
 }
 
 }

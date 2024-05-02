@@ -49,4 +49,30 @@ method="GET"
 
 
 
-</nav></form>
+</nav>
+
+</form>
+<ul class="flex gap-5 justify-center">
+    @foreach (App\Enums\Cities::cases() as $city)
+
+    <li
+    class="hover:bg-gray-200
+    hover:text-gray-700
+    dark:hover:bg-gray-600
+    dark:hover:text-white
+    text-gray-400
+    dark:text-gray-200
+    px-2
+    py-1
+    rounded-xl
+    cursor-pointer
+    "
+    >
+        <a
+        href="{{ route('home') }}?pageCity={{ $city->value }}"
+        >
+            {{__("messages.".$city->value) }}
+        </a>
+    </li>
+    @endforeach
+</ul>

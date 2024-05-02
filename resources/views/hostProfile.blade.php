@@ -1,5 +1,4 @@
-<x-layout.layout>
-
+<x-layout.layout :title="$user->name">
     <div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
@@ -21,15 +20,11 @@
                     <h1 class="text-2xl font-bold mt-2">{{$user->name  }}</h1>
                 </div>
                 <hr class="my-5">
-
                 <div class="space-y-4">
                     <x-listings :$listings />
-
                 </div>
                 {{$listings->links()}}
             </div>
         </div>
-
-
     </div>
 </x-layout.layout>

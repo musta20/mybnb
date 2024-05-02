@@ -27,6 +27,7 @@ dark:border-slate-600 p-5 border rounded-lg mx-auto">
                 </span>
 
             </p>
+
             @switch($item->status)
             @case('pending')
             <span class="bg-yellow-100 my-auto text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 

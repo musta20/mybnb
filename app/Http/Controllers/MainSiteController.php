@@ -22,6 +22,11 @@ class MainSiteController extends Controller
 {
     public function index()
     {
+        if (request()->filled(['pageCity'])) {
+            return view('index', [
+                'listings' => Listing::where('city', request('pageCity'))->where('status', Status::PUBLISHED->value)->paginate(10)
+            ]);
+        }
 
         if (request()->filled(['search']) || request()->filled(['start']) || request()->filled(['end']) || request()->filled(['bedrooms'])) {
 
@@ -176,7 +181,7 @@ class MainSiteController extends Controller
         }
 
         // Redirect back to the previous page with a success message
-        return redirect()->back()->with('OkToast', __('messages.product added'));
+        return redirect()->back()->with('OkToast', __('messages.listing added'));
     }
 
 
@@ -216,11 +221,11 @@ class MainSiteController extends Controller
 
             $productItem->first()->delete();
 
-            return redirect()->back()->with('OkToast', __('messages.product removed'));
+            return redirect()->back()->with('OkToast', __('messages.listing removed'));
         }
 
         WishlistService::remove($listing->id);
 
-        return redirect()->back()->with('OkToast', __('messages.product removed'));
+        return redirect()->back()->with('OkToast', __('messages.listing removed'));
     }
 }

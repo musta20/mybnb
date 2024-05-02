@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\HostType;
 use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\EditListing;
@@ -9,7 +10,7 @@ use Livewire\Volt\Volt;
 
 use App\Http\Controllers\MainSiteController;
 use App\Livewire\Host\Listing\Bookingrequest;
-
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[MainSiteController::class, 'index'])->name('home');
 
@@ -33,13 +34,19 @@ Route::get('/addToList/{listing}', [MainSiteController::class, 'addToList'])->na
 
 Route::get('/removeList/{listing}', [MainSiteController::class, 'removeList'])->name('removeList');
 
-Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], function () {
+Volt::route('messages/{Messages?}', 'host.messages.messages-component')
+->name('Message');
 
-    Route::view('profile', 'profile')
-        ->name('profile');
+Route::view('profile', 'profile')
+->name('profile');
+
+Route::group(['as' => 'host.', 'middleware' => ['auth','host'], 'prefix' => 'host'], function () {
+
+
 
     Route::get('BookingRequests', Bookingrequest::class)
         ->name('BookingRequests');
+
 
     Route::get('listing', Listing::class)
         ->name('listing');
@@ -54,8 +61,6 @@ Route::group(['as' => 'host.', 'middleware' => ['auth'], 'prefix' => 'host'], fu
         ->name('Booking');
 
 
-    Volt::route('messages/{Messages?}', 'host.messages.messages-component')
-        ->name('Message');
 
     Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
         ->name('BookingDetail');

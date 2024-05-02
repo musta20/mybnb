@@ -1,14 +1,17 @@
-<x-layout.layout>
+<x-layout.layout :title="$listing->title">
     <div class="w-5/6 mx-auto ">
-        <div class="flex gap-3 w-2/6 justify-between py-2">
+        <div class="flex gap-3 w-3/6 justify-between py-2">
             <h3 class="text-2xl ">{{$listing->title}} , {{__('messages.'.$listing->city)}}</h3>
+
+            <div class="flex gap-5  ">
+
             <x-user-rating :showText="false" :rating="$totalRating" />
 
 
 
 
             <livewire:wichlist-button :$listing />
-
+            </div>
 
 
 
@@ -139,7 +142,6 @@
                     </div>
                     <form action="{{route('booking', $listing->id)}}" method="GET">
 
-                        {{-- @csrf --}}
 
                         <div class="my-5 gap-2">
                             {{$listing->price_per_night}} <span class="text-xs">{{__('messages.EGP')}}</span>
