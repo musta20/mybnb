@@ -1,38 +1,46 @@
 <x-layout.layout :title="$listing->title">
+
     <div class="w-5/6 mx-auto ">
+
         <div class="flex gap-3 w-3/6 justify-between py-2">
+
             <h3 class="text-2xl ">{{$listing->title}} , {{__('messages.'.$listing->city)}}</h3>
 
             <div class="flex gap-5  ">
 
-            <x-user-rating :showText="false" :rating="$totalRating" />
+                <x-user-rating :showText="false" :rating="$totalRating" />
 
+                <livewire:wichlist-button :$listing />
 
-
-
-            <livewire:wichlist-button :$listing />
             </div>
 
-
-
-
         </div>
+
         <hr>
+
         <div class="flex gap-2  py-3">
+
             @if ($listing->media->count() == 0)
+
             <span class="text-gray-900 m-auto w-24 dark:text-gray-100">No image</span>
+
             @else
             <img src="{{ asset('listings/'.$listing?->media[0]?->path) }}" class=" w-1/2 h-1/2 rounded-md" alt="">
 
             <div class="grid grid-cols-3  gap-2">
                 @for ($i = 1; $i < count($listing->media); $i++)
+
                     <img src="{{asset('listings/'.$listing->media[$i]->path)}}" class="w-full rounded-md" alt="">
+
                     @endfor
             </div>
+
             @endif
 
         </div>
+
         <hr class="py-5">
+
         <div class="flex">
 
             <div class=" py-5  w-1/2">
@@ -112,8 +120,17 @@
                     </span>
                     @endforeach
                     <hr class="my-5">
+
+                    <iframe
+                    width="180%"
+                    height="450" style="border-radius:12px" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key={{config('app.GOOGLE_MAPS_KEY')}}
+    &q={{$listing->latitude}},{{$listing->longitude}}">
+                    </iframe>
+                    <hr class="my-5">
                     <x-add-review :$listing />
                 </div>
+
                 @foreach ($reviews as $review)
                 <x-comment-card :$review />
                 @endforeach

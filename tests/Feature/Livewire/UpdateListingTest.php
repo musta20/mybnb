@@ -3,7 +3,7 @@
 use Livewire\Volt\Volt;
 
 it('can render', function () {
-    $component = Volt::test('update-listing');
+    $component = Volt::test('host.listings.update-listing');
 
     $component->assertSee('');
 });

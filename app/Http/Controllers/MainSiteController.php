@@ -60,8 +60,6 @@ class MainSiteController extends Controller
             //         ->orWHere('bookings.status',  BookingStatus::ACTIVE->value);
             // });
 
-
-
             return view('index', [
                 'listings' => $query->paginate(5)
             ]);
