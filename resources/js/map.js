@@ -20,18 +20,19 @@ loader.load().then(async () => {
     });
 
 
+    console.log(locations);
     for (const location of locations) {
 
-        const AdvancedMarkerElement =
-            new google.maps.marker.AdvancedMarkerElement({
+        const AdvancedElement =
+            new AdvancedMarkerElement({
                 map,
                 content: buildContent(location),
                 position: { lat: location.latitude, lng: location.longitude },
                 title: location.title,
             });
 
-        AdvancedMarkerElement.addListener("click", () => {
-            toggleHighlight(AdvancedMarkerElement, location);
+            AdvancedElement.addListener("click", () => {
+            toggleHighlight(AdvancedElement, location);
         });
     }
 

@@ -42,6 +42,7 @@ new class extends Component {
 
    public function updateListing(){
 
+
     $validated = $this->validate([
             'title' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
@@ -49,8 +50,8 @@ new class extends Component {
             'guests' => ['required', 'numeric'],
             'beds' => ['required', 'numeric'],
             'baths' => ['required', 'numeric'],
-            // 'Latitude' => ['required', 'numeric', 'between:-90,90'],
-            // 'Longitude' => ['required', 'numeric', 'between:-180,180'],
+            'Latitude' => ['required', 'numeric', 'between:-90,90'],
+            'Longitude' => ['required', 'numeric', 'between:-180,180'],
 
             'price' => ['required','numeric'],
             'city' => ['required', Rule::in(Cities::cases())],
@@ -58,6 +59,7 @@ new class extends Component {
         ]);
 
         if ($this->listing) {
+          
             
         $this->listing->update([
             'title' => $validated['title'],
@@ -68,8 +70,8 @@ new class extends Component {
             'number_of_bedrooms' => $validated['beds'],
             'number_of_bathrooms' => $validated['baths'],
             'price_per_night' => $validated['price'],
-            // 'Latitude' => $validated['Latitude'],
-            // 'Longitude' => $validated['Longitude'],
+            'latitude' => $validated['Latitude'],
+            'longitude' => $validated['Longitude'],
             'amenities' => json_encode($this->amenities)
 
         ]);
@@ -79,8 +81,8 @@ new class extends Component {
 
    $newListing = Listing::create([
             'title' => $validated['title'],
-            // 'Latitude' => $validated['Latitude'],
-            // 'Longitude' => $validated['Longitude'],
+            'latitude' => $validated['Latitude'],
+            'longitude' => $validated['Longitude'],
             'address' => $validated['address'],
             'description' => $validated['description'],
             'number_of_guests' =>   $validated['guests'],
@@ -122,6 +124,8 @@ new class extends Component {
     $this->amenities = json_decode($listing->amenities);
 
     $this->title = $listing->title;
+    $this->Latitude = $listing->latitude;
+    $this->Longitude = $listing->longitude;
     $this->address = $listing->address;
     $this->description = $listing->description;
     $this->guests = $listing->number_of_guests;
@@ -147,9 +151,27 @@ new class extends Component {
 
 <section>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
-        defer></script>
+    <script>
+        
+        const process = { env: {} };
+        process.env.GOOGLE_MAPS_API_KEY = '{{config('app.GOOGLE_MAPS_KEY') }}';
+
+    </script>
+
+    
+    {{-- //locations = JSON.parse('{!! $listings->map(fn($listing)=> $listing->only('title','city','latitude','longitude','id'))->toJson() !!}'); --}}
+    <script>
+
+
+        const search = {
+            name: '{{ request('search') }}',
+            city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString($city)->getPosition()) !!}')
+         };
+
+        
+    </script>
+
+
 
     @if($errors->isNotEmpty())
     <div class="text-red-500">
@@ -165,10 +187,19 @@ new class extends Component {
 
 
         <div class="flex gap-3 ">
-            <div id="geoLoaction" class="w-full ">
+            <div wire:ignore id="geoLoaction" 
+            style="width:100%;height:400px;"></div>
 
-            </div>
+            <input name="Latitude" id="Latitude" 
+            wire:model="Latitude"
 
+            type="hidden" >
+
+            <input name="Longitude" 
+            wire:model="Longitude" 
+            id="Longitude" type="hidden" >
+           
+            
         </div>
 
         <div class="flex gap-3 ">
