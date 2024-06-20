@@ -162,10 +162,9 @@ new class extends Component {
     {{-- //locations = JSON.parse('{!! $listings->map(fn($listing)=> $listing->only('title','city','latitude','longitude','id'))->toJson() !!}'); --}}
     <script>
 
-
         const search = {
             name: '{{ request('search') }}',
-            city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString($city)->getPosition()) !!}')
+            city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString($city ? $city : "Cairo")->getPosition()) !!}')
          };
 
         
@@ -242,7 +241,7 @@ new class extends Component {
 
                 <select wire:model.live="selectedAmenities"
                     class="border-gray-300 w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-
+                    <option  selected  value=""> -- اختر من القائمة -- </option>
                     @foreach ($allAmenities as $key => $value)
 
 

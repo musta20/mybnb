@@ -26,7 +26,7 @@ loader.load().then(async () => {
         mapId: "DEMO_MAP_ID",
 
     });
-
+console.log(search)
     google.maps.event.addListenerOnce(map, 'idle', function(){
         if(Latitude.value && Longitude.value){
 
