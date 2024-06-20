@@ -10,7 +10,7 @@
 
     @else
     
-    @if(request('search') || request('city')  )
+    @if(request('search') || request('city') || request('pageCity')  )
 
 
                 <script>
@@ -21,7 +21,7 @@
                         
                         name: '{{ request('search') }}',
 
-                        city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city'))->getPosition()) !!}')
+                        city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city') ?? request('pageCity'))->getPosition()) !!}')
 
                     };
 
