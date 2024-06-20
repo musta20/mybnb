@@ -4,21 +4,18 @@ namespace App\Livewire\Host\Listing;
 
 use App\Models\Booking;
 use Livewire\Component;
-use Livewire\WithPagination;
-use App\Enums\BookingStatus;
 use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class Bookingrequest extends Component
 {
-    use WithPagination,WithoutUrlPagination;
+    use WithoutUrlPagination, WithPagination;
 
     public function render()
     {
-        
+
         return view('livewire.host.listings.bookingrequest', [
-            'bookings' => Booking::whereIn('listing_id', auth()->user()->listings()->pluck('id'))
-            ->paginate(5),//$this->getbookings()->Filter()->RequestPaginate(),
-          //  'filterBox' => Booking::showFilter()
+            'bookings' => Booking::whereIn('listing_id', auth()->user()->listings()->pluck('id'))->paginate(5),
         ]);
     }
 }

@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'type' => fake()->randomElement(HostType::cases())->value,
             'date_of_birth' => fake()->date(),
             'phone_number' => fake()->phoneNumber(),
-//            'profile_picture' => fake()->imageUrl(),
+            //            'profile_picture' => fake()->imageUrl(),
             'about_me' => fake()->paragraph(), // For hosts
             'languages' => fake()->randomElement(['English, arabic', 'French, Italian']), // For hosts
             'response_time' => fake()->randomElement(['within an hour', 'within a day']), // For hosts

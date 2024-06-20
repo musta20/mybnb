@@ -11,9 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model
 {
-
     use HasFactory, HasUlids ,SoftDeletes;
-
 
     protected $fillable = [
         'title',
@@ -30,10 +28,9 @@ class Listing extends Model
         'host_id',
     ];
 
-
     protected $casts = [
-        'amenities' => 'array'
-]  ;
+        'amenities' => 'array',
+    ];
 
     /**
      * Get the host (user) who owns the listing.
@@ -63,5 +60,4 @@ class Listing extends Model
     {
         return $this->hasMany(ListingMedia::class);
     }
-
 }

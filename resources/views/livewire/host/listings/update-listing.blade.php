@@ -59,8 +59,8 @@ new class extends Component {
         ]);
 
         if ($this->listing) {
-          
-            
+
+
         $this->listing->update([
             'title' => $validated['title'],
             'address' => $validated['address'],
@@ -98,7 +98,7 @@ new class extends Component {
       $this->dispatch('saveListingImages', $newListing->id);
 
 
-  
+
 
 
    }
@@ -119,7 +119,7 @@ new class extends Component {
     $this->Allcities = Cities::cases();
 
     if ($listing) {
-   
+
     $this->listing = $listing;
     $this->amenities = json_decode($listing->amenities);
 
@@ -136,10 +136,10 @@ new class extends Component {
 
     }
    }
- 
+
    public function removeAmenity($item)
    {
-   
+
     $this->amenities = array_filter($this->amenities, function($value) use ($item) {
         return $value != $item;
     });
@@ -152,13 +152,13 @@ new class extends Component {
 <section>
 
     <script>
-        
+
         const process = { env: {} };
-        process.env.GOOGLE_MAPS_API_KEY = '{{config('app.GOOGLE_MAPS_KEY') }}';
+        process.env.GOOGLE_MAPS_API_KEY = '{{ config('app.GOOGLE_MAPS_KEY') }}';
 
     </script>
 
-    
+
     {{-- //locations = JSON.parse('{!! $listings->map(fn($listing)=> $listing->only('title','city','latitude','longitude','id'))->toJson() !!}'); --}}
     <script>
 
@@ -167,38 +167,38 @@ new class extends Component {
             city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString($city ? $city : "Cairo")->getPosition()) !!}')
          };
 
-        
+
     </script>
 
 
 
-    @if($errors->isNotEmpty())
+    {{-- @if ($errors->isNotEmpty())
     <div class="text-red-500">
         @foreach ($errors->all() as $error)
         <div>{{ $error }}</div>
         @endforeach
     </div>
-    @endif
-
+    @endif --}}
+<x-error-message/>
 
 
     <form wire:submit="updateListing" class="mt-6 space-y-6   ">
 
 
         <div class="flex gap-3 ">
-            <div wire:ignore id="geoLoaction" 
+            <div wire:ignore id="geoLoaction"
             style="width:100%;height:400px;"></div>
 
-            <input name="Latitude" id="Latitude" 
+            <input name="Latitude" id="Latitude"
             wire:model="Latitude"
 
             type="hidden" >
 
-            <input name="Longitude" 
-            wire:model="Longitude" 
+            <input name="Longitude"
+            wire:model="Longitude"
             id="Longitude" type="hidden" >
-           
-            
+
+
         </div>
 
         <div class="flex gap-3 ">
@@ -225,8 +225,8 @@ new class extends Component {
                     @foreach ($amenities as $item)
                     <span
                         class="inline-flex items-center   gap-x-1.5 py-0.5 ps-3 pe-2 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
-                        {{__("messages.".$item) }}
-                        <button type="button" wire:click="removeAmenity('{{$item}}')"
+                        {{ __("messages.".$item) }}
+                        <button type="button" wire:click="removeAmenity('{{ $item }}')"
                             class="flex-shrink-0 size-4 inline-flex items-center justify-center rounded-full hover:bg-blue-200 focus:outline-none focus:bg-blue-200 focus:text-blue-500 dark:hover:bg-blue-900">
                             <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -245,7 +245,7 @@ new class extends Component {
                     @foreach ($allAmenities as $key => $value)
 
 
-                    <option value="{{ $value->value  }}">{{ __('messages.'.$value->value ) }}</option>
+                    <option value="{{ $value->value }}">{{ __('messages.'.$value->value ) }}</option>
 
                     @endforeach
                 </select>
@@ -307,16 +307,20 @@ new class extends Component {
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('messages.Save') }}</x-primary-button>
-
+{{--
             <x-action-message class="me-3" on="listing-updated">
                 {{ __('messages.Saved.') }}
-            </x-action-message>
+            </x-action-message> --}}
+
+            <x-event-toast on="listing-updated">
+                {{ __('messages.Saved.') }}
+            </x-event-toast>
         </div>
     </form>
 
     <script>
- 
-        
+
+
     </script>
-    
+
 </section>

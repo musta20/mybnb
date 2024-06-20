@@ -8,12 +8,12 @@
  <option  selected  value=""> -- اختر من القائمة -- </option>
 
  @foreach ($options as $key => $value)
-        
+
  @if ($options instanceof  Illuminate\Support\Collection )
  <option @if ($selected == $value->id) selected @endif value="{{ $value->id }}">{{ __($value->name ?? $value->title) }}</option>
 
  @else
- <option @if ($selected == $value->value) selected @endif value="{{ $value->value  }}">{{ __('messages.'.$value->name) }}</option>
+ <option @if ($selected == $value->value) selected @endif value="{{ $value->value }}">{{ __('messages.'.$value->name) }}</option>
 
  @endif
  @endforeach

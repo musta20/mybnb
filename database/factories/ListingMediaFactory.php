@@ -25,8 +25,8 @@ class ListingMediaFactory extends Factory
         ];
     }
 
-
-    public function withImage($image){
+    public function withImage($image)
+    {
 
         return $this->state(function (array $attributes) use ($image) {
             return [

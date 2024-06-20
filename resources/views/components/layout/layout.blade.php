@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <link rel="icon" href={{Vite::asset('resources/image/logo.svg')}}
-    type="image/svg+xml"> 
+
+    <link rel="icon" href={{ Vite::asset('resources/image/logo.svg') }}
+    type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,9 @@
 
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
     <script>
-        
+
         const process = { env: {} };
-        process.env.GOOGLE_MAPS_API_KEY = '{{config('app.GOOGLE_MAPS_KEY') }}';
+        process.env.GOOGLE_MAPS_API_KEY = '{{ config('app.GOOGLE_MAPS_KEY') }}';
 
     </script>
     @vite(['resources/css/app.css', 'resources/js/main.js'])

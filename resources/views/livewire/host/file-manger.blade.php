@@ -1,9 +1,9 @@
 <div x-data="{ uploading: false,fileLoded:false, progress: 0  }"
     class="flex flex-col items-center m-4  light:bg-slate-200
     light:border-bodydark1  ">
-    <div x-ref="dnd" class="relative flex w-full flex-col items-center justify-center  
+    <div x-ref="dnd" class="relative flex w-full flex-col items-center justify-center
     dark:bg-slate-700
-    h-full border-2 border-dashed  hover:border-primary hover:border-3 light:bg-slate-50 rounded-lg 
+    h-full border-2 border-dashed  hover:border-primary hover:border-3 light:bg-slate-50 rounded-lg
     dark:border-slate-600 dark:hover:border-slate-500
                  light:bg-gray-50 light:hover:bg-gray-100 ">
 
@@ -25,14 +25,14 @@
 
                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <span class="font-semibold">
-                  {{__('messages.click here or drag')}}
+                  {{ __('messages.click here or drag') }}
                 </span>
               </p>
               <p>
-                {{__('messages.Supported image formats ')}}(PNG, JPG or GIF)
+                {{ __('messages.Supported image formats ') }}(PNG, JPG or GIF)
               </p>
               <p>
-                {{__('messages.size')}} (800x400px)
+                {{ __('messages.size') }} (800x400px)
               </p>
               @error('photo') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
@@ -49,12 +49,12 @@
     <div class=" grid  2xl:grid-cols-3   xsm:grid-cols-1 gap-2 items-center p-3  w-full ">
         @foreach ($subFiles as $item )
 
-        <div x-data="{showCancle:false}" 
+        <div x-data="{showCancle:false}"
         @if ($listing)
-        wire:key='{{$item['id']}}'
+        wire:key='{{ $item['id'] }}'
         @else
-        wire:key='{{$item->getfileName()}}'
-        @endif 
+        wire:key='{{ $item->getfileName() }}'
+        @endif
          >
             <div @mouseenter="showCancle=true" @mouseleave="showCancle=false" class=" rounded-lg relative  ">
                 <img :class="{'blur-sm' : showCancle==true}" class=" rounded-lg   "
@@ -65,21 +65,21 @@
 
                 @else
 
-                src="{{$item->temporaryUrl()}}" 
+                src="{{ $item->temporaryUrl() }}"
 
                 @endif
-                     
+
                      />
-                <button 
+                <button
                 @if ($listing)
 
-                wire:click.prevent="remove('{{$item['id']}}')"
+                wire:click.prevent="remove('{{ $item['id'] }}')"
 
                 @else
-                wire:click.prevent="remove('{{$item->getfileName()}}')"
+                wire:click.prevent="remove('{{ $item->getfileName() }}')"
 
                 @endif
-                
+
                 x-show="showCancle"
                     class="absolute bg-white hover:bg-slate-200 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <svg class="w-10 h-10 text-gray-900 dark:text-gray-300" aria-hidden="true"
@@ -89,13 +89,13 @@
                     </svg>
                 </button>
             </div>
-            <input hidden name="subFiles[]" 
-            
+            <input hidden name="subFiles[]"
+
             {{-- value="{{ json_encode([
                 "name"=>$item,
             "type"=>$type
             ]) }}"  --}}
-            
+
             />
         </div>
         @endforeach

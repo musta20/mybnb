@@ -38,12 +38,12 @@ new class extends Component
                     </x-nav-link>
 
                     @if (auth()->user()->type==App\Enums\HostType::HOST->value)
-                        
+
 
                     <x-nav-link :href="route('host.BookingRequests')" :active="request()->routeIs('host.Booking')"
                         wire:navigate>
                         {{ __('messages.BookingRequests') }}
-                    </x-nav-link>     
+                    </x-nav-link>
 
                     <x-nav-link :href="route('host.listing')" :active="request()->routeIs('host.listing')"
                         wire:navigate>
@@ -68,7 +68,7 @@ new class extends Component
 
                 <div class="flex px-2 items-center justify-end  pr-4">
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" x-model="darkMode" 
+                        <input type="checkbox" x-model="darkMode"
                             @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
                             class="sr-only peer">
                         <div

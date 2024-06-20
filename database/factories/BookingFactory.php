@@ -21,7 +21,7 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         $checkInDate = fake()->dateTimeBetween('-1 month', '+1 month');
-        $checkOutDate = fake()->dateTimeBetween($checkInDate, $checkInDate->format('Y-m-d H:i:s').' + 5 days');
+        $checkOutDate = fake()->dateTimeBetween($checkInDate, $checkInDate->format('Y-m-d H:i:s') . ' + 5 days');
 
         return [
             'listing_id' => Listing::factory(),
@@ -32,7 +32,7 @@ class BookingFactory extends Factory
             'check_out_date' => $checkOutDate,
             'total_price' => fake()->randomFloat(2, 50, 500),
             'status' => fake()->randomElement(BookingStatus::cases())->value,
-            'special_requests' => fake()->paragraph(), 
+            'special_requests' => fake()->paragraph(),
         ];
     }
 }

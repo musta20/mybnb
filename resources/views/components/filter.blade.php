@@ -19,8 +19,8 @@
 
         function buildUri($param){
 
-        
-    
+
+
         $queryParams = request()->query();
 
         $newuri = url()->current();
@@ -72,8 +72,8 @@
                 @foreach ([5,10,20,30,40,50] as $item)
                 <li>
 
-                    <a href="{{buildUri(['itemsPerPage'=>$item])}}" class="block px-4 py-2 hover:bg-gray-100  ">
-                        {{$item}}
+                    <a href="{{ buildUri(['itemsPerPage'=>$item]) }}" class="block px-4 py-2 hover:bg-gray-100  ">
+                        {{ $item }}
                     </a>
                 </li>
                 @endforeach
@@ -105,9 +105,9 @@
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                 @foreach ($filterFiled as $item)
                 <li>
-                    <a href="{{buildUri(['filed'=>$item['name'],'orderType'=>$item['orderType']->value,'value'=>$item['value']])}}"
+                    <a href="{{ buildUri(['filed'=>$item['name'],'orderType'=>$item['orderType']->value,'value'=>$item['value']]) }}"
                         class="block px-4 py-2 hover:bg-gray-100  ">
-                        {{$item['lable']}}
+                        {{ $item['lable'] }}
                     </a>
                 </li>
                 @endforeach
@@ -158,9 +158,9 @@
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                 @foreach ($realData as $item)
                 <li>
-                    <a href="{{buildUri(['rel'=>$relType,'id'=>$item->id])}}"
+                    <a href="{{ buildUri(['rel'=>$relType,'id'=>$item->id]) }}"
                         class="block px-4 py-2 hover:bg-gray-100  ">
-                        {{$item->name ?? $item->title}}
+                        {{ $item->name ?? $item->title }}
                     </a>
                 </li>
                 @endforeach
@@ -208,7 +208,7 @@
 
             {{ request('search') }}
 
-            <a href="{{  removeVale(['search']) }}">
+            <a href="{{ removeVale(['search']) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                     <path
                         d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
@@ -219,14 +219,14 @@
         </span>
         @endif
         @foreach ($filterFiled as $item)
-        @if(request()->input('value') === (string) $item['value'])
+        @if (request()->input('value') === (string) $item['value'])
         <span class="flex pt-2 p-2 rounded-md border mx-2  text-gray-500 text-xs">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 mx-1">
                 <path
                     d="M14 2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2.172a2 2 0 0 0 .586 1.414l2.828 2.828A2 2 0 0 1 6 9.828v4.363a.5.5 0 0 0 .724.447l2.17-1.085A2 2 0 0 0 10 11.763V9.829a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 0 14 4.172V2Z" />
             </svg>
             {{ $item['lable'] }}
-            <a href="{{  removeVale(['value','orderType','filed']) }}">
+            <a href="{{ removeVale(['value','orderType','filed']) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                     <path
                         d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />

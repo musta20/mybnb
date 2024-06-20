@@ -1,52 +1,46 @@
 <?php
 
-use App\Enums\HostType;
+use App\Http\Controllers\MainSiteController;
 use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
+use App\Livewire\Host\Listing\Bookingrequest;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-use App\Http\Controllers\MainSiteController;
-use App\Livewire\Host\Listing\Bookingrequest;
-use Illuminate\Support\Facades\Auth;
-
-Route::get('/',[MainSiteController::class, 'index'])->name('home');
+Route::get('/', [MainSiteController::class, 'index'])->name('home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::post('Addreview',[MainSiteController::class, 'Addreview'])->name('Addreview');
+Route::post('AddReview', [MainSiteController::class, 'addReview'])->name('AddReview');
 
 Volt::route('booking/', 'booking-detail')->name('bookingdetail');
 
-Route::get('listing/{listing}',[MainSiteController::class,'listing'])->name('listing');
+Route::get('listing/{listing}', [MainSiteController::class, 'listing'])->name('listing');
 
-Route::get('hostProfile/{user}',[MainSiteController::class,'hostProfile'])->name('hostProfile');
+Route::get('hostProfile/{user}', [MainSiteController::class, 'hostProfile'])->name('hostProfile');
 
 Volt::route('booking/{listing}', 'booking')->name('booking');
 
-Route::view('/wishList','wishList')->name('wishList');
+Route::view('wishList', 'wishList')->name('wishList');
 
-Route::get('/addToList/{listing}', [MainSiteController::class, 'addToList'])->name('addToList');
+Route::get('addToList/{listing}', [MainSiteController::class, 'addToList'])->name('addToList');
 
-Route::get('/removeList/{listing}', [MainSiteController::class, 'removeList'])->name('removeList');
+Route::get('removeList/{listing}', [MainSiteController::class, 'removeList'])->name('removeList');
 
 Volt::route('messages/{Messages?}', 'host.messages.messages-component')
-->name('Message');
+    ->name('Message');
 
 Route::view('profile', 'profile')
-->name('profile');
+    ->name('profile');
 
-Route::group(['as' => 'host.', 'middleware' => ['auth','host'], 'prefix' => 'host'], function () {
-
-
+Route::group(['as' => 'host.', 'middleware' => ['auth', 'host'], 'prefix' => 'host'], function () {
 
     Route::get('BookingRequests', Bookingrequest::class)
         ->name('BookingRequests');
-
 
     Route::get('listing', Listing::class)
         ->name('listing');
@@ -60,11 +54,8 @@ Route::group(['as' => 'host.', 'middleware' => ['auth','host'], 'prefix' => 'hos
     Route::get('booking/', Booking::class)
         ->name('Booking');
 
-
-
     Volt::route('booking/detail/{Booking}', 'host.booking.detail-booking')
         ->name('BookingDetail');
 });
-
 
 require __DIR__ . '/auth.php';

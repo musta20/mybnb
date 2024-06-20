@@ -1,5 +1,5 @@
 @auth
-<a href="{{route('wishList')}}" class="hover:bg-slate-100 rounded-full p-2 flex justify-center justify-items-center">
+<a href="{{ route('wishList') }}" class="hover:bg-slate-100 rounded-full p-2 flex justify-center justify-items-center">
     <span class="relative inline-block my-auto">
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -9,7 +9,7 @@
         </svg>
 
         @if (count(Auth::user()->wichListings) > 0)
-        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs 
+        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs
              font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
             {{ count(Auth::user()->wichListings) }}
         </span>
@@ -18,7 +18,7 @@
     </span>
 </a>
 @else
-<a href="{{route('wishList')}}" class="hover:text-red-400 rounded-full my-auto px-2 flex justify-center justify-items-center">
+<a href="{{ route('wishList') }}" class="hover:text-red-400 rounded-full my-auto px-2 flex justify-center justify-items-center">
     <span class="relative inline-block">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
@@ -29,7 +29,7 @@
 
         @session('List')
         @if (count($value))
-        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs 
+        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs
         font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
             {{ count($value) }}
         </span>

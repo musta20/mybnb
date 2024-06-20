@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Listing;
 use App\Models\Reviews;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class reviewsSeeder extends Seeder
+class ReviewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,21 +15,20 @@ class reviewsSeeder extends Seeder
     {
         $listings = Listing::all();
         foreach ($listings as $listing) {
-       
+
             Reviews::factory()
-            ->count(20)
-            ->for($listing)
-            ->create(); 
+                ->count(20)
+                ->for($listing)
+                ->create();
 
             $this->updateRating($listing);
 
         }
-     
 
     }
 
-
-    public function updateRating($listing){
+    public function updateRating($listing)
+    {
         $allRating = Reviews::where('listing_id', $listing->id)->pluck('rating')->toArray();
         $totalRating = 0;
 
@@ -39,7 +37,7 @@ class reviewsSeeder extends Seeder
         }
 
         $listing->update([
-            'rating' => $totalRating
+            'rating' => $totalRating,
         ]);
     }
 }

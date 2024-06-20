@@ -11,12 +11,10 @@ class ListingMedia extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['listing_id', 'path','type', 'alt_text'];
+    protected $fillable = ['listing_id', 'path', 'type', 'alt_text'];
 
     public function listing(): BelongsTo
     {
         return $this->belongsTo(Listing::class);
     }
-
-
 }

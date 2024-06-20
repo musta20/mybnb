@@ -10,7 +10,6 @@ class Listing extends Component
 {
     use WithPagination;
 
-
     public function mount()
     {
 

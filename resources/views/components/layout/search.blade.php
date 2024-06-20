@@ -1,22 +1,22 @@
 <div x-data="{ open: false }"
 class="max-w-[700px] px-2 mx-auto ">
     <div class="flex">
-        
-     
-            <select    
+
+
+            <select
             name="city"
-            
+
             class="items-center py-2.5  text-sm font-medium text-center text-gray-900 bg-gray-100 border
             border-gray-300 rounded-s-full w-36 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700
             dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"aria-labelledby="dropdown-button">
                 @php($cites = App\Enums\Cities::cases())
-                @foreach($cites as $city)
-                    <option  
+                @foreach ($cites as $city)
+                    <option
                     selected="{{ $city->value == request('city') }}"
                     value="{{ $city->value }}"
                         class="inline-flex w-full px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
                         __('messages.'.$city->value) }}</option>
-               
+
                 @endforeach
 
             </select>
@@ -26,7 +26,7 @@ class="max-w-[700px] px-2 mx-auto ">
             name="search"
             value="{{ request('search') }}"
              id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-full border-s-gray-50 border-s-2 border
-            border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 
+            border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700
              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                 placeholder="المدينة , المنتطقة , المحافظة" required />
             <button type="submit"

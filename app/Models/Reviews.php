@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reviews extends Model
 {
-
-    use SoftDeletes,HasFactory,HasUlids;
+    use HasFactory,HasUlids,SoftDeletes;
 
     protected $fillable = [
         'listing_id',
@@ -20,7 +19,6 @@ class Reviews extends Model
         'comment',
     ];
 
- 
     /**
      * Get the listing that the review belongs to.
      */
@@ -36,7 +34,4 @@ class Reviews extends Model
     {
         return $this->belongsTo(User::class, 'guest_id');
     }
-
-
-
 }

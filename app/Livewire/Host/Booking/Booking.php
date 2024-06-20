@@ -7,10 +7,10 @@ use Livewire\Component;
 
 class Booking extends Component
 {
-
     public $bookings;
-    
-    public function mount(){
+
+    public function mount()
+    {
         $this->bookings = ModelsBooking::with('listing')->get();
     }
 

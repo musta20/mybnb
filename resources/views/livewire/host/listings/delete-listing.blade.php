@@ -9,7 +9,7 @@ new class extends Component
     public string $password = '';
 
     public $listing;
-    
+
     public function mount()
     {
         $this->listing = $this->listing;
@@ -26,7 +26,7 @@ new class extends Component
 
         $this->listing->delete();
 
-       
+
         redirect()->route('host.listing')->with('OkToast', __('messages.Listing Deleted'));
 
      //   $this->redirect('/host/listing', navigate: true);

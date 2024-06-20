@@ -16,13 +16,13 @@ dark:text-slate-300
 dark:border-slate-600 p-5 border rounded-lg mx-auto">
         @foreach ($bookings as $item)
         <div class="w-3/4 mx-auto flex gap-3 justify-evenly border-t-2 p-2">
-            <img src="{{asset('listings/'.$item->listing->media[0]->path)}}" class="w-32 h-32 border rounded-lg" alt="">
+            <img src="{{ asset('listings/'.$item->listing->media[0]->path) }}" class="w-32 h-32 border rounded-lg" alt="">
             <p class="my-auto flex gap-1 flex-col ">
-                {{$item->listing->title}} ,
-                {{$item->listing->city}}
+                {{ $item->listing->title }} ,
+                {{ $item->listing->city }}
                 <span>
-                    {{$item->listing->price_per_night}} <span class="text-xs">{{__('messages.EGP')}}</span>
-                    {{__('messages.per night')}}
+                    {{ $item->listing->price_per_night }} <span class="text-xs">{{ __('messages.EGP') }}</span>
+                    {{ __('messages.per night') }}
 
                 </span>
 
@@ -30,14 +30,14 @@ dark:border-slate-600 p-5 border rounded-lg mx-auto">
 
             @switch($item->status)
             @case('pending')
-            <span class="bg-yellow-100 my-auto text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 
+            <span class="bg-yellow-100 my-auto text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5
                 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">
-                {{__('messages.'.$item->status)}}</span>
+                {{ __('messages.'.$item->status) }}</span>
             @break
             @case('active')
             <span class="bg-green-100 my-auto text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700
                  dark:text-green-400 border border-green-400">
-                {{__('messages.'.$item->status)}}</span>
+                {{ __('messages.'.$item->status) }}</span>
 
             </span>
 
@@ -46,7 +46,7 @@ dark:border-slate-600 p-5 border rounded-lg mx-auto">
             @case('canceled')
             <span class="bg-red-100 my-auto text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded
                  dark:bg-gray-700 dark:text-red-400 border border-red-400">
-                {{__('messages.'.$item->status)}}</span>
+                {{ __('messages.'.$item->status) }}</span>
             </span>
 
             @break
@@ -61,8 +61,8 @@ dark:border-slate-600 p-5 border rounded-lg mx-auto">
 
 
             <div class="my-auto">
-                <a href="{{route('host.BookingDetail', $item->id)}}" {{--
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-booking-cancelation'); $wire.bookingId = '{{$item->id}}';"
+                <a href="{{ route('host.BookingDetail', $item->id) }}" {{--
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-booking-cancelation'); $wire.bookingId = '{{ $item->id }}';"
                     --}} class="bg-slate-500 m-5 hover:bg-slate-600 text-slate-100 font-bold py-2 px-4 rounded-full">
                     عرض
                 </a>
@@ -71,7 +71,7 @@ dark:border-slate-600 p-5 border rounded-lg mx-auto">
         </div>
         @endforeach
         <span dir="ltr" class="w-3/4 mx-auto">
-            {{$bookings->links()}}
+            {{ $bookings->links() }}
         </span>
 
     </div>

@@ -10,7 +10,7 @@ new class extends Component
    {
     $this->event = json_encode($events);
     $this->month = $month;
-    
+
    }
 
 
@@ -85,7 +85,7 @@ new class extends Component
                                         :class="{'bg-blue-500  text-white': isToday(date) == true, 'text-gray-700 dark:text-gray-400 hover:bg-blue-200': isToday(date) == false }">
                                     </div>
                                     <div style="height: 80px;" class="overflow-y-auto mt-1 dark:text-white">
-                                        <!-- <div 
+                                        <!-- <div
                                             class="absolute top-0 right-0 mt-2 mr-2 inline-flex items-center justify-center rounded-full text-sm w-6 h-6 bg-gray-700 text-white leading-none"
                                             x-show="events.filter(e => e.event_date === new Date(year, month, date).toDateString()).length"
                                             x-text="events.filter(e => e.event_date === new Date(year, month, date).toDateString()).length"></div> -->
@@ -185,7 +185,7 @@ new class extends Component
         <script>
             const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    
+
             function app() {
                 return {
                     month: '',
@@ -193,14 +193,14 @@ new class extends Component
                     no_of_days: [],
                     blankdays: [],
                     days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    
+
                     events: [],
-          
-                    
+
+
                     event_title: '',
                     event_date: '',
                     event_theme: 'blue',
-    
+
                     themes: [
                         {
                             value: "blue",
@@ -223,9 +223,9 @@ new class extends Component
                             label: "Purple Theme"
                         }
                     ],
-    
+
                     openEventModal: false,
-    
+
                     initDate(month=null) {
                         let today = new Date();
 
@@ -242,60 +242,60 @@ new class extends Component
                         // });
                         //    console.log(e);
                         //     this.events = e;
-                   
+
                     },
-    
-    
+
+
                     isToday(date) {
                         const today = new Date();
                         const d = new Date(this.year, this.month, date);
-    
+
                         return today.toDateString() === d.toDateString() ? true : false;
                     },
-    
+
                     showEventModal(date) {
                         // open the modal
                         this.openEventModal = true;
                         this.event_date = new Date(this.year, this.month, date).toDateString();
                     },
-    
+
                     addEvent() {
                         if (this.event_title == '') {
                             return;
                         }
-    
+
                         this.events.push({
                             event_date: this.event_date,
                             event_title: this.event_title,
                             event_theme: this.event_theme
                         });
-    
+
                         console.log(this.events);
-    
+
                         // clear the form data
                         this.event_title = '';
                         this.event_date = '';
                         this.event_theme = 'blue';
-    
+
                         //close the modal
                         this.openEventModal = false;
                     },
-    
+
                     getNoOfDays() {
                         let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
-    
+
                         // find where to start calendar day of week
                         let dayOfWeek = new Date(this.year, this.month).getDay();
                         let blankdaysArray = [];
                         for ( var i=1; i <= dayOfWeek; i++) {
                             blankdaysArray.push(i);
                         }
-    
+
                         let daysArray = [];
                         for ( var i=1; i <= daysInMonth; i++) {
                             daysArray.push(i);
                         }
-                        
+
                         this.blankdays = blankdaysArray;
                         this.no_of_days = daysArray;
                     }

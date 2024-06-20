@@ -38,11 +38,11 @@
                     </div>
                     <div class="flex justify-between ">
                         <p class="text-xs my-auto">{{ $listing->address }}</p>
-                     
+
 
                         <span class="flex gap-1 border-2 p-1 rounded-md items-center">
                             <p>
-                                {{$listing->price_per_night}}
+                                {{ $listing->price_per_night }}
                             </p>
                             <p style="font-size: 10px; padding: 1px 1px"> جنيه </p>
 

@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Collection;
-
 class WishlistService
 {
     public static function add($productid): void
@@ -11,22 +9,19 @@ class WishlistService
         //dd($productid);
         $cart = self::getList();
 
-
         $cartItem = $cart->where('id', $productid->id)->first();
-        if (!$cartItem) {
+        if (! $cartItem) {
 
             $cart->push($productid);
             session()->put('List', $cart);
         }
     }
 
-
     public static function remove($productId): void
     {
         $cart = self::getList();
-        
-        $cart = $cart->filter(fn($item) => $item->id!= $productId);
 
+        $cart = $cart->filter(fn ($item) => $item->id != $productId);
 
         session()->put('List', $cart);
     }

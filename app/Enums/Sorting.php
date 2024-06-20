@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Enums;
 
-enum Sorting:string 
+enum Sorting: string
 {
     case NEWEST = 'NEWEST';
     case AVG_COUSTMER = 'AVG_COUSTMER';
@@ -13,7 +14,4 @@ enum Sorting:string
     case OlDEST = 'OlDEST';
     case EQULE = 'EQULE';
 
-    
 }
-
-?>

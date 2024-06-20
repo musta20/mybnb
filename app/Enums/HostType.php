@@ -2,12 +2,8 @@
 
 namespace App\Enums;
 
-enum HostType :string
+enum HostType: string
 {
     case GUEST = 'guest';
     case HOST = 'host';
 }
-
-
-
-?>

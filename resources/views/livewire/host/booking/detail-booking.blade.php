@@ -6,7 +6,7 @@ use App\Enums\BookingStatus;
 use App\Models\Booking;
 new class extends Component
 {
-   
+
 public $events = [];
 public $width = 'w-1/2';
 
@@ -41,7 +41,7 @@ public function mount(Booking $Booking){
     $this->price = $Booking->total_price;
     $this->special_requests = $Booking->special_requests;
 
-    
+
     $this->month = Carbon::parse($Booking->check_out_date)->subMonth()->month;
 
 
@@ -59,7 +59,7 @@ public function mount(Booking $Booking){
         ]
 
 
-        
+
     ];
 }
 
@@ -78,7 +78,7 @@ public function mount(Booking $Booking){
 <div x-data class="py-12 flex gap-1 w-full ">
     <x-toast />
 
-    
+
     <div class="w-1/2 mx-auto sm:px-6 lg:px-8 space-y-6 ">
         @if ($booking->status != 'canceled')
 
@@ -114,7 +114,7 @@ public function mount(Booking $Booking){
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
                     </svg>
-                    {{$listing->title}}
+                    {{ $listing->title }}
                 </p>
                 <p class="mt-1 flex gap-2 max-w-2xl m-5 py-3 flex text-sm text-gray-500 dark:text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -124,7 +124,7 @@ public function mount(Booking $Booking){
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
-                    {{$listing->address}}
+                    {{ $listing->address }}
                 </p>
                 <p class="mt-1 flex gap-2 max-w-2xl m-5 py-3 flex text-sm text-gray-500 dark:text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -132,7 +132,7 @@ public function mount(Booking $Booking){
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
                     </svg>
-                    {{__('messages.'.$listing->city)}}
+                    {{ __('messages.'.$listing->city) }}
                 </p>
 
                 <a href="{{ route('host.EditListing', $listing->id) }}"
@@ -167,7 +167,7 @@ public function mount(Booking $Booking){
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                     </svg>
-                    {{$status}}
+                    {{ $status }}
                     <x-booking-status-card :status="$status" />
 
                 </p>
@@ -181,7 +181,7 @@ public function mount(Booking $Booking){
                         </svg>
                     </span>
                     <p>
-                        {{$special_requests}}
+                        {{ $special_requests }}
                     </p>
                 </div>
 
@@ -191,7 +191,7 @@ public function mount(Booking $Booking){
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                     </svg>
-                    {{$price}} <span class="text-xs">{{__('messages.EGP')}}</span>
+                    {{ $price }} <span class="text-xs">{{ __('messages.EGP') }}</span>
                 </p>
             </div>
         </div>

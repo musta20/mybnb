@@ -6,10 +6,9 @@ use App\Enums\HostType;
 use App\Enums\Status;
 use App\Models\Listing;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class listingSeeder extends Seeder
+class ListingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +17,7 @@ class listingSeeder extends Seeder
     {
         $allusers = User::where('type', HostType::HOST->value)->get();
 
-        foreach ($allusers  as $user) {
+        foreach ($allusers as $user) {
             Listing::factory()->count(20)->withHost($user)->create();
         }
 
@@ -27,6 +26,5 @@ class listingSeeder extends Seeder
         Listing::factory()->count(20)->withHost($user)->create([
             'status' => Status::PUBLISHED->value,
         ]);
-
     }
 }

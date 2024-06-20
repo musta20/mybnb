@@ -37,15 +37,15 @@ class extends Component
 
   public function getDays()
   {
-    $startDate = \Carbon\Carbon::parse($this->start);
-    $endDate = \Carbon\Carbon::parse($this->end);
+    $startDate = Carbon::parse($this->start);
+    $endDate = Carbon::parse($this->end);
     $this->numberOfDays = $startDate->diffInDays($endDate) + 1;
     $this->totalPrice = $this->listing->price_per_night * $this->numberOfDays;
 
   }
 
   public function updated($start, $end){
-    
+
     $this->getDays();
   }
 
@@ -55,13 +55,13 @@ class extends Component
 
     $this->listing = $listing;
 
-    
+
 
     if ($listing->status != Status::PUBLISHED->value) return     abort(404);
 
           $this->beds = $request->bedrooms;
           $this->start = $request->start;
-          $this->end = $request->end; 
+          $this->end = $request->end;
           // $startDate = \Carbon\Carbon::parse($this->start);
           // $endDate = \Carbon\Carbon::parse($this->end);
           // $this->numberOfDays = $startDate->diffInDays($endDate) + 1;
@@ -109,7 +109,7 @@ public function saveBooking()
         'total_price' => $this->totalPrice,
         'status' => Status::PENDING->value
     ])){
-      
+
       return redirect()->route('bookingdetail')->with('OkToast',__('messages.listing booked')); // session()->flash('okToast','تم اضافة الحجز بنجاح');
     }
 
@@ -130,39 +130,39 @@ public function saveBooking()
 
     <x-layout.booking-check-date />
     <hr class="my-5 dark:border-slate-500 ">
-    <img src="{{asset('listings/'.$listing->media[0]->path)}}" class="w-32 h-32 border rounded-lg" alt="">
+    <img src="{{ asset('listings/'.$listing->media[0]->path) }}" class="w-32 h-32 border rounded-lg" alt="">
     <span>
-      {{$listing->title}}
+      {{ $listing->title }}
     </span>
     </p>
     <hr class="my-5 dark:border-slate-500 ">
 
     <p>
-      الضيوف : {{$beds}}
+      الضيوف : {{ $beds }}
       <br>
-      النزول: {{$start}}
+      النزول: {{ $start }}
       <br>
-      المغادرة: {{$end}}
+      المغادرة: {{ $end }}
       <hr class="my-5 dark:border-slate-500 ">
     </p>
-    {{$listing->price_per_night}} <span class="text-xs">{{__('messages.EGP')}}</span> {{__('messages.per night')}}
+    {{ $listing->price_per_night }} <span class="text-xs">{{ __('messages.EGP') }}</span> {{ __('messages.per night') }}
 
     <x-layout.booking-guest :$beds />
 
   </div>
   <div class="w-1/2">
     <p>
-      الايام : {{floor($numberOfDays)}}
+      الايام : {{ floor($numberOfDays) }}
     </p>
     <hr class="my-5 dark:border-slate-500 ">
     <p>
-      {{floor($numberOfDays)}} * {{$listing->price_per_night}}
+      {{ floor($numberOfDays) }} * {{ $listing->price_per_night }}
     </p>
     <hr class="my-5 dark:border-slate-500 ">
 
     <p>
       اجمالي السعر :
-      {{ floor($totalPrice) }} <span class="text-xs">{{__('messages.EGP')}}</span>
+      {{ floor($totalPrice) }} <span class="text-xs">{{ __('messages.EGP') }}</span>
     </p>
     <p>
       <button class="bg-blue-500 m-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">تأكيد الحجز</button>

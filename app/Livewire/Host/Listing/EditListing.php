@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class EditListing extends Component
 {
-
     public $listing;
 
     public $photo;
@@ -21,7 +20,6 @@ class EditListing extends Component
         $this->subFiles = $listing->media->toArray();
 
     }
-
 
     public function render()
     {

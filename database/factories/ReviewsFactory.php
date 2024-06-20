@@ -20,10 +20,10 @@ class ReviewsFactory extends Factory
     public function definition(): array
     {
         return [
-            'listing_id' => Listing::factory(), 
+            'listing_id' => Listing::factory(),
             'guest_id' => User::factory()->create([
                 'type' => HostType::GUEST->value,
-            ]), 
+            ]),
             'rating' => fake()->numberBetween(1, 5),
             'comment' => fake()->paragraph(),
         ];

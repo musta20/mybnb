@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use function Pest\Laravel\call;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,17 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $this->call([
-            userSeeder::class,
-            listingSeeder::class,
-            bookingSeeder::class,
-            messagesSeeder::class,
-            reviewsSeeder::class,
-            ListingMediaSeeder::class
+            UserSeeder::class,
+            ListingSeeder::class,
+            BookingSeeder::class,
+            MessagesSeeder::class,
+            ReviewsSeeder::class,
+            ListingMediaSeeder::class,
         ]);
-
-
 
     }
 }

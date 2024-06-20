@@ -102,7 +102,7 @@
             </path>
         </svg>
 
-        <span>{{__('messages.Parking')}}</span>
+        <span>{{ __('messages.Parking') }}</span>
     </div>
     @break
     @case(App\Enums\Amenities::POOL->value)
@@ -156,7 +156,7 @@
             <line class="cls-1" x1="0.55" y1="22.5" x2="23.45" y2="22.5"></line>
         </svg>
 
-        <span>{{__('messages.Heating')}}</span>
+        <span>{{ __('messages.Heating') }}</span>
 
     </div>
     @break

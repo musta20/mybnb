@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Enums\HostType;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory,HasUlids,SoftDeletes, Notifiable;
+    use HasFactory,HasUlids,Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -37,10 +36,6 @@ class User extends Authenticatable
         'response_rate',
     ];
 
-
-
-
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -50,21 +45,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed'
-
-        ];
-    }
-
 
     /**
      * Get the listings owned by the user (host).
@@ -82,7 +62,7 @@ class User extends Authenticatable
         return $this->hasMany(Booking::class, 'guest_id');
     }
 
-        /**
+    /**
      * Get the bookings made by the user (guest).
      */
     public function hostbookings(): HasManyThrough
@@ -90,19 +70,31 @@ class User extends Authenticatable
         return $this->hasManyThrough(Booking::class, Listing::class, 'host_id', 'listing_id', 'id', 'id');
         // return $this->hasMany(Booking::class);
     }
+
     public function wichListings(): BelongsToMany
     {
-        return $this->belongsToMany(Listing::class,'wish_lists')->wherePivotNull('deleted_at');
+        return $this->belongsToMany(Listing::class, 'wish_lists')->wherePivotNull('deleted_at');
     }
 
     /**
-     * Get the reviews written by the user (guest). 
+     * Get the reviews written by the user (guest).
      */
     public function reviews(): HasMany
     {
         return $this->hasMany(Reviews::class, 'guest_id');
     }
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
 
-    
+        ];
+    }
 }

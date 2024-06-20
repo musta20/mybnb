@@ -13,11 +13,11 @@ new class extends Component
     public $users;
 
     public $allUsers=[];
-    
+
     public string $content;
 
     public string $recipient_id;
-    
+
     public function getMessages(){
 
         $myID =auth()->user()->id;
@@ -33,7 +33,7 @@ new class extends Component
                 break;
                 case 'all':
                 $messagescontent= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
-                break;  
+                break;
                 case 'new':
                 $allbooking = Booking::whereIn('listing_id', function ($query) use ($myID) {
                         $query->select('id')->from('listings')->where('host_id', $myID);
@@ -41,22 +41,22 @@ new class extends Component
 
                     $this->allUsers =  $allbooking->pluck('guest')->pluck('id')->toArray();
                 $messagescontent = $allbooking->pluck('guest');
-             
-                break; 
 
-            
-                break;  
+                break;
+
+
+                break;
                 default:
                 $messagescontent= Messages::where('sender_id', $myID)->orWhere('recipient_id', $myID)->latest()->paginate(20);
                 break;
         }
-        
+
         return $messagescontent;
 
     }
 
     public function mount(Messages $Messages ){
-     
+
         $this->mail = request()->mail ? request()->mail : null;
 
         if ( $Messages->id ) {
@@ -67,18 +67,18 @@ new class extends Component
 
             $this->currentMessage = $Messages;
         }
-        
+
 
     }
 
     public function sendMessag():void{
-  
-        
+
+
         $messages= [
             'recipient_id.required' => 'The recipient field is required.',
             'content.required' => 'The content field is required.'
         ];
-        
+
         $validated = $this->validate([
             'recipient_id' => ['required'],
             'content' => ['required'],
@@ -105,7 +105,7 @@ new class extends Component
 
         Messages::find($deleteMessageId)->delete();
 
-      
+
        // $this->redirect('/messages', navigate: true)->with('OkToast', __('messages.message deleted'));
         redirect()->route('Message')->with('OkToast', __('messages.message deleted'));
 
@@ -117,12 +117,12 @@ new class extends Component
     public function with(): array
             {
 
-            return [ 
+            return [
                     'allmessages' => $this->getMessages() ,
                  ];
 
             }
-            
+
     }
 
 
@@ -160,17 +160,17 @@ new class extends Component
         <x-toast />
         <div class="p-2 sm:p-8  w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <div class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('Message')}}?mail=new" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{ route('Message') }}?mail=new" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                       </svg>
-                      
+
                     انشاء رسالة
                 </a>
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('Message')}}?mail=Inbox" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{ route('Message') }}?mail=Inbox" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -181,7 +181,7 @@ new class extends Component
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('Message')}}?mail=sent" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{ route('Message') }}?mail=sent" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -192,7 +192,7 @@ new class extends Component
             </div>
 
             <div  class=" p-2 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-900  hover:bg-gray-200 sm:rounded-lg">
-                <a href="{{route('Message')}}?mail=all" class="text-sm py-2 text-md flex gap-2">
+                <a href="{{ route('Message') }}?mail=all" class="text-sm py-2 text-md flex gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -214,7 +214,7 @@ new class extends Component
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
-                {{ $this->currentMessage->sender->id == auth()->user()->id ? "الى :". $this->currentMessage->recipient->name : $this->currentMessage->sender->name  }}
+                {{ $this->currentMessage->sender->id == auth()->user()->id ? "الى :". $this->currentMessage->recipient->name : $this->currentMessage->sender->name }}
                 {{-- {{$this->currentMessage->sender->name}} --}}
             </p>
             <p class="font-bold  py-2 text-md  flex gap-2">
@@ -223,25 +223,25 @@ new class extends Component
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
-                {{$this->currentMessage->created_at->diffForHumans()}}
+                {{ $this->currentMessage->created_at->diffForHumans() }}
             </p>
 
             <p class="font-bold  py-2 text-lg">
-                {{$this->currentMessage->content}}
+                {{ $this->currentMessage->content }}
             </p>
 
         </div>
-        @elseif($mail=='new')
+        @elseif ($mail=='new')
         <form wire:submit='sendMessag'  class=" p-4 w-full  bg-white dark:bg-gray-800 dark:text-gray-400 shadow sm:rounded-lg">
 
-            
-      
+
+
 
             <x-input-label for="user" value="المستخدميين" />
 
             <x-select-input  id="recipient_id" class="block mt-1 w-4/6" :options="$allmessages"
 
-             wire:model.live='recipient_id' 
+             wire:model.live='recipient_id'
              name="recipient_id" :value="old('recipient_id')" required
                 autocomplete="recipient_id" />
 
@@ -251,32 +251,32 @@ new class extends Component
             <x-text-area id="content" class="block mt-1 w-4/6" type="text" wire:model='content' name="content" :value="old('content')" required
                 autocomplete="content" ></x-text-area>
 
-            <x-input-error 
+            <x-input-error
             :messages="$errors->get('content')"
              class="mt-2" />
                 <x-primary-button class="mt-4" type="submit">ارسال</x-primary-button>
 
         </form>
-        
+
 
         @else
         <div class=" p-4 w-full  bg-white dark:bg-gray-800  shadow sm:rounded-lg">
-            @foreach($allmessages as $item)
+            @foreach ($allmessages as $item)
             <div class="
-                    @if($item->is_read)
+                    @if ($item->is_read)
                     dark:bg-gray-900
 
                     bg-gray-200
-                  
+
                     @endif
 
                     rounded-md
-                    flex px-4   
-                justify-between w-full gap-1 
+                    flex px-4
+                justify-between w-full gap-1
                 dark:hover:bg-gray-950
                 hover:bg-gray-200
                 m-2 py-3 text-sm text-gray-500 dark:text-gray-400">
-                <a class="flex w-3/4  justify-between  gap-2 " href="{{ route('Message', $item->id)}}">
+                <a class="flex w-3/4  justify-between  gap-2 " href="{{ route('Message', $item->id) }}">
                     <span class="text-gray-700 dark:text-gray-300">
                         {{ $item->sender->name }} </span>
 
@@ -289,8 +289,8 @@ new class extends Component
 
                 </a>
 
-                <button x-data="" 
-        x-on:click.prevent="deleteMessageId='{{$item->id}}' ;$dispatch('open-modal', 'confirm-messages-deletion')" >
+                <button x-data=""
+        x-on:click.prevent="deleteMessageId='{{ $item->id }}' ;$dispatch('open-modal', 'confirm-messages-deletion')" >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Amenities :string
+enum Amenities: string
 {
     case WIFI = 'Wifi';
     case KITCHEN = 'Kitchen';
@@ -11,7 +11,3 @@ enum Amenities :string
     case HEATING = 'Heating';
     case AIR_CONDITIONING = 'Air conditioning';
 }
-
-
-
-?>

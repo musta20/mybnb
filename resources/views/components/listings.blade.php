@@ -15,10 +15,10 @@
 </div>
 
     <div class="m-5 p-10 ">
-        
+
         <hr class="my-5" >
 
-        {{$listings->links()}}
+        {{ $listings->links() }}
 
     </div>
 

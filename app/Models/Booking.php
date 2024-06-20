@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\Sorting;
-use App\Models\Conserns\Withfilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +12,39 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
 {
-    use HasFactory,SoftDeletes,HasUlids,Withfilter;
+    use HasFactory, HasUlids, SoftDeletes;
+
+    protected static $filterFiled = [
+        [
+            'lable' => 'مخفي',
+            'orderType' => Sorting::EQULE,
+            'value' => 1,
+            'name' => 'status',
+        ],
+        [
+            'lable' => 'غير مخفي',
+            'orderType' => Sorting::EQULE,
+            'value' => 2,
+            'name' => 'status',
+        ],
+        [
+            'lable' => 'الاقدم',
+            'orderType' => Sorting::ASC,
+            'value' => 3,
+            'name' => 'created_at',
+        ],
+
+        [
+            'lable' => 'الاحدث',
+            'orderType' => Sorting::NEWEST,
+            'value' => 4,
+            'name' => 'created_at',
+        ],
+    ];
+
+    protected static $filterByRelation = ['toUser', 'fromUser'];
+
+    protected static $searchField = ['name', 'des'];
 
     protected $fillable = [
         'listing_id',
@@ -25,44 +56,6 @@ class Booking extends Model
         'special_requests',
     ];
 
-
-
-    protected static $filterFiled = [
-        [
-            "lable" => "مخفي",
-            "orderType" => Sorting:: EQULE, 
-            "value" => 1, 
-            "name" => "status"
-        ],
-        [
-            "lable" => "غير مخفي",
-            "orderType" => Sorting::EQULE, 
-            "value" => 2, 
-            "name" => "status"
-        ],
-        [
-            "lable" => "الاقدم",
-            "orderType" => Sorting::ASC, 
-            "value" => 3, 
-            "name" => "created_at"
-        ],
-        
-        [
-            "lable" => "الاحدث",
-            "orderType" => Sorting::NEWEST, 
-            "value" => 4, 
-            "name" => "created_at"
-        ],
-    
-    
-    ];
-
-    protected static $filterByRelation = ['toUser','fromUser'];
-
-    protected static $searchField = ['name', 'des'];
-
-
-
     /**
      * The attributes that should be cast.
      *
@@ -73,7 +66,6 @@ class Booking extends Model
         'check_out_date' => 'date',
     ];
 
-  
     /**
      * Get the listing associated with the booking.
      */
@@ -91,7 +83,7 @@ class Booking extends Model
     }
 
     /**
-     * Get the review associated with the booking (optional). 
+     * Get the review associated with the booking (optional).
      */
     public function review(): HasOne
     {

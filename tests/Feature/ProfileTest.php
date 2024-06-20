@@ -69,7 +69,7 @@ test('user can delete their account', function () {
         ->assertRedirect('/');
 
     $this->assertGuest();
-    
+
     $this->assertSoftDeleted($user);
 
 });

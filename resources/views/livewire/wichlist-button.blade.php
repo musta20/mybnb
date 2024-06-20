@@ -20,7 +20,7 @@ new class extends Component
         if (Auth::check()) {
 
                 $this->inmylist = auth()->user()->wichListings->contains('id', $listing->id);
-        
+
             } else{
 
                 $this->inmylist = WishlistService::getList()->contains('id', $listing->id);

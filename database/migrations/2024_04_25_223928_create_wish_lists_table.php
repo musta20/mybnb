@@ -6,22 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('wish_lists', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('listing_id')
-            ->index()
-            ->constrained()
-            ->cascadeOnDelete();
+                ->index()
+                ->constrained()
+                ->cascadeOnDelete();
             $table->foreignUlid('user_id')
-            ->index()
-            ->constrained()
-            ->cascadeOnDelete();
-
+                ->index()
+                ->constrained()
+                ->cascadeOnDelete();
 
             $table->softDeletes();
 
@@ -29,9 +25,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('wish_lists');

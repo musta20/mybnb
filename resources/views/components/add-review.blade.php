@@ -1,7 +1,7 @@
-<form method="post" action="{{route('Addreview')}}" class="p-2 m-2 space-x-2">
+<form method="post" action="{{ route('AddReview') }}" class="p-2 m-2 space-x-2">
     @csrf
     <label for="message" class="block mb-2 text-sm  font-medium text-gray-900 dark:text-white">
-        {{__('messages.add review')}}
+        {{ __('messages.add review') }}
     </label>
     <x-add-rating />
     <textarea id="comment" rows="4" name="comment"
@@ -11,6 +11,6 @@
     rounded-lg
     hover:bg-slate-800 focus:outline-none focus:ring-4
     focus:ring-green-300 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2
-     ">{{__('messages.publish')}}</button>
-    <input value="{{$listing->id}}" name="listing_id" hidden />
+     ">{{ __('messages.publish') }}</button>
+    <input value="{{ $listing->id }}" name="listing_id" hidden />
 </form>

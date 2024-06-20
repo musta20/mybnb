@@ -22,13 +22,14 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         $city = fake()->randomElement(Cities::cases())->value;
+
         return [
-            'title' =>fake()->randomElement(["فيلا","بيت","شقة","عمارة"])." " . __("messages.".$city) ,
+            'title' => fake()->randomElement(['فيلا', 'بيت', 'شقة', 'عمارة']) . ' ' . __('messages.' . $city),
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
             'city' => $city,
             'latitude' => fake()->latitude(),
-            'status' => fake()->randomElement(Status::cases())->value, 
+            'status' => fake()->randomElement(Status::cases())->value,
             'longitude' => fake()->longitude(),
             'number_of_guests' => fake()->numberBetween(1, 10),
             'number_of_bedrooms' => fake()->numberBetween(1, 5),
@@ -42,8 +43,8 @@ class ListingFactory extends Factory
 
     }
 
-
-    public function withHost(User $user){
+    public function withHost(User $user)
+    {
 
         return $this->state(function (array $attributes) use ($user) {
             return [
@@ -51,6 +52,4 @@ class ListingFactory extends Factory
             ];
         });
     }
-
-
 }

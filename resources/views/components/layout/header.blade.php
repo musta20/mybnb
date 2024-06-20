@@ -1,4 +1,4 @@
-<div class="flex justify-between 
+<div class="flex justify-between
 items-center p-3">
 
     <div>
@@ -31,11 +31,11 @@ items-center p-3">
 
 </div>
 <form
-action="{{route('home')}}"
+action="{{ route('home') }}"
 method="GET"
 >
 <nav class="bg-white flex justify-between border-2
-     border-gray-200 mx-auto w-3/6 my-10 sm:px-4 py-2.5 
+     border-gray-200 mx-auto w-3/6 my-10 sm:px-4 py-2.5
      dark:border-gray-600
      rounded-2xl dark:bg-gray-700">
 
@@ -71,7 +71,7 @@ method="GET"
         <a
         href="{{ route('home') }}?pageCity={{ $city->value }}"
         >
-            {{__("messages.".$city->value) }}
+            {{ __("messages.".$city->value) }}
         </a>
     </li>
     @endforeach

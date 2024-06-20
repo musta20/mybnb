@@ -12,7 +12,7 @@ new class extends Component
     use WithFileUploads;
 
     public $profile_picture;
-    
+
     public function uploadProfilePicture()
     {
         $validatedData = $this->validate([
@@ -21,10 +21,10 @@ new class extends Component
 
         ]);
 
-        
+
         $fileName = $this->profile_picture->store();
-   
-        
+
+
 
         $user = Auth::user();
 
