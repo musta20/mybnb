@@ -76,3 +76,4 @@ method="GET"
     </li>
     @endforeach
 </ul>
+<hr class="mt-5" >

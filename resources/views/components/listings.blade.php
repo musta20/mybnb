@@ -1,6 +1,11 @@
 
-<div class="grid grid-cols-1  sm:grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4" >
-
+<div class="w-full">
+<div
+@class([
+'grid grid-cols-1  sm:grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4',
+    ' xl:grid-cols-3'=>request('city') || request('search'),
+])
+>
     @foreach ($listings as $listing)
 
        <x-listing-card :$listing />
@@ -10,8 +15,11 @@
 
 </div>
 
-<div class="m-5 p-10 ">
-    <hr class="my-5" >
+    <div class="m-5 p-10 ">
+        <hr class="my-5" >
 
-    {{$listings->links()}}
+        {{$listings->links()}}
+
+    </div>
+
 </div>

@@ -121,9 +121,7 @@
                     @endforeach
                     <hr class="my-5">
 
-                    <iframe
-                    width="180%"
-                    height="450" style="border-radius:12px" loading="lazy" allowfullscreen
+                    <iframe width="180%" height="450" style="border-radius:12px" loading="lazy" allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key={{config('app.GOOGLE_MAPS_KEY')}}
     &q={{$listing->latitude}},{{$listing->longitude}}">
                     </iframe>

@@ -1,5 +1,6 @@
 <x-layout.layout :title="request('search') ? request('search'): 'Home'">
 
+<div class="flex  " >
     @vite(['resources/js/map.js'])
     
     @if ($listings->count() == 0)
@@ -11,30 +12,29 @@
     
     @if(request('search') || request('city')  )
 
-    {{-- @dd($listings->map(fn($listing)=> $listing->only('title','city','latitude','longitude','id'))->toJson()) --}}
 
-    <script>
+                <script>
 
-        locations = JSON.parse('{!! $listings->map(fn($listing)=> $listing->only('title','city','latitude','longitude','id'))->toJson() !!}');
+                    locations = JSON.parse('{!! $listings->map(fn($listing)=> $listing->only('number_of_guests','media','rating','number_of_bathrooms','title','city','latitude','longitude','id','price_per_night','address','number_of_bedrooms'))->toJson() !!}');
 
-        const search = {
-            
-            name: '{{ request('search') }}',
+                    const search = {
+                        
+                        name: '{{ request('search') }}',
 
-            city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city'))->getPosition()) !!}')
+                        city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city'))->getPosition()) !!}')
 
-         };
+                    };
 
-    </script>
+                </script>
 
-    <div id="map" style="height: 400px; width: 100%;"></div>
-
-    @endif
+    <div id="map" style="height: auto; width: 50%;"></div>
 
     @endif
 
+    @endif
     <x-listings :$listings />
 
 
 
+</div>
 </x-layout.layout>
