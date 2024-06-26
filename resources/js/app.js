@@ -1,6 +1,9 @@
 import './bootstrap';
 
-
+import.meta.glob([
+  '../image/**',
+  '../fonts/**',
+]);
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   localStorage.theme = 'dark';
     document.documentElement.classList.add('dark')

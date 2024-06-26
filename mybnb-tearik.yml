@@ -1,0 +1,81 @@
+iginx_mybnb:
+  container_name: "mybnb_nginx"
+
+  build:
+    context: ../mybnb/docker/nginx
+    dockerfile: Dockerfile
+
+  depends_on:
+    - traefik
+    - mybnb
+
+  volumes:
+    - ../mybnb/:/var/www/vhost/mybnb/
+    - ../mybnb/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ../mybnb/docker/nginx/nginx.d:/etc/nginx/conf.d
+    - ../mybnb/docker/nginx/ssl:/etc/nginx/ssl
+
+  working_dir: /var/www/vhost
+
+  # ports:
+  #     - '442:442'
+  #     - '8005:9005'
+  networks:
+    - docker_network
+  labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.iginx_mybnb.rule=Host(`mybnb.localhost`)"
+    - "traefik.http.services.iginx_mybnb.loadbalancer.server.port=80"
+    - "traefik.docker.network=docker_network"
+
+    # - 'traefik.http.routers.mybnb_nginx.priority=1'
+    # - 'traefik.docker.network=proxy'
+    # - traefik.enable=true
+    # - traefik.http.routers.mybnb_nginx.rule=Host(`mybnb.localhost`)
+    # - traefik.http.routers.mybnb_nginx.entryPoints=web
+    # - traefik.http.routers.mybnb_nginx.service=iginx_mybnb
+    # - traefik.http.services.mybnb.loadBalancer.server.port=8005
+
+mybnb:
+  container_name: "mybnb_php"
+  build:
+    context: ../mybnb/docker/php
+    dockerfile: Dockerfile
+
+    args:
+      user: "root"
+      uid: 1000
+
+  environment:
+    PHP_MEMORY_LIMIT: "512M"
+    COMPOSER_MEMORY_LIMIT: "-1"
+
+  working_dir: /var/www/vhost/mybnb/
+
+  volumes:
+    - ../mybnb/:/var/www/vhost/mybnb/
+
+  # ports:
+  #     - '9003:9003'
+
+  networks:
+    - docker_network
+
+mybnb_mariadb:
+  image: mariadb:latest
+  container_name: "mybnb_docker_mysql"
+  environment:
+    MYSQL_ROOT_PASSWORD: "${MYBNB_DB_PASSWORD}"
+    MYSQL_DATABASE: "${MYBNB_DB_DATABASE}"
+    MYSQL_USER: "${MYBNB_DB_USERNAME}"
+    MYSQL_PASSWORD: "${MYBNB_DB_PASSWORD}"
+    MYSQL_TCP_PORT: "${MYBNB_DB_PORT}"
+    MYSQL_ROOT_HOST: "%"
+    MYSQL_ALLOW_EMPTY_PASSWORD: "YES"
+    command: mysql --character-set-server=utf8mb4 --collaction-server
+  volumes:
+    - "mybnb_docker_mysql:/data"
+  ports:
+    - "3307:3307"
+  networks:
+    - docker_network
