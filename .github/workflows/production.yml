@@ -121,7 +121,7 @@ jobs:
             git checkout production # Checkout your local branch
             git reset --hard HEAD
             git merge origin/production   # Merge remote 'main' branch into your local branch
-             
+            chmod -R 777 storage
   
       - name: Deploy successful
         run: echo "Deployment successful!"
