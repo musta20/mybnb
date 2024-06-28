@@ -22,6 +22,7 @@
 
         const process = { env: {} };
         process.env.GOOGLE_MAPS_API_KEY = '{{ config('app.GOOGLE_MAPS_KEY') }}';
+        const mainUrl = '{{ url('/') }}';
     </script>
     @vite(['resources/css/app.css', 'resources/js/main.js'])
 </head>
