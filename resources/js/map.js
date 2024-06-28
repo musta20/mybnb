@@ -58,7 +58,7 @@ loader.load().then(async () => {
         let Imageurl;
 
         if(location.media[0].path){
-            Imageurl = `<image class='min-w-[350px] w-full max-h-[200px]' src='${mainUrl}/${location.media[0].path}'>`;
+            Imageurl = `<image class='min-w-[350px] w-full max-h-[200px]' src='${mainUrl}/listings/${location.media[0].path}'>`;
         }else{
             Imageurl = "<span class='text-gray-900 m-auto w-24 dark:text-gray-100'>No image</span>";
         }
