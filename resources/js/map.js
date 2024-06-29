@@ -86,7 +86,7 @@ loader.load().then(async () => {
                 </div>
                 <div class="p-5 flex sm:flex-col justify-between align-baseline text-sm ">
                     
-                    <a href="http://localhost/listing/${location.id}" class=" text-gray-900 dark:text-gray-100">
+                    <a href="${mainUrl}/listing/${location.id}" class=" text-gray-900 dark:text-gray-100">
                         <span class="flex justify-between">
                         <p>
                         ${ location.title}

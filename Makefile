@@ -19,3 +19,6 @@ fresh:
 
 clearFiles: 
 	rm -rf storage/app/listings/*
+
+dockerFresh:
+	@docker exec -it mybnb_php make fresh
