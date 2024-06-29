@@ -17,7 +17,7 @@ import{L as d}from"./index-HckQbaeO.js";var r={};const p={},o=new d({apiKey:r.GO
                 </div>
                 <div class="p-5 flex sm:flex-col justify-between align-baseline text-sm ">
                     
-                    <a href="http://localhost/listing/${e.id}" class=" text-gray-900 dark:text-gray-100">
+                    <a href="${mainUrl}/listing/${e.id}" class=" text-gray-900 dark:text-gray-100">
                         <span class="flex justify-between">
                         <p>
                         ${e.title}
