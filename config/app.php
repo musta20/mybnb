@@ -98,10 +98,10 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'key' => env('APP_KEY'),
-    
+
     'GOOGLE_MAPS_KEY' => env('GOOGLE_MAP_API_KEY'),
 
-    'MAP_ID'=>env('MAP_ID'),
+    'MAP_ID' => env('MAP_ID'),
 
     'previous_keys' => [
         ...array_filter(
