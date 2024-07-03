@@ -1,5 +1,5 @@
 <div class="flex justify-between
-items-center p-3">
+items-center p-2">
 
     <div>
         @if (Route::has('login'))
@@ -35,7 +35,7 @@ action="{{ route('home') }}"
 method="GET"
 >
 <nav class="bg-white flex justify-between border-2
-     border-gray-200 mx-auto w-3/6 my-10 sm:px-4 py-2.5
+     border-gray-200 mx-auto w-3/6 sm:px-4 py-2
      dark:border-gray-600
      rounded-2xl dark:bg-gray-700">
 
@@ -52,7 +52,7 @@ method="GET"
 </nav>
 
 </form>
-<ul class="flex gap-5 justify-center">
+<ul class="flex gap-5 my-2 justify-center">
     @foreach (App\Enums\Cities::cases() as $city)
 
     <li
@@ -76,4 +76,4 @@ method="GET"
     </li>
     @endforeach
 </ul>
-<hr class="mt-5" >
+<hr class=" dark:border-gray-600" >

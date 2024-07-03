@@ -22,15 +22,17 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         $city = fake()->randomElement(Cities::cases())->value;
+        $getPosition= Cities::getByString($city)->getPosition();
+        $newpostion =  $this->getRandomPosition($getPosition['lat'], $getPosition['lng'], 5);
 
         return [
             'title' => fake()->randomElement(['فيلا', 'بيت', 'شقة', 'عمارة']) . ' ' . __('messages.' . $city),
             'description' => fake()->paragraph(),
             'address' => fake()->streetAddress(),
             'city' => $city,
-            'latitude' => fake()->latitude(),
+            'latitude' => $newpostion['latitude'],
+            'longitude' => $newpostion['longitude'],
             'status' => fake()->randomElement(Status::cases())->value,
-            'longitude' => fake()->longitude(),
             'number_of_guests' => fake()->numberBetween(1, 10),
             'number_of_bedrooms' => fake()->numberBetween(1, 5),
             'number_of_bathrooms' => fake()->numberBetween(1, 4),
@@ -42,6 +44,43 @@ class ListingFactory extends Factory
         ];
 
     }
+function getRandomPosition($latitude, $longitude, $radiusKm = 10) {
+    // Earth's radius in kilometers
+    $earthRadius = 6371;
+
+    // Convert radius from kilometers to radians
+    $radiusRadians = $radiusKm / $earthRadius;
+
+    // Generate random angle in radians
+    $randomAngle = mt_rand() / mt_getrandmax() * 2 * M_PI;
+
+    // Generate random distance within the radius
+    $randomDistance = mt_rand() / mt_getrandmax() * $radiusRadians;
+
+    // Convert latitude and longitude to radians
+    $latRad = deg2rad($latitude);
+    $lonRad = deg2rad($longitude);
+
+    // Calculate new latitude
+    $newLatRad = asin(sin($latRad) * cos($randomDistance) + 
+                      cos($latRad) * sin($randomDistance) * cos($randomAngle));
+
+    // Calculate new longitude
+    $newLonRad = $lonRad + atan2(sin($randomAngle) * sin($randomDistance) * cos($latRad),
+                                 cos($randomDistance) - sin($latRad) * sin($newLatRad));
+
+    // Convert new latitude and longitude back to degrees
+    $newLatitude = rad2deg($newLatRad);
+    $newLongitude = rad2deg($newLonRad);
+
+    return [
+        'latitude' => $newLatitude,
+        'longitude' => $newLongitude
+    ];
+}
+
+
+
 
     public function withHost(User $user)
     {

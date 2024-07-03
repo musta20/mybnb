@@ -270,7 +270,7 @@ new class extends Component
                             event_theme: this.event_theme
                         });
 
-                        console.log(this.events);
+                        //console.log(this.events);
 
                         // clear the form data
                         this.event_title = '';

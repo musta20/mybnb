@@ -19,7 +19,7 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
 
         <!-- Dropdown Start -->
         <div x-show="dropdownOpen"
-            class="absolute ltr:-right-25 mt-2 flex w-40 flex-col rounded-sm border border-stroke bg-white shadow-default">
+            class="absolute z-10 ltr:-right-25 mt-2 flex w-40 flex-col rounded-sm border border-stroke bg-white shadow-default">
             <ul class="flex  flex-col border-b border-stroke px-5 py-7.5">
                 <li>
                     <a href="{{ route('profile') }}"

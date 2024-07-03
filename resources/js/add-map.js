@@ -3,10 +3,11 @@ import { Loader } from "@googlemaps/js-api-loader";
 const additionalOptions = {};
 
 const loader = new Loader({
-    apiKey: process.env.GOOGLE_MAPS_API_KEY,
+    apiKey: "AIzaSyCTylQm68jD0VNBvu998JoLhm3jqAqgP_k",
     version: "weekly",
     ...additionalOptions,
 });
+
 loader.load().then(async () => {
 
   let  Latitude = document.getElementById("Latitude");
