@@ -25,10 +25,10 @@
 
                         MAP_ID: '{{ config('app.MAP_ID') }}',
 
-                        
+
 
                     };
-                    
+
                 </script>
 
     <div id="map" style="height: auto; width: 60%;"></div>
