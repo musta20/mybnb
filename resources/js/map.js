@@ -1,21 +1,22 @@
-import { Loader } from "@googlemaps/js-api-loader";
+// import { Loader } from "@googlemaps/js-api-loader";
 
-const additionalOptions = {};
+// const additionalOptions = {};
 
-const loader = new Loader({
-    apiKey: process.env.GOOGLE_MAPS_API_KEY,
-    version: "weekly",
-    ...additionalOptions,
-});
+// const loader = new Loader({
+//     apiKey: process.env.GOOGLE_MAPS_API_KEY,
+//     version: "weekly"
+// });
+let map;
+async function initMap() {
 
-loader.load().then(async () => {
-    const { AdvancedMarkerElement, PinElement } =
-        await google.maps.importLibrary("marker");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const { Map } = await google.maps.importLibrary("maps");
 
-    const map = new google.maps.Map(document.getElementById("map"), {
+
+    map = new Map(document.getElementById("map"), {
         zoom: 13,
         center: { lat: search.city.lat, lng: search.city.lng },
-        mapId: "DEMO_MAP_ID",
+        mapId: search.MAP_ID,
     });
 
     for (const location of locations) {
@@ -124,4 +125,9 @@ loader.load().then(async () => {
       `;
         return content;
     }
-});
+
+
+
+}
+
+window.addEventListener('load', initMap);

@@ -1,6 +1,6 @@
 <x-layout.layout :title="request('search') ? request('search'): 'Home'">
 
-<div class="flex  " >
+<div class="flex" >
     @vite(['resources/js/map.js'])
 
     @if ($listings->count() == 0)
@@ -21,19 +21,22 @@
 
                         name: '{{ request('search') }}',
 
-                        city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city') ?? request('pageCity'))->getPosition()) !!}')
+                        city: JSON.parse('{!! json_encode(App\Enums\Cities::getByString(request('city') ?? request('pageCity'))->getPosition()) !!}'),
+
+                        MAP_ID: '{{ config('app.MAP_ID') }}',
+
+
 
                     };
 
                 </script>
 
-    <div id="map" style="height: auto; width: 50%;"></div>
+    <div id="map" style="height: auto; width: 60%;"></div>
 
     @endif
 
     @endif
     <x-listings :$listings />
-
 
 
 </div>

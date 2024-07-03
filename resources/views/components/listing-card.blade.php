@@ -1,6 +1,6 @@
 <div class=" px-4 py-2">
     <div
-        class="bg-white hover:shadow-xl dark:hover:shadow-gray-700 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        class="bg-white hover:shadow-xl dark:hover:shadow-gray-700 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <a href="{{ route('listing', $listing->id) }}">
             @if ($listing->media->count() == 0)
             <span class="text-gray-900 m-auto w-24 dark:text-gray-100">No image</span>
@@ -12,9 +12,6 @@
                 <livewire:wichlist-button :$listing />
             </div>
             <div class="p-2 flex sm:flex-col justify-between align-baseline text-sm ">
-
-
-
 
                 <a href="{{ route('listing', $listing->id) }}">
 
@@ -40,8 +37,8 @@
                         <p class="text-xs my-auto">{{ $listing->address }}</p>
 
 
-                        <span class="flex gap-1 border-2 p-1 rounded-md items-center">
-                            <p>
+                        <span class="flex gap-1 border-2 p-1 dark:border-gray-700  rounded-md items-center">
+                            <p class="dark:text-yellow-100">
                                 {{ $listing->price_per_night }}
                             </p>
                             <p style="font-size: 10px; padding: 1px 1px"> جنيه </p>
