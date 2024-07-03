@@ -1,4 +1,4 @@
-<x-layout.layout :title="request('search') ? request('search'): 'Home'">
+<x-layout.layout :title="request('search') ? request('search'): 'Mybnb| vacations, stays, and experiences'">
 
 <div class="flex" >
     @vite(['resources/js/map.js'])
