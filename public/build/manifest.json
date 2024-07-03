@@ -1,10 +1,6 @@
 {
-  "_index-HckQbaeO.js": {
-    "file": "assets/index-HckQbaeO.js",
-    "name": "index"
-  },
   "resources/css/app.css": {
-    "file": "assets/app-D-elf76D.css",
+    "file": "assets/app-Bgm4iRgU.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -13,13 +9,10 @@
     "src": "resources/image/logo.svg"
   },
   "resources/js/add-map.js": {
-    "file": "assets/add-map-3Grg_EhX.js",
+    "file": "assets/add-map-B_xhyaZy.js",
     "name": "add-map",
     "src": "resources/js/add-map.js",
-    "isEntry": true,
-    "imports": [
-      "_index-HckQbaeO.js"
-    ]
+    "isEntry": true
   },
   "resources/js/app.js": {
     "file": "assets/app-8NU48Ww8.js",
@@ -34,12 +27,9 @@
     "isEntry": true
   },
   "resources/js/map.js": {
-    "file": "assets/map-CXetAr1F.js",
+    "file": "assets/map-CAmZHeEk.js",
     "name": "map",
     "src": "resources/js/map.js",
-    "isEntry": true,
-    "imports": [
-      "_index-HckQbaeO.js"
-    ]
+    "isEntry": true
   }
 }
