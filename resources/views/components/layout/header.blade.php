@@ -61,12 +61,12 @@ items-center p-2">
 
 
     <li class="hover:bg-gray-200
-    
+
      bg-{{ $city->value }}
     bg-cover
     bg-center
     bg-no-repeat
-   
+
     border-2
    border-[#24baff]
     text-white
@@ -102,7 +102,7 @@ items-center p-2">
           "rounded-none",
           "z-50",
           "px-20",
-  
+
           "bg-opacity-50",
           "backdrop-blur-sm"
         );
@@ -113,7 +113,7 @@ items-center p-2">
           "px-20",
           "w-full",
           "rounded-none",
-  
+
           "z-50",
           "bg-opacity-50",
           "backdrop-blur-sm"
