@@ -21,6 +21,17 @@ darkMode: 'selector',
                 Rubik: ['Rubik', ...defaultTheme.fontFamily.sans],
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'Cairo': 'url(/resources/image/Cairo.jpg)',
+                'Alexandria': 'url(/resources/image/Alexandria.jpg)',
+                'Aswan': 'url(/resources/image/Aswan.jpg)',
+                'Giza': 'url(/resources/image/Giza.jpg)',
+                'Luxor': 'url(/resources/image/Luxor.jpg)',
+                'PortSaid': 'url(/resources/image/PortSaid.jpg)',
+                'SharmElSheikh': 'url(/resources/image/SharmElSheikh.jpg)',
+                'Suez': 'url(/resources/image/Suez.jpg)',
+             
+            },
         },
     },
 

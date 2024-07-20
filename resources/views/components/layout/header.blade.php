@@ -30,50 +30,94 @@ items-center p-2">
 
 
 </div>
-<form
-action="{{ route('home') }}"
-method="GET"
->
-<nav class="bg-white flex justify-between border-2
+<form action="{{ route('home') }}" method="GET">
+    <nav id="header" class="bg-white flex justify-between border-2
      border-gray-200 mx-auto w-3/6 sm:px-4 py-2
      dark:border-gray-600
      rounded-2xl dark:bg-gray-700">
 
-    <x-layout.check-date />
+        <x-layout.check-date />
 
-    <x-layout.guest />
+        <x-layout.guest />
 
-    <x-layout.search />
-
-
+        <x-layout.search />
 
 
 
-</nav>
+
+
+    </nav>
 
 </form>
-<ul class="flex gap-5 my-2 justify-center">
+<ul class="flex gap-5 my-3 justify-center">
+
+    {{-- url('/resources/image/PortSaid.jpg' --}}
+    {{-- url('/resources/image/Luxor.jpg' --}}
+    {{-- url('/resources/image/Giza.jpg' --}}
+    {{-- url('/resources/image/Aswan.jpg' --}}
+    <div @class([ 'hidden bg-Cairo bg-Alexandria bg-Giza bg-Aswan bg-Suez bg-Luxor bg-PortSaid bg-SharmElSheikh'=>
+        false]) ></div>
     @foreach (App\Enums\Cities::cases() as $city)
 
-    <li
-    class="hover:bg-gray-200
-    hover:text-gray-700
-    dark:hover:bg-gray-600
-    dark:hover:text-white
-    text-gray-400
-    dark:text-gray-200
-    px-2
-    py-1
-    rounded-xl
+
+    <li class="hover:bg-gray-200
+
+     bg-{{ $city->value }}
+    bg-cover
+    bg-center
+    bg-no-repeat
+
+    border-2
+   border-[#24baff]
+    text-white
+    font-bold
+    hover:text-[#24baff]
+   text-center
+   flex
+
+   w-36
+   h-32
+
+    rounded-full
     cursor-pointer
-    "
-    >
-        <a
-        href="{{ route('home') }}?pageCity={{ $city->value }}"
-        >
+    ">
+        <a class=" place-content-center w-full h-full rounded-full   hover:bg-opacity-50
+    hover:backdrop-blur-sm" href="{{ route('home') }}?pageCity={{ $city->value }}">
             {{ __("messages.".$city->value) }}
         </a>
     </li>
     @endforeach
 </ul>
-<hr class=" dark:border-gray-600" >
+<hr class=" dark:border-gray-600">
+
+<script>
+    window.addEventListener("scroll", function () {
+      var header = document.getElementById("header");
+    //  var banner = document.getElementById("banner");
+      if (window.pageYOffset > 0) {
+        header.classList.add(
+          "fixed",
+          "top-0",
+          "w-full",
+          "rounded-none",
+          "z-50",
+          "px-20",
+
+          "bg-opacity-50",
+          "backdrop-blur-sm"
+        );
+      } else {
+        header.classList.remove(
+          "fixed",
+          "top-0",
+          "px-20",
+          "w-full",
+          "rounded-none",
+
+          "z-50",
+          "bg-opacity-50",
+          "backdrop-blur-sm"
+        );
+      }
+    });
+  </script>

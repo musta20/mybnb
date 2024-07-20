@@ -18,7 +18,7 @@ class ListingSeeder extends Seeder
         $allusers = User::where('type', HostType::HOST->value)->get();
 
         foreach ($allusers as $user) {
-            Listing::factory()->count(20)->withHost($user)->create();
+            Listing::factory()->count(40)->withHost($user)->create();
         }
 
         $user = User::where('email', 'admin@admin.com')->first();
