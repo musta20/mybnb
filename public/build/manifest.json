@@ -1,12 +1,56 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-Bgm4iRgU.css",
+    "file": "assets/app-CTTsaZeR.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/image/01.jpg": {
+    "file": "assets/01-7mYkUVvB.jpg",
+    "src": "resources/image/01.jpg"
+  },
+  "resources/image/Alexandria.jpg": {
+    "file": "assets/Alexandria-VmCSnYQt.jpg",
+    "src": "resources/image/Alexandria.jpg"
+  },
+  "resources/image/Aswan.jpg": {
+    "file": "assets/Aswan-xkRX7jlz.jpg",
+    "src": "resources/image/Aswan.jpg"
+  },
+  "resources/image/Cairo.jpg": {
+    "file": "assets/Cairo-C_-M5Ilv.jpg",
+    "src": "resources/image/Cairo.jpg"
+  },
+  "resources/image/Giza.jpg": {
+    "file": "assets/Giza-DFu4CV_Z.jpg",
+    "src": "resources/image/Giza.jpg"
+  },
+  "resources/image/Luxor.jpg": {
+    "file": "assets/Luxor-no5ERMb8.jpg",
+    "src": "resources/image/Luxor.jpg"
+  },
+  "resources/image/PortSaid.jpg": {
+    "file": "assets/PortSaid-DcGcSVMX.jpg",
+    "src": "resources/image/PortSaid.jpg"
+  },
+  "resources/image/PortSsaid.jpg": {
+    "file": "assets/Suez-Bqztvv11.jpg",
+    "src": "resources/image/Suez.jpg"
+  },
+  "resources/image/SharmElSheikh.jpg": {
+    "file": "assets/SharmElSheikh-uOfuCFXy.jpg",
+    "src": "resources/image/SharmElSheikh.jpg"
+  },
+  "resources/image/Suez.jpg": {
+    "file": "assets/Suez-Bqztvv11.jpg",
+    "src": "resources/image/Suez.jpg"
   },
   "resources/image/logo.svg": {
     "file": "assets/logo-CMlejdqJ.svg",
     "src": "resources/image/logo.svg"
+  },
+  "resources/image/statues-entrance-Ramses-II-Luxor-temple-complex.webp": {
+    "file": "assets/statues-entrance-Ramses-II-Luxor-temple-complex-D6g5d_uu.webp",
+    "src": "resources/image/statues-entrance-Ramses-II-Luxor-temple-complex.webp"
   },
   "resources/js/add-map.js": {
     "file": "assets/add-map-B_xhyaZy.js",
@@ -15,13 +59,13 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-8NU48Ww8.js",
+    "file": "assets/app-D2jpX1vH.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/main.js": {
-    "file": "assets/main-BAEXBS-t.js",
+    "file": "assets/main-pcDtaV6J.js",
     "name": "main",
     "src": "resources/js/main.js",
     "isEntry": true
