@@ -142,6 +142,17 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
 
 
     @endauth
+    <script>
+          function setTheme(theme) {
+            console.log(theme);
+    localStorage.theme = theme;
+    if(theme === 'dark') {
+    document.documentElement.classList.add('dark')
+    } else {
+    document.documentElement.classList.remove('dark')
+    }
+  };
+        </script>
     <div
         class="flex px-2 items-center justify-end  pr-4">
         <label class="inline-flex items-center cursor-pointer">
@@ -151,7 +162,7 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
 
 
 
-                @change="$event.target.checked ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')"
+                @change="$event.target.checked ?   setTheme('dark') : setTheme('light') "
 
                 value="" class="sr-only peer">
             <div
