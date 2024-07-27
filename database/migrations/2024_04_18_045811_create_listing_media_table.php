@@ -13,6 +13,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('listing_id')->constrained('listings')->onDelete('cascade');
             $table->string('path'); // Store the path to the image file
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
             $table->string('type')->default(MediaType::IMAGE->value);
             $table->string('alt_text')->nullable(); // Optional alt text for accessibility
             $table->timestamps();

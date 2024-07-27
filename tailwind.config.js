@@ -15,7 +15,7 @@ export default {
     ],
 darkMode: 'selector',
     theme: {
-        
+     
         extend: {
             fontFamily: {
                 Rubik: ['Rubik', ...defaultTheme.fontFamily.sans],

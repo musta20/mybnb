@@ -25,20 +25,25 @@ class ListingMediaSeeder extends Seeder
                 ->for($listing)
                 ->count(6)
                 ->sequence(function ($sequence) use ($images) {
+                    $data=$this->copyImage($images);
 
                     return [
-                        'path' => $this->copyImage($images),
+                        'path' => $data['path'],
+                        'width' => $data['width'],
+                        'height' => $data['height'],
                     ];
                 })->create();
         }
     }
 
-    public function copyImage($images): string
+    public function copyImage($images): array
     {
 
         $image = $images[array_rand($images)];
 
         $imagePath = storage_path("images/{$image}");
+        
+        list($width, $height) = getimagesize($imagePath);
 
         $ext = pathinfo($imagePath, PATHINFO_EXTENSION);
 
@@ -46,6 +51,9 @@ class ListingMediaSeeder extends Seeder
 
         Storage::disk('listings')->put($name, file_get_contents($imagePath));
 
-        return $name;
+        return [
+            'path' => $name,
+            'width' => $width,
+            'height' => $height];
     }
 }

@@ -1,6 +1,9 @@
 
 import DateRangePicker from 'flowbite-datepicker/DateRangePicker';
 
+
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 // import Alpine from 'alpinejs'
  
 // window.Alpine = Alpine
@@ -53,6 +56,22 @@ const options = {
 		year: "numeric"
 	}
 }
+
+
+
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#my-gallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe')
+
+});
+
+
+
+lightbox.init();
+
+
 
 const dateRangePickerEl = document.getElementById('dateRangePickerId');
 const dateRangePickerElBooking = document.getElementById('dateRangePickerIdBookign');

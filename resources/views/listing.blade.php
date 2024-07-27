@@ -2,9 +2,9 @@
 
     <div class="w-5/6 mx-auto ">
 
-        <div class="flex gap-3 w-3/6 justify-between py-2">
+        <div class="flex gap-3 w-full lg:w-4/6   justify-between py-2">
 
-            <h3 class="text-2xl ">{{ $listing->title }} , {{ __('messages.'.$listing->city) }}</h3>
+            <h3 class="text-md md:text-2xl ">{{ $listing->title }} , {{ __('messages.'.$listing->city) }}</h3>
 
             <div class="flex gap-5  ">
 
@@ -27,11 +27,17 @@
             @else
             <img src="{{ asset('listings/'.$listing?->media[0]?->path) }}" class=" w-1/2 h-1/2 rounded-md" alt="">
 
-            <div class="grid grid-cols-3  gap-2">
+            <div id="my-gallery" class="grid grid-cols-3 h-auto gap-2">
                 @for ($i = 1; $i < count($listing->media); $i++)
-
+                <a  
+                
+                href="{{ asset('listings/'.$listing->media[$i]->path) }}"
+                data-pswp-width="{{$listing->media[$i]->width}}" 
+                data-pswp-height="{{$listing->media[$i]->height}}" 
+                target="_blank"
+                >
                     <img src="{{ asset('listings/'.$listing->media[$i]->path) }}" class="w-full rounded-md" alt="">
-
+                </a>
                     @endfor
             </div>
 
@@ -41,12 +47,47 @@
 
         <hr class="py-5">
 
-        <div class="flex">
+        <div class="flex flex-col   xl:flex-row-reverse">
+            <div class="flex  justify-center  py-5 w-full xl:w-1/2">
 
-            <div class=" py-5  w-1/2">
+                <div class="rounded-lg  border-2 max-h-96 w-full xl:w-1/2  p-5 dark:bg-slate-800 bg-white ">
+
+                    <div class="flex gap-3">
+
+                        @if ($avalbleDate == now()->format('F j, Y'))
+                        متوفر من الان
+                        @else
+                        <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800  dark:bg-yellow-800 dark:text-yellow-200">
+                            غير متوفر حاليا </span>
+                        متوفر من {{ $avalbleDate }}
+                        @endif
+
+
+                    </div>
+                    <form action="{{ route('booking', $listing->id) }}" method="GET">
+
+
+                        <div class="my-5 gap-2">
+                            {{ $listing->price_per_night }} <span class="text-xs">{{ __('messages.EGP') }}</span>
+                            {{ __('messages.per night') }}
+                        </div>
+                        <x-layout.booking-check-date />
+                        <hr class="my-5">
+                        <x-layout.guest />
+
+
+                        <button class="w-full bg-slate-500 rounded-lg text-white p-2 mt-5">
+                            {{ __('messages.Book now') }}</button>
+
+                    </form>
+                </div>
+            </div>  
+            <div class=" py-5 w-full xl:w-1/2">
                 <a href="{{ route('hostProfile', $listing->host->id) }}" class="flex gap-3">
                     @if ($listing->host->profile_picture)
-                    <img src="{{ asset('listings/'.$listing->host->profile_picture) }}" class="w-14 h-14 rounded-full" />
+                    <img src="{{ asset('listings/'.$listing->host->profile_picture) }}"
+                        class="w-14 h-14 rounded-full" />
                     @else
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-14 h-14">
@@ -120,10 +161,9 @@
                     </span>
                     @endforeach
                     <hr class="my-5">
-
-                    <iframe width="180%" height="450" style="border-radius:12px" loading="lazy" allowfullscreen
-                        referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key={{ config('app.GOOGLE_MAPS_KEY') }}
-    &q={{ $listing->latitude }},{{ $listing->longitude }}">
+                    {{-- width="180%" height="450" style="border-radius:12px" --}}
+                    <iframe loading="lazy" class="w-full h-96 rounded-md" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key={{ config('app.GOOGLE_MAPS_KEY') }}&q={{ $listing->latitude }},{{ $listing->longitude }}">
                     </iframe>
                     <hr class="my-5">
                     <x-add-review :$listing />
@@ -138,41 +178,7 @@
             </div>
 
 
-            <div class="flex  justify-center  py-5 w-1/2">
-
-                <div class="rounded-lg  border-2 max-h-96 w-1/2  p-5 dark:bg-slate-800 bg-white ">
-
-                    <div class="flex gap-3">
-
-                        @if ($avalbleDate == now()->format('F j, Y'))
-                        متوفر من الان
-                        @else
-                        <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800  dark:bg-yellow-800 dark:text-yellow-200">
-                            غير متوفر حاليا </span>
-                        متوفر من {{ $avalbleDate }}
-                        @endif
-
-
-                    </div>
-                    <form action="{{ route('booking', $listing->id) }}" method="GET">
-
-
-                        <div class="my-5 gap-2">
-                            {{ $listing->price_per_night }} <span class="text-xs">{{ __('messages.EGP') }}</span>
-                            {{ __('messages.per night') }}
-                        </div>
-                        <x-layout.booking-check-date />
-                        <hr class="my-5">
-                        <x-layout.guest />
-
-
-                        <button class="w-full bg-slate-500 rounded-lg text-white p-2 mt-5">
-                            {{ __('messages.Book now') }}</button>
-
-                    </form>
-                </div>
-            </div>
+         
 
         </div>
     </div>
