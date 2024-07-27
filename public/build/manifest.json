@@ -1,6 +1,12 @@
 {
+  "node_modules/photoswipe/dist/photoswipe.esm.js": {
+    "file": "assets/photoswipe.esm-GXRgw7eJ.js",
+    "name": "photoswipe.esm",
+    "src": "node_modules/photoswipe/dist/photoswipe.esm.js",
+    "isDynamicEntry": true
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CTTsaZeR.css",
+    "file": "assets/app-v4yxcvEr.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -65,10 +71,16 @@
     "isEntry": true
   },
   "resources/js/main.js": {
-    "file": "assets/main-pcDtaV6J.js",
+    "file": "assets/main-BreiZNIN.js",
     "name": "main",
     "src": "resources/js/main.js",
-    "isEntry": true
+    "isEntry": true,
+    "dynamicImports": [
+      "node_modules/photoswipe/dist/photoswipe.esm.js"
+    ],
+    "css": [
+      "assets/main-CvRwqrEO.css"
+    ]
   },
   "resources/js/map.js": {
     "file": "assets/map-CAmZHeEk.js",
