@@ -42,7 +42,7 @@ items-center p-2">
 
 
 
-    <nav id="main-header" class="bg-white 
+    <nav id="main-header" class="bg-white
             hidden
             sm:flex
             md:flex

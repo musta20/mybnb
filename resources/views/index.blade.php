@@ -31,7 +31,7 @@
 
                 </script>
 
-    <div id="map" 
+    <div id="map"
 
     class="w-[95%] mx-1 h-[350px]  lg:h-auto lg:w-3/5"
     {{-- class="w-full lg:w-1/2 h-screen sm:h-screen md:h-screen lg:h-screen xl:h-screen 2xl:h-screen" --}}

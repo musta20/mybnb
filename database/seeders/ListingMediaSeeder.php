@@ -25,7 +25,7 @@ class ListingMediaSeeder extends Seeder
                 ->for($listing)
                 ->count(6)
                 ->sequence(function ($sequence) use ($images) {
-                    $data=$this->copyImage($images);
+                    $data = $this->copyImage($images);
 
                     return [
                         'path' => $data['path'],
@@ -42,8 +42,8 @@ class ListingMediaSeeder extends Seeder
         $image = $images[array_rand($images)];
 
         $imagePath = storage_path("images/{$image}");
-        
-        list($width, $height) = getimagesize($imagePath);
+
+        [$width, $height] = getimagesize($imagePath);
 
         $ext = pathinfo($imagePath, PATHINFO_EXTENSION);
 
