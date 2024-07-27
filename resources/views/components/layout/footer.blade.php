@@ -9,7 +9,7 @@
       <a href="#" class=" text-secondary ">خدمات الإلغاء</a>
       <a href="#" class="  text-secondary ">معلومات الامان</a>
     </div>
-    
+
   </div>
 
   <div class="flex text-[#195072] flex-col gap-1 text-center">
@@ -21,7 +21,7 @@
       <a href="#" class="  text-secondary ">سياسة الخصوصية</a>
       <a href="#" class="  text-secondary ">سياسة الاستخدام</a>
     </div>
-    
+
   </div>
 
   <div class="flex text-[#195072] flex-col gap-1 text-center">
@@ -31,7 +31,7 @@
       <a href="#" class=" text-secondary ">الاسئلة الاكثر شيوعا</a>
       <a href="#" class="  text-secondary ">تواصل</a>
     </div>
-    
+
   </div>
 
   <div class="flex text-[#195072] flex-col gap-1 text-center">
@@ -60,7 +60,7 @@
         </span>
         </div>
     </div>
-    
+
   </div>
 
 
