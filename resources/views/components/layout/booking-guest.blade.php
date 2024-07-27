@@ -1,5 +1,5 @@
-<div class="max-w-xs mx-auto"  >
-    <div class="relative flex items-center max-w-[11rem]">
+<div class="  mx-auto"  >
+    <div class="relative flex items-center  ">
         <button type="button"
         wire:click="removeBeds"
         id="decrement-button"

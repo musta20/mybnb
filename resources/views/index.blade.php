@@ -1,6 +1,6 @@
 <x-layout.layout :title="request('search') ? request('search'): 'Mybnb| vacations, stays, and experiences'">
 
-<div class="flex" >
+<div class="flex  flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row " >
     @vite(['resources/js/map.js'])
 
     @if ($listings->count() == 0)
@@ -31,7 +31,13 @@
 
                 </script>
 
-    <div id="map" style="height: auto; width: 60%;"></div>
+    <div id="map"
+
+    class="w-[95%] mx-1 h-[350px]  lg:h-auto lg:w-3/5"
+    {{-- class="w-full lg:w-1/2 h-screen sm:h-screen md:h-screen lg:h-screen xl:h-screen 2xl:h-screen" --}}
+
+     {{-- style="height: auto; width: 60%;" --}}
+   ></div>
 
     @endif
 

@@ -1,6 +1,6 @@
-<footer class="bg-[#f3f3f3] justify-between p-5 px-10 text-[#172a36]   h-96 ">
+<footer class="bg-[#f3f3f3] justify-between p-5 px-10 text-[#172a36]   h-auto ">
 
-  <div class="w-4/6 mx-auto flex gap-10 my-16 justify-between">
+  <div class="w-4/6 mx-auto flex flex-col lg:flex-row gap-10 my-16 justify-between">
 
   <div class="flex text-[#195072] flex-col gap-1 text-center">
     <p class="text-md font-bold"> الدعم الفني</p>

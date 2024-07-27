@@ -19,6 +19,10 @@ Route::post('AddReview', [MainSiteController::class, 'addReview'])->name('AddRev
 
 Volt::route('booking/', 'booking-detail')->name('bookingdetail');
 
+Route::get('host/{user}', [MainSiteController::class, 'host'])->name('host');
+
+Route::get('logout', [MainSiteController::class, 'logout'])->name('logout');
+
 Route::get('listing/{listing}', [MainSiteController::class, 'listing'])->name('listing');
 
 Route::get('hostProfile/{user}', [MainSiteController::class, 'hostProfile'])->name('hostProfile');

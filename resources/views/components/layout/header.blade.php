@@ -31,10 +31,27 @@ items-center p-2">
 
 </div>
 <form action="{{ route('home') }}" method="GET">
-    <nav id="header" class="bg-white flex justify-between border-2
-     border-gray-200 mx-auto w-3/6 sm:px-4 py-2
+
+
+
+
+    <x-layout.responsive-nav />
+
+
+
+
+
+
+    <nav id="main-header" class="bg-white
+            hidden
+            sm:flex
+            md:flex
+            lg:flex
+
+      justify-between border-2
+     border-gray-200 mx-auto sm:w-[40rem] lg:w-[50rem] sm:px-4 py-2
      dark:border-gray-600
-     rounded-2xl dark:bg-gray-700">
+      rounded-2xl dark:bg-gray-700">
 
         <x-layout.check-date />
 
@@ -49,75 +66,63 @@ items-center p-2">
     </nav>
 
 </form>
-<ul class="flex gap-5 my-3 justify-center">
 
-    {{-- url('/resources/image/PortSaid.jpg' --}}
-    {{-- url('/resources/image/Luxor.jpg' --}}
-    {{-- url('/resources/image/Giza.jpg' --}}
-    {{-- url('/resources/image/Aswan.jpg' --}}
+
+
+
+
+{{-- <ul class="flex gap-4 sm:gap-3 md:hidden lg:hidden my-3 justify-center">
+    @foreach (App\Enums\Cities::cases() as $city)
+    <li class="hover:bg-gray-200">
+        <a class=" place-content-center w-full h-full rounded-full" href="{{ route('home') }}?pageCity={{ $city->value }}">
+            {{ __("messages.".$city->value) }}
+        </a>
+    </li>
+    @endforeach
+</ul> --}}
+
+
+<select class="flex gap-4     md:hidden lg:hidden my-3 justify-center bg-white sm:hidden    flex-col  border-2
+    border-gray-200 mx-auto w-4/6 sm:px-4 py-2
+    dark:border-gray-600
+    place-content-center
+    rounded-2xl dark:bg-gray-700">
+
+    @foreach (App\Enums\Cities::cases() as $city)
+
+    <option value="{{ $city->value }}">{{ __("messages.".$city->value) }}</option>
+    @endforeach
+</select>
+
+
+<ul class="  lg:flex gap-5  md:hidden min-[400px]:hidden my-3 justify-center">
+
     <div @class([ 'hidden bg-Cairo bg-Alexandria bg-Giza bg-Aswan bg-Suez bg-Luxor bg-PortSaid bg-SharmElSheikh'=>
         false]) ></div>
     @foreach (App\Enums\Cities::cases() as $city)
-
-
-    <li class="hover:bg-gray-200
-
-     bg-{{ $city->value }}
-    bg-cover
-    bg-center
-    bg-no-repeat
-
-    border-2
-   border-[#24baff]
-    text-white
-    font-bold
-    hover:text-[#24baff]
-   text-center
-   flex
-
-   w-36
-   h-32
-
-    rounded-full
-    cursor-pointer
-    ">
-        <a class=" place-content-center w-full h-full rounded-full   hover:bg-opacity-50
-    hover:backdrop-blur-sm" href="{{ route('home') }}?pageCity={{ $city->value }}">
+    <li
+        class="hover:bg-gray-200  bg-{{ $city->value }}    bg-cover   bg-center   bg-no-repeat   border-2   lg:border-[#24baff]  lg:text-white   font-bold  lg:hover:text-[#24baff]  text-center  flex  w-36 h-32 rounded-full cursor-pointer ">
+        <a class=" place-content-center w-full h-full rounded-full   hover:bg-opacity-50  hover:backdrop-blur-sm"
+            href="{{ route('home') }}?pageCity={{ $city->value }}">
             {{ __("messages.".$city->value) }}
         </a>
     </li>
     @endforeach
 </ul>
-<hr class=" dark:border-gray-600">
+<hr class=" dark:border-gray-600 ">
 
 <script>
     window.addEventListener("scroll", function () {
-      var header = document.getElementById("header");
-    //  var banner = document.getElementById("banner");
-      if (window.pageYOffset > 0) {
-        header.classList.add(
-          "fixed",
-          "top-0",
-          "w-full",
-          "rounded-none",
-          "z-50",
-          "px-20",
 
-          "bg-opacity-50",
-          "backdrop-blur-sm"
-        );
-      } else {
-        header.classList.remove(
-          "fixed",
-          "top-0",
-          "px-20",
-          "w-full",
-          "rounded-none",
+	var header = document.getElementById("responsive-nav");
+	var main = document.getElementById("main-header");
 
-          "z-50",
-          "bg-opacity-50",
-          "backdrop-blur-sm"
-        );
-      }
-    });
-  </script>
+    if (window.pageYOffset > 0) {
+        main.classList.add( "fixed","top-5","w-1/2","z-50","px-20","left-1/2","-translate-x-1/2","mx-auto","bg-opacity-50","backdrop-blur-sm");
+        header.classList.add("fixed","top-5","w-1/2","z-50","px-20","left-1/2","-translate-x-1/2","mx-auto","bg-opacity-50","backdrop-blur-sm");
+	} else {
+        main.classList.remove("fixed","top-5","px-20","left-1/2","-translate-x-1/2","w-1/2","z-50","bg-opacity-50","backdrop-blur-sm");
+        header.classList.remove("fixed","top-5","px-20","left-1/2","-translate-x-1/2","w-1/2","z-50","bg-opacity-50","backdrop-blur-sm");
+	}
+  });
+</script>

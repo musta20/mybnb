@@ -1,5 +1,5 @@
 <div  class="  gap-2  items-center">
-  <div class="relative   py-2 flex w-64 ">
+  <div class="relative   py-2 flex  ">
     <span class="my-auto w-3/6 px-2" >
       النزول :
     </span>
@@ -24,7 +24,7 @@
   </div>
 
 
-  <div class="relative   py-2 flex w-64 ">
+  <div class="relative   py-2 flex   ">
     <span class="my-auto w-3/6 px-2" >
       المغادرة :
     </span>
