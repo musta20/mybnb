@@ -1,5 +1,5 @@
 @props(['start'=>null,'end'=>null])
-<div dir="ltr" id="dateRangePickerId"  class="flex gap-2  items-center">
+<div dir="ltr"  id="dateRangePickerId"  class="flex gap-2  items-center">
 
 
   <div class="relative w-32">

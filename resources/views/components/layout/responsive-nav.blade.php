@@ -2,13 +2,13 @@
 
 
 
-<nav id="responsive-nav"  x-data="{ open: false }" class="bg-white sm:hidden lg:hidden md:hidden   flex-col justify-between border-2
-border-gray-200 mx-auto w-4/6 sm:px-4 py-2
+<form  action="{{ route('home') }}" method="GET"  id="responsive-nav"  x-data="{ open: false }" class="bg-white sm:hidden lg:hidden md:hidden   flex-col justify-between border-2
+border-gray-200 mx-auto w-5/6 sm:px-4 py-2
 dark:border-gray-600
 place-content-center
  rounded-2xl dark:bg-gray-700">
 
-    <button @click="open = !open" class=" px-10 mx-auto my-auto flex  place-content-center     gap-2">
+    <button @click.prevent="open = !open" class=" px-10 mx-auto my-auto flex  place-content-center     gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -17,9 +17,9 @@ place-content-center
         {{ __('messages.Search') }}
     </button>
 
-    <div x-transition class="flex gap-5 flex-col place-content-center" x-show="open">
+    <div x-transition class="flex gap-5 flex-col place-content-center" x-cloak x-show="open">
 
-        <div dir="ltr" id="dateRangePickerId" class="flex gap-2 p-3 place-content-center  items-center">
+        <div dir="ltr" id="dateRangeResPickerId" class="flex gap-2 p-3 place-content-center  items-center">
 
 
             <div class="relative w-32">
@@ -36,11 +36,7 @@ place-content-center
                             dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="{{ __('messages.Check Out') }}">
 
-                {{--
-                <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-                <x-text-input wire:model="current_password" id="update_password_current_password"
-                    name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-                --}}
+
             </div>
 
 
@@ -153,4 +149,4 @@ place-content-center
 
 
 
-</nav>
+</form>
