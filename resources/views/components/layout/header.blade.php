@@ -42,7 +42,8 @@ items-center p-2">
 
 
 
-    <form  action="{{ route('home') }}" method="GET" id="main-header" class="bg-white 
+        <form  action="{{ route('home') }}" method="GET" id="main-header"  
+ id="main-header" class="bg-white 
             hidden
             sm:flex
             md:flex

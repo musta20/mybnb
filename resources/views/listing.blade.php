@@ -37,11 +37,11 @@
 
             <div class="grid grid-cols-3 h-auto gap-2  md:w-1/2">
                 @for ($i = 1; $i < count($listing->media); $i++)
-                <a  
-                
+                <a
+
                 href="{{ asset('listings/'.$listing->media[$i]->path) }}"
-                data-pswp-width="{{$listing->media[$i]->width}}" 
-                data-pswp-height="{{$listing->media[$i]->height}}" 
+                data-pswp-width="{{ $listing->media[$i]->width }}"
+                data-pswp-height="{{ $listing->media[$i]->height }}"
                 target="_blank"
                 >
                     <img src="{{ asset('listings/'.$listing->media[$i]->path) }}" class="w-full rounded-md" alt="">
@@ -90,7 +90,7 @@
 
                     </form>
                 </div>
-            </div>  
+            </div>
             <div class=" py-5 w-full xl:w-1/2">
                 <a href="{{ route('hostProfile', $listing->host->id) }}" class="flex gap-3">
                     @if ($listing->host->profile_picture)
@@ -186,7 +186,7 @@
             </div>
 
 
-         
+
 
         </div>
     </div>

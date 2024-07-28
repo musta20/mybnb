@@ -21,7 +21,7 @@ Volt::route('booking/', 'booking-detail')->name('bookingdetail');
 
 Route::get('host/{user}', [MainSiteController::class, 'host'])->name('host');
 
-Route::get('/logout', [MainSiteController::class, 'logout'])->name('logout');
+Route::get('logout', [MainSiteController::class, 'logout'])->name('logout');
 
 Route::get('listing/{listing}', [MainSiteController::class, 'listing'])->name('listing');
 
@@ -34,7 +34,6 @@ Route::view('wishList', 'wishList')->name('wishList');
 Route::get('addToList/{listing}', [MainSiteController::class, 'addToList'])->name('addToList');
 
 Route::get('removeList/{listing}', [MainSiteController::class, 'removeList'])->name('removeList');
-
 
 Volt::route('messages/{Messages?}', 'host.messages.messages-component')
     ->name('Message');
