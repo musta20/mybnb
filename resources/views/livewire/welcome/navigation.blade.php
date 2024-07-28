@@ -108,6 +108,7 @@ class=" border bg-white  dark:bg-slate-600 dark:border-slate-500 rounded-full h-
         </button>
 
         <div x-show="UserdropdownOpen"
+        x-cloak
             class="absolute ltr:-right-25 mt-11 dark:bg-slate-800  flex w-44 flex-col rounded-md border border-stroke bg-white shadow-default">
 
 

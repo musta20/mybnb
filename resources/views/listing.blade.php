@@ -18,16 +18,24 @@
 
         <hr>
 
-        <div class="flex gap-2  py-3">
+        <div id="my-gallery"  class="flex flex-col md:flex-row w-full gap-2   py-3">
 
             @if ($listing->media->count() == 0)
 
             <span class="text-gray-900 m-auto w-24 dark:text-gray-100">No image</span>
 
             @else
-            <img src="{{ asset('listings/'.$listing?->media[0]?->path) }}" class=" w-1/2 h-1/2 rounded-md" alt="">
 
-            <div id="my-gallery" class="grid grid-cols-3 h-auto gap-2">
+            <a  
+            class="  md:w-1/2  border rounded-md" 
+            href="{{ asset('listings/'.$listing->media[0]->path) }}"
+            data-pswp-width="{{$listing->media[0]->width}}" 
+            data-pswp-height="{{$listing->media[0]->height}}" 
+            target="_blank">
+            <img src="{{ asset('listings/'.$listing?->media[0]?->path) }}"  class=" w-full h-full "  alt="">
+        </a>
+
+            <div class="grid grid-cols-3 h-auto gap-2  md:w-1/2">
                 @for ($i = 1; $i < count($listing->media); $i++)
                 <a  
                 

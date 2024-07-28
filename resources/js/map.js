@@ -1,11 +1,4 @@
-// import { Loader } from "@googlemaps/js-api-loader";
 
-// const additionalOptions = {};
-
-// const loader = new Loader({
-//     apiKey: process.env.GOOGLE_MAPS_API_KEY,
-//     version: "weekly"
-// });
 let map;
 async function initMap() {
 
