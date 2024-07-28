@@ -36,7 +36,7 @@ place-content-center
                             dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="{{ __('messages.Check Out') }}">
 
-           
+
             </div>
 
 

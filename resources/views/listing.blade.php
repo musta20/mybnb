@@ -26,11 +26,11 @@
 
             @else
 
-            <a  
-            class="  md:w-1/2  border rounded-md" 
+            <a
+            class="  md:w-1/2  border rounded-md"
             href="{{ asset('listings/'.$listing->media[0]->path) }}"
-            data-pswp-width="{{$listing->media[0]->width}}" 
-            data-pswp-height="{{$listing->media[0]->height}}" 
+            data-pswp-width="{{ $listing->media[0]->width }}"
+            data-pswp-height="{{ $listing->media[0]->height }}"
             target="_blank">
             <img src="{{ asset('listings/'.$listing?->media[0]?->path) }}"  class=" w-full h-full "  alt="">
         </a>
