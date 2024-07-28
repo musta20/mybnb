@@ -85,7 +85,7 @@ new class extends Component
                                         :class="{'bg-blue-500  text-white': isToday(date) == true, 'text-gray-700 dark:text-gray-400 hover:bg-blue-200': isToday(date) == false }">
                                     </div>
                                     <div style="height: 80px;" class="overflow-y-auto mt-1 dark:text-white">
-                                
+
                                         <template
                                             x-for="event in events.filter(e => new Date(e.event_date).toDateString() ===  new Date(year, month, date).toDateString() )">
                                             <div class="px-2 py-1 rounded-lg mt-1 overflow-hidden border" :class="{
