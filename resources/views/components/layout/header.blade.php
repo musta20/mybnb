@@ -71,7 +71,7 @@ items-center p-2">
 
 
 
-<select class="flex gap-4     md:hidden lg:hidden my-3 justify-center bg-white sm:hidden    flex-col  border-2
+<select onchange="window.location.href = this.value" class="flex gap-4   md:hidden lg:hidden my-3 justify-center bg-white sm:hidden    flex-col  border-2
     border-gray-200 mx-auto w-5/6 sm:px-4 py-2
     dark:border-gray-600
     place-content-center
@@ -79,7 +79,7 @@ items-center p-2">
 
     @foreach (App\Enums\Cities::cases() as $city)
 
-    <option value="{{ $city->value }}">{{ __("messages.".$city->value) }}</option>
+    <option value="{{ route('home') }}?pageCity={{ $city->value }}">{{ __("messages.".$city->value) }}</option>
     @endforeach
 </select>
 
