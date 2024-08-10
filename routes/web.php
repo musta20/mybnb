@@ -6,8 +6,12 @@ use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\Bookingrequest;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
 use Livewire\Volt\Volt;
+use WpOrg\Requests\Auth;
 
 Route::get('/', [MainSiteController::class, 'index'])->name('home');
 
@@ -15,11 +19,20 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/callback',[MainSiteController::class, 'socialiteCallback'])->name('socialite');
+
+
+
 Route::post('AddReview', [MainSiteController::class, 'addReview'])->name('AddReview');
 
 Volt::route('booking/', 'booking-detail')->name('bookingdetail');
 
-Route::get('host/{user}', [MainSiteController::class, 'host'])->name('host');
+//Route::get('host/{user}', [MainSiteController::class, 'host'])->name('host');
 
 Route::get('logout', [MainSiteController::class, 'logout'])->name('logout');
 
