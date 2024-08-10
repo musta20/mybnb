@@ -9,9 +9,7 @@ use App\Livewire\Host\Listing\Listing;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-
 use Livewire\Volt\Volt;
-use WpOrg\Requests\Auth;
 
 Route::get('/', [MainSiteController::class, 'index'])->name('home');
 
@@ -19,14 +17,11 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
-Route::get('/auth/redirect', function () {
+Route::get('auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
 
-Route::get('/auth/callback',[MainSiteController::class, 'socialiteCallback'])->name('socialite');
-
-
+Route::get('auth/callback', [MainSiteController::class, 'socialiteCallback'])->name('socialite');
 
 Route::post('AddReview', [MainSiteController::class, 'addReview'])->name('AddReview');
 
