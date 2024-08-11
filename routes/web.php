@@ -6,12 +6,10 @@ use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\Bookingrequest;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
+ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
 use Livewire\Volt\Volt;
-use WpOrg\Requests\Auth;
 
 Route::get('/', [MainSiteController::class, 'index'])->name('home');
 
@@ -21,7 +19,9 @@ Route::view('dashboard', 'dashboard')
 
 
 Route::get('/auth/redirect', function () {
+
     return Socialite::driver('google')->redirect();
+    
 });
 
 Route::get('/auth/callback',[MainSiteController::class, 'socialiteCallback'])->name('socialite');
