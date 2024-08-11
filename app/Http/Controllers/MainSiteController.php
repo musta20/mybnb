@@ -79,7 +79,6 @@ class MainSiteController extends Controller
     public function socialiteCallback()
     {
 
-
         $googleUser = Socialite::driver('google')->user();
 
         $user = User::updateOrCreate([
