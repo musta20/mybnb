@@ -176,6 +176,28 @@ trait EnumeratesValues
     }
 
     /**
+     * Get the average value of a given key.
+     *
+     * @param  (callable(TValue): float|int)|string|null  $callback
+     * @return float|int|null
+     */
+    public function avg($callback = null)
+    {
+        $callback = $this->valueRetriever($callback);
+
+        $reduced = $this->reduce(static function (&$reduce, $value) use ($callback) {
+            if (! is_null($resolved = $callback($value))) {
+                $reduce[0] += $resolved;
+                $reduce[1]++;
+            }
+
+            return $reduce;
+        }, [0, 0]);
+
+        return $reduced[1] ? $reduced[0] / $reduced[1] : null;
+    }
+
+    /**
      * Alias for the "avg" method.
      *
      * @param  (callable(TValue): float|int)|string|null  $callback
@@ -207,9 +229,7 @@ trait EnumeratesValues
      */
     public function dd(...$args)
     {
-        $this->dump(...$args);
-
-        dd();
+        dd($this->all(), ...$args);
     }
 
     /**
@@ -344,6 +364,10 @@ trait EnumeratesValues
 
     /**
      * Determine if the collection is not empty.
+     *
+     * @phpstan-assert-if-true TValue $this->first()
+     *
+     * @phpstan-assert-if-false null $this->first()
      *
      * @return bool
      */

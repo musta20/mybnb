@@ -45,9 +45,10 @@ class ShowCommand extends DatabaseInspectionCommand
         $data = [
             'platform' => [
                 'config' => $this->getConfigFromDatabase($database),
-                'name' => $this->getConnectionName($connection, $database),
+                'name' => $connection->getDriverTitle(),
+                'connection' => $connection->getName(),
                 'version' => $connection->getServerVersion(),
-                'open_connections' => $this->getConnectionCount($connection),
+                'open_connections' => $connection->threadCount(),
             ],
             'tables' => $this->tables($connection, $schema),
         ];
@@ -78,7 +79,7 @@ class ShowCommand extends DatabaseInspectionCommand
             'table' => $table['name'],
             'schema' => $table['schema'],
             'size' => $table['size'],
-            'rows' => $this->option('counts') ? $connection->table($table->getName())->count() : null,
+            'rows' => $this->option('counts') ? $connection->table($table['name'])->count() : null,
             'engine' => $table['engine'],
             'collation' => $table['collation'],
             'comment' => $table['comment'],
@@ -159,6 +160,7 @@ class ShowCommand extends DatabaseInspectionCommand
         $this->newLine();
 
         $this->components->twoColumnDetail('<fg=green;options=bold>'.$platform['name'].'</>', $platform['version']);
+        $this->components->twoColumnDetail('Connection', Arr::get($platform['config'], 'connection'));
         $this->components->twoColumnDetail('Database', Arr::get($platform['config'], 'database'));
         $this->components->twoColumnDetail('Host', Arr::get($platform['config'], 'host'));
         $this->components->twoColumnDetail('Port', Arr::get($platform['config'], 'port'));

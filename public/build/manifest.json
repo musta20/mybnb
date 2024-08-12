@@ -6,7 +6,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-BIZqvqtk.css",
+    "file": "assets/app-WO8Dj3nK.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -49,6 +49,10 @@
   "resources/image/Suez.jpg": {
     "file": "assets/Suez-Bqztvv11.jpg",
     "src": "resources/image/Suez.jpg"
+  },
+  "resources/image/google-icon-logo-svgrepo-com.svg": {
+    "file": "assets/google-icon-logo-svgrepo-com-CksRRPxu.svg",
+    "src": "resources/image/google-icon-logo-svgrepo-com.svg"
   },
   "resources/image/logo.svg": {
     "file": "assets/logo-CMlejdqJ.svg",
