@@ -16,5 +16,12 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'Log in' => 'تسجيل الدخول',
+    'Email' => 'البريد الالكتروني',
+    'Password' => 'كلمة المرور',
+    'Remember me' => 'تذكرني',
+    'Forgot your password?' => 'نسيت كلمة المرور؟',
+    'Sign in with google' => 'تسجيل الدخول باستخدام جوجل',
+    'Register with google' => 'انشاء حساب باستخدام جوجل',
 
 ];

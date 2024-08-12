@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\MainSiteController;
+use App\Http\Controllers\Auth\SocialiteAuthController;
 use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\Bookingrequest;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
- use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Route;
 
 use Livewire\Volt\Volt;
 
@@ -18,13 +18,9 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 
-Route::get('/auth/redirect', function () {
+Route::get('/auth/redirect/{driver}', [SocialiteAuthController::class, 'redirect'])->name('SocialiteRedirect');
 
-    return Socialite::driver('google')->redirect();
-    
-});
-
-Route::get('/auth/callback',[MainSiteController::class, 'socialiteCallback'])->name('socialite');
+Route::get('/auth/callback/{driver}',[SocialiteAuthController::class, 'callback'])->name('SocialiteCallback');
 
 
 
