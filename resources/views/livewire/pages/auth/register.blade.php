@@ -84,5 +84,14 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+
+        <div class="flex items-center justify-end mt-4">
+
+
+            <a href="{{ route('SocialiteRedirect','google') }}" class="p-3 border rounded-md w-full flex justify-evenly m-3 hover:bg-slate-100 text-bg-slate-50" href="{{ route('register') }}">
+              {{ __('auth.Register with google') }}
+              <x-google-logo class="w-6 h-6"/>
+            </a>
+              </div>
     </form>
 </div>

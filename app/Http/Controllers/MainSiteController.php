@@ -13,10 +13,8 @@ use App\Models\WishList;
 use App\Services\WishlistService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 
 class MainSiteController extends Controller
 {
@@ -74,25 +72,6 @@ class MainSiteController extends Controller
         return view('index', [
             'listings' => $listings,
         ]);
-    }
-
-    public function socialiteCallback()
-    {
-
-        $googleUser = Socialite::driver('google')->user();
-
-        $user = User::updateOrCreate([
-            'google_id' => $googleUser->id,
-        ], [
-            'name' => $googleUser->name,
-            'email' => $googleUser->email,
-            'google_id_token' => $googleUser->token,
-            'google_id_refresh_token' => $googleUser->refreshToken,
-        ]);
-
-        Auth::login($user);
-
-        return redirect('/dashboard');
     }
 
     public function addReview(Request $request)
