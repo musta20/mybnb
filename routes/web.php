@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\MainSiteController;
 use App\Http\Controllers\Auth\SocialiteAuthController;
+use App\Http\Controllers\MainSiteController;
 use App\Livewire\Host\Booking\Booking;
 use App\Livewire\Host\Listing\AddListing;
 use App\Livewire\Host\Listing\Bookingrequest;
 use App\Livewire\Host\Listing\EditListing;
 use App\Livewire\Host\Listing\Listing;
 use Illuminate\Support\Facades\Route;
-
 use Livewire\Volt\Volt;
 
 Route::get('/', [MainSiteController::class, 'index'])->name('home');
@@ -17,12 +16,9 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::get('auth/redirect/{driver}', [SocialiteAuthController::class, 'redirect'])->name('SocialiteRedirect');
 
-Route::get('/auth/redirect/{driver}', [SocialiteAuthController::class, 'redirect'])->name('SocialiteRedirect');
-
-Route::get('/auth/callback/{driver}',[SocialiteAuthController::class, 'callback'])->name('SocialiteCallback');
-
-
+Route::get('auth/callback/{driver}', [SocialiteAuthController::class, 'callback'])->name('SocialiteCallback');
 
 Route::post('AddReview', [MainSiteController::class, 'addReview'])->name('AddReview');
 

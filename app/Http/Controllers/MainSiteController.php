@@ -74,7 +74,6 @@ class MainSiteController extends Controller
         ]);
     }
 
-
     public function addReview(Request $request)
     {
 

@@ -26,6 +26,7 @@ class SocialiteAuthController extends Controller
 
             Auth::login($AuthLogin->user());
             Session::regenerate();
+
             return redirect('/dashboard');
 
         }
@@ -37,10 +38,8 @@ class SocialiteAuthController extends Controller
             SocialiteLogin::create([
                 'provider' => $driver,
                 'provider_id' => $db_user->id,
-                'user_id' => $db_user->id
+                'user_id' => $db_user->id,
             ]);
-
-     
 
         } else {
 
@@ -53,10 +52,9 @@ class SocialiteAuthController extends Controller
             SocialiteLogin::create([
                 'provider' => $driver,
                 'provider_id' => $db_user->id,
-                'user_id' => $db_user->id
+                'user_id' => $db_user->id,
             ]);
         }
-
 
         Auth::login($db_user);
         Session::regenerate();
